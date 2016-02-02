@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.expense.ExpenseMapperInter">
+
+  <insert id="create" parameterType="ExpenseVO">
+    INSERT INTO expense(sort, expenseitem, file1, expensemoney, categoryno, mno)
+    VALUES (#{sort}, #{expenseitem}, #{file1}, #{expensemoney}, #{categoryno}, #{mno})
+  </insert>
+  
+<!-- 
+  <select id="list" resultType="CategoryVO">
+    SELECT categoryno, sort
+    FROM category 
+    ORDER BY categoryno ASC
+  </select>
+  
+  <update id="update" parameterType="CategoryVO">
+    UPDATE category
+    SET sort=#{sort}
+    WHERE categoryno=#{categoryno}
+  </update> 
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM category
+    WHERE categoryno=#{categoryno}
+  </delete>
+   -->
+</mapper>
