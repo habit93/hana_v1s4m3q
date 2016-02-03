@@ -8,13 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("com.hana.category.CategoryDAO")
+@Repository("com.hana.expense.ExpenseDAO")
 public class ExpenseDAO implements ExpenseMapperInter{
   @Autowired
   private SqlSession sqlSession; // MyBATIS 3 ¿¬°á °´Ã¼
   
   public ExpenseDAO(){
-    System.out.println("--> CategoryDAO created.");
+    System.out.println("--> ExpenseDAO created.");
   }
    
   public ExpenseMapperInter mapper(){
@@ -24,28 +24,24 @@ public class ExpenseDAO implements ExpenseMapperInter{
   }
 
   
-
+  
   @Override
-  public int create(ExpenseVO categoryVO) {
-    return mapper().create(categoryVO);
+  public int create(ExpenseVO expenseVO) {
+    return mapper().create(expenseVO); 
   }
-
+  
   @Override
   public ArrayList<ExpenseVO> list() {
     return mapper().list();
   }
 
   @Override
-  public int update(ExpenseVO categoryVO) {
-    return mapper().update(categoryVO);
+  public int update(ExpenseVO expenseVO) {
+    return mapper().update(expenseVO);
   }
 
-  @Override
-  public int delete(int categoryno) {
-    return mapper().delete(categoryno);
-  }
   
   
-  
+
 }
 

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.hana.category.CategoryVO" %>
+<%@ page import="com.hana.category.CategoryVO" %> 
 
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -15,34 +15,32 @@
 <script type="text/javascript" src="../js/tool.js"></script>
 <script type="text/javascript">
 $(function(){ 
-  $('#panel_frm').hide();
+  $('#panel_frm_create').hide();
+  $('#panel_frm_update').hide();
   $('#panel_frm_remove').hide();
 });
 
 function create(){
-  $('#panel_frm').show();
-  $('#frm').attr('action', './create.do');
-  $('#sort').attr('value', '').focus();
-  $('#submit').html('등록');
+  $('#panel_frm_create').show();
+  $('#categorysort').attr('value', '').focus();
 }
-
 function create_cancel(){
-  $('#panel_frm').hide();
+  $('#panel_frm_create').hide();
 }
-
-function update(categoryno, sort){
-  $('#panel_frm').show();
-  $('#frm').attr('action', './update.do');
+ 
+function update(categoryno, categorysort){
+  $('#panel_frm_update').show();
   $('#categoryno').attr('value', categoryno);
-  $('#sort').attr('value', sort).focus();
-  $('#submit').html('저장');
+  $('#categorysort_update').attr('value', categorysort).focus(); 
+}
+function update_cancel(){
+  $('#panel_frm_update').hide();
 }
 
-function remove(categoryno){
+function remove(categoryno){ 
   $('#panel_frm_remove').show();
   $('#categoryno', frm_remove).attr('value', categoryno);
 }
-
 function remove_cancel(){
   $('#panel_frm_remove').hide();
 }
@@ -55,14 +53,23 @@ function remove_cancel(){
 
 <DIV class='title'>지출 카테고리 목록</DIV>
 
-<!-- 등록/수정 -->
-<DIV id='panel_frm' class='content' style='padding: 10px 0px 10px 0px; background-color: #DDDDDD; width: 70%; text-align: center;'>
-  <FORM name='frm' id='frm' method='POST' action='./create.do'>
-    <input type='hidden' name='categoryno' id='categoryno' > 
-    <label for='sort'>지출 카테고리</label>
-    <input type='text' name='sort' id='sort' size='15' required="required">
-    <button type="submit" id='submit'>등록</button>
-    <button type="button" onclick="create_cancel()">취소</button> 
+<!-- 등록-->
+<DIV id='panel_frm_create' class='content' style='padding: 10px 0px 10px 0px; background-color: #DDDDDD; width: 70%; text-align: center;'>
+  <form name='frm_create' id='frm_create' method='POST' action="./create.do" style="text-align: center;">
+    <label for='categorysort'>지출 카테고리</label> 
+    <input type='text' name='categorysort' id='categorysort' required="required">             
+    <button type='submit'>등록</button>
+        <button type="button" onclick="create_cancel()">취소</button> 
+  </form>
+</DIV>
+    
+<!--수정-->
+<DIV id='panel_frm_update' class='content' style='padding: 10px 0px 10px 0px; background-color: #DDDDDD; width: 70%; text-align: center;'>
+  <form name='frm_update' id='frm_update' method='POST' action="./update.do">
+    <input type='hidden' name='categoryno' id='categoryno'>   
+    <input type='text' name='categorysort_update' id='categorysort_update' required="required">
+    <button type='submit' id='submit'>저장</button>
+    <button type="button" onclick="update_cancel()">취소</button> 
   </FORM>
 </DIV>
 
@@ -95,23 +102,24 @@ for(int index=0; index < list.size(); index++){
   CategoryVO vo = list.get(index);
   int categoryno = vo.getCategoryno();
 %> 
-  <TR>
+  <TR> 
     <TD class='td'><%=categoryno %></TD>
-    <TD class='td'><%=vo.getSort() %></TD>
+    <TD class='td'><%=vo.getCategorysort() %></TD>
     <TD class='td'>
-      <A href="javascript:update(<%=categoryno%>, '<%=vo.getSort() %>')"><IMG src='./images/update.png' title='수정'></A>
-      <A href="javascript:remove(<%=categoryno%>)"><IMG src='./images/delete.png' title='삭제'></A>
+      <A href="javascript:update(<%=categoryno%>, '<%=vo.getCategorysort() %>')"><IMG src='./images/update.png' title='수정'></A>
+      <A href="javascript:remove(<%=categoryno%>)"><IMG src='./images/delete.png' title='삭제'></A> 
     </TD>
   </TR>
 <%
 }
 %>
 </TABLE>
-
-
+  
 <DIV class='bottom'>
   <button type='button' onclick="create();">등록</button>
   <button type='button' onclick="location.reload();">새로고침</button>
+  <button type='button' onclick="location.href='../income/list.do'">수입목록</button>
+  <button type='button' onclick="location.href='../expense/list.do'">지출목록</button>
 </DIV>
 
 <!-- -------------------------------------------- -->

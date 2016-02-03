@@ -3,7 +3,7 @@
 /**********************************/
 CREATE TABLE category(
 		categoryno                    		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '지출내역카테고리번호',
-		sort                          		VARCHAR(50)		 NOT NULL COMMENT '분류'
+		categorysort                  		VARCHAR(50)		 NOT NULL COMMENT '분류'
 ) COMMENT='지출내역카테고리';
 
 /**********************************/
@@ -20,7 +20,9 @@ CREATE TABLE member(
 		admin                         		INT(10)		 DEFAULT 0		 NOT NULL COMMENT '관리자',
   CONSTRAINT id UNIQUE (id)
 ) COMMENT='멤버';
-   
+
+SELECT * FROM member;
+
 /**********************************/
 /* Table Name: 지출 */
 /**********************************/
@@ -31,7 +33,6 @@ CREATE TABLE expense(
 		file1                         		VARCHAR(10)		 NULL  COMMENT '첨부파일',
 		expensemoney                  		MEDIUMINT(10)		 NOT NULL COMMENT '지출금액',
 		categoryno                    		INT(10)		 NULL  COMMENT '지출내역카테고리번호',
-		calenderno                    		INT(10)		 NULL  COMMENT '달력 번호',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
   FOREIGN KEY (categoryno) REFERENCES category (categoryno),
   FOREIGN KEY (mno) REFERENCES member (mno)
@@ -44,7 +45,6 @@ CREATE TABLE income(
 		incomeno                      		INT(10)		 NOT NULL AUTO_INCREMENT COMMENT '수입번호',
 		incomeitem                    		VARCHAR(20)		 NOT NULL COMMENT '수입내용',
 		incomemoney                   		MEDIUMINT(10)		 NOT NULL COMMENT '수입금액',
-		calenderno                    		INT(10)		 NULL  COMMENT '달력 번호',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
   FOREIGN KEY (mno) REFERENCES member (mno)
 ) COMMENT='수입';
@@ -109,7 +109,6 @@ CREATE TABLE schedule(
 		scheduleno                    		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '스케줄번호',
 		contents                      		VARCHAR(200)		 NOT NULL COMMENT '내용',
 		icon                          		VARCHAR(50)		 NOT NULL COMMENT '아이콘',
-		calenderno                    		INT(10)		 NULL  COMMENT '달력 번호',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
   FOREIGN KEY (mno) REFERENCES member (mno)
 ) COMMENT='스케줄';

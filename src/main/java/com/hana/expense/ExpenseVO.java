@@ -4,6 +4,7 @@ public class ExpenseVO {
 /*
 CREATE TABLE expense(
     expenseno                         INT(10)    NOT NULL    PRIMARY KEY AUTO_INCREMENT COMMENT '지출번호',
+    rdate                             DATE     NOT NULL COMMENT '날짜',
     sort                              VARCHAR(10)    NULL  COMMENT '분류',
     expenseitem                       VARCHAR(20)    NOT NULL COMMENT '지출내용',
     file1                             VARCHAR(10)    NULL  COMMENT '첨부파일',
@@ -15,6 +16,7 @@ CREATE TABLE expense(
 ) COMMENT='지출';
 */
   private int expenseno;
+  private String rdate;
   private String sort;
   private String expenseitem;
   private String file1;
@@ -27,6 +29,12 @@ CREATE TABLE expense(
   }
   public void setExpenseno(int expenseno) {
     this.expenseno = expenseno;
+  }
+  public String getRdate() {
+    return rdate;
+  }
+  public void setRdate(String rdate) {
+    this.rdate = rdate;
   }
   public String getSort() {
     return sort;

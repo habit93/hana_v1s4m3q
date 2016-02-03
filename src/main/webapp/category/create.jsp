@@ -24,18 +24,16 @@ $(function(){
 
     <div class='content'>
         <form name='frm' method='POST' action="./create.do">
-            <fieldset> 
                 <ul>
                   <li>
-                    <label class='label' for='sort'>지출 카테고리</label> 
-                    <input type='text' name='sort' id='sort' value='' required="required">             
+                    <label class='label' for='categorysort'>지출 카테고리</label> 
+                    <input type='text' name='categorysort' id='categorysort' value='' required="required">             
                   </li>
                   <li class='right'>
                     <button type='submit'>등록</button>
                     <button type="button" onclick="location.href='./list.do'">목록</button>
                   </li>
                   </ul>
-            </fieldset>
         </form>
     </div>
 <!-- ------------------------------------- -->

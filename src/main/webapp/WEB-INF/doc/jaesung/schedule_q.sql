@@ -6,6 +6,7 @@ DROP TABLE schedule;
 
 CREATE TABLE schedule(
     scheduleno                        INT(10)    NOT NULL    PRIMARY KEY AUTO_INCREMENT COMMENT '스케줄번호',
+    rdate                             DATE     NOT NULL COMMENT '날짜',
     title                             VARCHAR(20)    NOT NULL COMMENT '제목',
     contents                          VARCHAR(200)     NOT NULL COMMENT '내용',
     icon                              VARCHAR(50)    NOT NULL COMMENT '아이콘',
