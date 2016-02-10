@@ -21,18 +21,15 @@ CREATE TABLE member(
   CONSTRAINT id UNIQUE (id)
 ) COMMENT='멤버';
 
-SELECT * FROM member;
-
 /**********************************/
 /* Table Name: 지출 */
 /**********************************/
 CREATE TABLE expense(
 		expenseno                     		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '지출번호',
-		sort                          		VARCHAR(10)		 NULL  COMMENT '분류',
-		expenseitem                   		VARCHAR(20)		 NOT NULL COMMENT '지출내용',
-		file1                         		VARCHAR(10)		 NULL  COMMENT '첨부파일',
-		expensemoney                  		MEDIUMINT(10)		 NOT NULL COMMENT '지출금액',
+		rdate                         		DATE		 NOT NULL COMMENT '날짜',
 		categoryno                    		INT(10)		 NULL  COMMENT '지출내역카테고리번호',
+		expenseitem                   		VARCHAR(20)		 NOT NULL COMMENT '지출내용',
+		expensemoney                  		MEDIUMINT(10)		 NOT NULL COMMENT '지출금액',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
   FOREIGN KEY (categoryno) REFERENCES category (categoryno),
   FOREIGN KEY (mno) REFERENCES member (mno)
@@ -43,6 +40,7 @@ CREATE TABLE expense(
 /**********************************/
 CREATE TABLE income(
 		incomeno                      		INT(10)		 NOT NULL AUTO_INCREMENT COMMENT '수입번호',
+		rdate                         		DATE		 NOT NULL COMMENT '날짜',
 		incomeitem                    		VARCHAR(20)		 NOT NULL COMMENT '수입내용',
 		incomemoney                   		MEDIUMINT(10)		 NOT NULL COMMENT '수입금액',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
@@ -82,12 +80,18 @@ CREATE TABLE item(
 /**********************************/
 /* Table Name: 질문답변 */
 /**********************************/
-CREATE TABLE QA(
+CREATE TABLE qa(
 		qano                          		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '질문답변번호',
 		title                         		VARCHAR(20)		 NOT NULL COMMENT '제목',
 		content                       		VARCHAR(200)		 NOT NULL COMMENT '내용',
+		rdate                         		DATE		 NOT NULL COMMENT '등록일',
+		step                          		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '스텝',
+		depth                         		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '깊이',
+		ref                           		VARCHAR(10)		 NOT NULL COMMENT '레프',
 		itemno                        		INT(10)		 NULL  COMMENT '물건번호',
-  FOREIGN KEY (itemno) REFERENCES item (itemno)
+		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
+  FOREIGN KEY (itemno) REFERENCES item (itemno),
+  FOREIGN KEY (mno) REFERENCES member (mno)
 ) COMMENT='질문답변';
 
 /**********************************/
@@ -97,9 +101,11 @@ CREATE TABLE review(
 		reviewno                      		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '리뷰번호',
 		title                         		VARCHAR(20)		 NOT NULL COMMENT '리뷰제목',
 		contents                      		VARCHAR(800)		 NOT NULL COMMENT '리뷰내용',
-		item                          		MEDIUMINT		 NULL  COMMENT '물건번호',
+		rdate                         		DATE		 NOT NULL COMMENT '등록일',
 		itemno                        		INT(10)		 NULL  COMMENT '물건번호',
-  FOREIGN KEY (itemno) REFERENCES item (itemno)
+		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
+  FOREIGN KEY (itemno) REFERENCES item (itemno),
+  FOREIGN KEY (mno) REFERENCES member (mno)
 ) COMMENT='리뷰';
 
 /**********************************/
@@ -107,8 +113,8 @@ CREATE TABLE review(
 /**********************************/
 CREATE TABLE schedule(
 		scheduleno                    		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '스케줄번호',
+		rdate                         		DATE		 NOT NULL COMMENT '날짜',
 		contents                      		VARCHAR(200)		 NOT NULL COMMENT '내용',
-		icon                          		VARCHAR(50)		 NOT NULL COMMENT '아이콘',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
   FOREIGN KEY (mno) REFERENCES member (mno)
 ) COMMENT='스케줄';
@@ -127,53 +133,54 @@ CREATE TABLE buy(
 ) COMMENT='구매 내역';
 
 /**********************************/
-/* Table Name: 게시판 코드 */
+/* Table Name: 블로그 코드 */
 /**********************************/
 CREATE TABLE code(
-		codeno                        		MEDIUMINT(7)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT 'codeno',
-		sort                          		VARCHAR(50)		 NOT NULL COMMENT 'sort'
-) COMMENT='게시판 코드';
+		codeno                        		MEDIUMINT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '코드번호',
+		sort                          		VARCHAR(50)		 NOT NULL COMMENT '분류'
+) COMMENT='블로그 코드';
 
 /**********************************/
-/* Table Name: 게시판 카테고리 */
+/* Table Name: 블로그 카테고리 */
 /**********************************/
 CREATE TABLE blogcategory(
-		blogcategoryno                		MEDIUMINT(7)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT 'blogcategoryno',
-		title                         		VARCHAR(50)		 NOT NULL COMMENT 'title',
-		orderno                       		SMALLINT(5)		 NOT NULL COMMENT 'orderno',
-		visible                       		CHAR(1)		 NOT NULL COMMENT 'visible',
-		ids                           		VARCHAR(100)		 NOT NULL COMMENT 'ids',
-		cnt                           		MEDIUMINT(7)		 NOT NULL COMMENT 'cnt',
-		codeno                        		MEDIUMINT(7)		 NULL  COMMENT 'codeno',
+		blogcategoryno                		MEDIUMINT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '블로그카테고리번호',
+		title                         		VARCHAR(50)		 NOT NULL COMMENT '제목',
+		orderno                       		SMALLINT(5)		 NOT NULL COMMENT '출력순서',
+		visible                       		CHAR(1)		 NOT NULL COMMENT '출력모드',
+		ids                           		VARCHAR(100)		 NOT NULL COMMENT '접근계정',
+		cnt                           		MEDIUMINT(7)		 NOT NULL COMMENT '등록된글수',
+		codeno                        		MEDIUMINT(10)		 NULL  COMMENT '코드번호',
   FOREIGN KEY (codeno) REFERENCES code (codeno)
-) COMMENT='게시판 카테고리';
+) COMMENT='블로그 카테고리';
 
 /**********************************/
-/* Table Name: 게시판글 */
+/* Table Name: 블로그글 */
 /**********************************/
-CREATE TABLE board(
-		boardno                       		MEDIUMINT(7)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT 'boardno',
-		title                         		VARCHAR(200)		 NOT NULL COMMENT 'title',
-		content                       		MEDIUMTEXT		 NOT NULL COMMENT 'content',
-		good                          		MEDIUMINT(7)		 NOT NULL COMMENT 'good',
-		rdate                         		DATETIME		 NOT NULL COMMENT 'rdate',
-		cnt                           		MEDIUMINT(7)		 NOT NULL COMMENT 'cnt',
-		replycnt                      		SMALLINT(5)		 NOT NULL COMMENT 'replycnt',
-		blogcategoryno                		MEDIUMINT(7)		 NULL  COMMENT 'blogcategoryno',
+CREATE TABLE blog(
+		blogno                        		MEDIUMINT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '블로그번호',
+		title                         		VARCHAR(200)		 NOT NULL COMMENT '제목',
+		content                       		MEDIUMTEXT		 NOT NULL COMMENT '내용',
+		file                          		VARCHAR(20)		 NOT NULL COMMENT '썸파일',
+		good                          		MEDIUMINT(7)		 NOT NULL COMMENT '좋아요',
+		rdate                         		DATETIME		 NOT NULL COMMENT '작성시간',
+		cnt                           		MEDIUMINT(7)		 NOT NULL COMMENT '조회수',
+		replycnt                      		SMALLINT(5)		 NOT NULL COMMENT '댓글수',
+		blogcategoryno                		MEDIUMINT(10)		 NULL  COMMENT '블로그카테고리번호',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
   FOREIGN KEY (blogcategoryno) REFERENCES blogcategory (blogcategoryno),
   FOREIGN KEY (mno) REFERENCES member (mno)
-) COMMENT='게시판글';
+) COMMENT='블로그글';
 
 /**********************************/
-/* Table Name: 댓글 */
+/* Table Name: 블로그 댓글 */
 /**********************************/
 CREATE TABLE reply(
-		replyno                       		MEDIUMINT(7)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT 'replyno',
-		content                       		MEDIUMTEXT		 NOT NULL COMMENT 'content',
-		boardno                       		MEDIUMINT(7)		 NULL  COMMENT 'boardno',
-  FOREIGN KEY (boardno) REFERENCES board (boardno)
-) COMMENT='댓글';
+		replyno                       		MEDIUMINT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '댓글번호',
+		content                       		VARCHAR(80)		 NOT NULL COMMENT '내용',
+		blogno                        		MEDIUMINT(10)		 NULL  COMMENT '블로그번호',
+  FOREIGN KEY (blogno) REFERENCES blog (blogno)
+) COMMENT='블로그 댓글';
 
 /**********************************/
 /* Table Name: 설문조사 */
@@ -201,7 +208,7 @@ CREATE TABLE cart(
 
 CREATE INDEX codeno ON blogcategory (codeno);
 
-CREATE INDEX categoryno ON board (categoryno);
+CREATE INDEX categoryno ON blog (categoryno);
 
 CREATE INDEX boardno ON reply (boardno);
 

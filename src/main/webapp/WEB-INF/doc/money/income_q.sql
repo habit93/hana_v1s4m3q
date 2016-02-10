@@ -14,7 +14,7 @@ CREATE TABLE income(
   FOREIGN KEY (mno) REFERENCES member (mno)
 ) COMMENT='¼öÀÔ';
 
-
+ 
 2) µî·Ï
 INSERT INTO income(rdate, incomeitem, incomemoney, mno)
 VALUES('20100510', '½ò¶ó¾¾', '12000', '1');

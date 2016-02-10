@@ -10,13 +10,12 @@ public interface ExpenseMapperInter {
 
   public ArrayList<ExpenseVO> list();
   
- 
   public int update(ExpenseVO expenseVO);
   
-  /* 
   public int delete(int expenseno);
-  */
   
+  public ArrayList<ExpenseVO> sumlist(String month);
+
 }
 
 

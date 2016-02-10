@@ -23,8 +23,6 @@ public class ExpenseDAO implements ExpenseMapperInter{
     return mapper;
   }
 
-  
-  
   @Override
   public int create(ExpenseVO expenseVO) {
     return mapper().create(expenseVO); 
@@ -34,10 +32,20 @@ public class ExpenseDAO implements ExpenseMapperInter{
   public ArrayList<ExpenseVO> list() {
     return mapper().list();
   }
-
+  
   @Override
   public int update(ExpenseVO expenseVO) {
     return mapper().update(expenseVO);
+  }
+
+  @Override
+  public int delete(int expenseno) {
+    return mapper().delete(expenseno);
+  }
+
+  @Override
+  public ArrayList<ExpenseVO> sumlist(String month) {
+    return mapper().sumlist(month);
   }
 
   

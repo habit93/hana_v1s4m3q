@@ -45,6 +45,9 @@
 </style>
 
 <body>
+
+<jsp:include page="../income/create.jsp" flush='false' />
+
 <div class='wrap'>
 
   <div class='btn-holder'>
@@ -56,16 +59,6 @@
   <div id="calendar"></div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 

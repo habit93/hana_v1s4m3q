@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
-
 @Controller
 public class CategoryCont {
   @Autowired
@@ -21,8 +18,6 @@ public class CategoryCont {
   public CategoryCont(){
     System.out.println("--> CategoryCont created.");
   }
-  
-  
   
   @RequestMapping(value = "/category/create.do", method = RequestMethod.POST)
   public ModelAndView create(CategoryVO categoryVO) {
@@ -47,8 +42,6 @@ public class CategoryCont {
     return mav;
   }
   
-  
-  
   @RequestMapping(value = "/category/list.do", method = RequestMethod.GET)
   public ModelAndView list() {
     ModelAndView mav = new ModelAndView();
@@ -57,8 +50,6 @@ public class CategoryCont {
 
     return mav;
   }
-  
-  
 
   @RequestMapping(value = "/category/update.do", method = RequestMethod.POST)
   public ModelAndView update(CategoryVO categoryVO) {
@@ -100,7 +91,6 @@ public class CategoryCont {
       mav.addObject("msgs", msgs);
       mav.addObject("links", links);
     }
-
     return mav;
   }
 

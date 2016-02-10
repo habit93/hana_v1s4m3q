@@ -20,20 +20,13 @@ String root = request.getContextPath();
     <%
     }else{
     %>
-      <a class='menuLink' href='<%=root %>/member/logout.do'>${id} 로그아웃</a>      
+      <a class='menuLink' href='<%=root %>/member/logout.do'>${id} 로그아웃</a>   
+      <a class='menuLink' href='<%=root %>/member/read.do?mno=${mno}'>마이페이지</a>   
     <%  
      }
     %>
       
-    <a class='menuLink' href='<%=root %>/noticev3/list.jsp'>Notice</a>
-    <a class='menuLink' href='<%=root %>/newsv2/list.jsp'>News</a>
-    <a class='menuLink' href='<%=root %>/urlv2/list.jsp'>URL</a>
-    <a class='menuLink' href='<%=root %>/pdsv3/list.jsp'>Movie</a>
-    <a class='menuLink' href='<%=root %>/member/create.do'>JOIN</a>
-    <a class='menuLink' href='<%=root %>/code/list.do'>Code</a>
-    <a class='menuLink' href='<%=root %>/blogcategory/list.do'>Blog category</a>
-    <a class='menuLink' href='<%=root %>/blog/list.do'>Blog</a>
- 
+    
     <%
     if (session.getAttribute("act") == null){
     %>
@@ -46,5 +39,21 @@ String root = request.getContextPath();
     <%
     }
     %>
+    ||||||||||||||
+    <a class='menuLink' href='<%=root %>/category/list.do'>지출카테고리</a>
+    <a class='menuLink' href='<%=root %>/expense/list.do'>지출</a>
+    <a class='menuLink' href='<%=root %>/income/list.do'>수입</a>
+    <a class='menuLink' href='<%=root %>/expense/sum.do'>돈정산</a>
+    <a class='menuLink' href='<%=root %>/schedule/list.do'>스케줄</a>
+    ||||||||||||||
+    <a class='menuLink' href='<%=root %>/code/list.do'>블로그코드</a>
+    <a class='menuLink' href='<%=root %>/blogcategory/list.do'>블로그카테고리</a>
+    <a class='menuLink' href='<%=root %>/blog/list.do'>블로그</a> 
+    ||||||||||||||
+    <a class='menuLink' href='<%=root %>/shopcode/list.do'>샵코드</a>
+    <a class='menuLink' href='<%=root %>/shopcategory/list.do'>샵카테고리(아이템 메뉴)</a>
+    <a class='menuLink' href='<%=root %>/review/list.do'>리뷰</a>
+    ||||||||||||||
+    <a class='menuLink' href='<%=root %>/pds5/list.jsp'>답변형 게시판</a>
   </DIV>    
 </DIV>

@@ -5,35 +5,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.hana.expense.ExpenseMapperInter">
 
-  <insert id="create" parameterType="ExpenseVO">
-    INSERT INTO expense(rdate, sort, expenseitem, file1, expensemoney, categoryno, mno)
-    VALUES (#{rdate}, #{sort}, #{expenseitem}, #{file1}, #{expensemoney}, #{categoryno}, #{mno})
+  <insert id="create" parameterType="ExpenseVO"> 
+    INSERT INTO expense(rdate, categoryno, expenseitem, expensemoney, mno)
+    VALUES (#{rdate}, #{categoryno}, #{expenseitem}, #{expensemoney}, #{mno})
   </insert>
   
 <!-- 
   <select id="list" resultType="ExpenseVO">
-    SELECT expenseno, rdate, sort, expenseitem, file1, expensemoney, categoryno, mno
+    SELECT expenseno, rdate, categoryno, expenseitem, expensemoney, mno
     FROM expense 
-    ORDER BY expenseno ASC
+    ORDER BY rdate DESC
   </select>
  -->
  
   <select id="list" resultType="ExpenseVO"> 
-    SELECT c.categoryno, c.categorysort, p.expenseno, p.rdate, p.sort, p.expenseitem, p.file1, p.expensemoney, p.categoryno, p.mno
+    SELECT c.categoryno, c.categorysort, p.expenseno, p.rdate, p.categoryno, p.expenseitem, p.expensemoney, p.mno
     FROM category c, expense p
     WHERE c.categoryno = p.categoryno
+    ORDER BY rdate DESC
   </select>
-
+ 
   <update id="update" parameterType="ExpenseVO">
     UPDATE expense
-    SET rdate=#{rdate}, sort=#{sort}, expenseitem=#{expenseitem}, expensemoney=#{expensemoney}
+    SET rdate=#{rdate}, categoryno=#{categoryno}, expenseitem=#{expenseitem}, expensemoney=#{expensemoney}
     WHERE expenseno=#{expenseno}
   </update> 
   
-<!--   
   <delete id="delete" parameterType="int">
-    DELETE FROM category
-    WHERE categoryno=#{categoryno}
+    DELETE FROM expense
+    WHERE expenseno=#{expenseno}
   </delete>
-   -->
+
+  <select id="sumlist" resultType="ExpenseVO" parameterType="String">
+    SELECT expenseno, SUBSTRING(rdate, 1, 7) as rdate, categoryno, expenseitem, expensemoney, mno
+    FROM expense 
+    WHERE SUBSTRING(rdate, 1, 7) = #{month}
+    ORDER BY rdate DESC
+  </select>
+  
+  
 </mapper>

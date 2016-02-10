@@ -8,33 +8,50 @@
 <meta charset="UTF-8"> 
 <title></title> 
 
+  <style type="text/css">
+  .write{
+    width:700px;
+    height:500px;
+    border:1px solid #333333; 
+    background-color:white; 
+  }
+  </style>
+
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery.cookie.js"></script>
 <script type="text/javascript" src="../js/tool.js"></script>
+<script type='text/javascript' src='http://dinbror.dk/bpopup/assets/jquery.bpopup-0.9.4.min.js'></script>
+
 <script type="text/javascript">
 $(function(){ 
-  $('#panel_frm_create').hide();
-  $('#panel_frm_update').hide();
+  $('#panel_frm').hide();
   $('#panel_frm_remove').hide();
 });
-
-function create(){
-  $('#panel_frm_create').show();
-  $('#categorysort').attr('value', '').focus();
-}
-function create_cancel(){
-  $('#panel_frm_create').hide();
-}
  
-function update(categoryno, categorysort){
-  $('#panel_frm_update').show();
-  $('#categoryno').attr('value', categoryno);
-  $('#categorysort_update').attr('value', categorysort).focus(); 
+function create(){
+ openMessage('panel_frm'); 
+/*$('#panel_frm').show(); */
+  $('#frm').attr('action', './create.do');
+  $('#categorysort').attr('value', '').focus(); 
+  $('#btn').html('등록');
+} 
+
+function openMessage(IDS){
+  $('#'+IDS).bPopup();
 }
-function update_cancel(){
-  $('#panel_frm_update').hide();
+
+function create_cancel(){
+  $('#panel_frm').hide();
+} 
+
+function update(categoryno, categorysort){
+  $('#panel_frm').show();
+  $('#frm').attr('action', './update.do');
+  $('#categoryno').attr('value', categoryno);
+  $('#categorysort').attr('value', categorysort).focus();
+  $('#btn').html('수정');
 }
 
 function remove(categoryno){ 
@@ -53,25 +70,29 @@ function remove_cancel(){
 
 <DIV class='title'>지출 카테고리 목록</DIV>
 
-<!-- 등록-->
-<DIV id='panel_frm_create' class='content' style='padding: 10px 0px 10px 0px; background-color: #DDDDDD; width: 70%; text-align: center;'>
-  <form name='frm_create' id='frm_create' method='POST' action="./create.do" style="text-align: center;">
-    <label for='categorysort'>지출 카테고리</label> 
-    <input type='text' name='categorysort' id='categorysort' required="required">             
-    <button type='submit'>등록</button>
-        <button type="button" onclick="create_cancel()">취소</button> 
-  </form>
-</DIV>
-    
-<!--수정-->
-<DIV id='panel_frm_update' class='content' style='padding: 10px 0px 10px 0px; background-color: #DDDDDD; width: 70%; text-align: center;'>
-  <form name='frm_update' id='frm_update' method='POST' action="./update.do">
-    <input type='hidden' name='categoryno' id='categoryno'>   
-    <input type='text' name='categorysort_update' id='categorysort_update' required="required">
-    <button type='submit' id='submit'>저장</button>
-    <button type="button" onclick="update_cancel()">취소</button> 
-  </FORM>
-</DIV>
+<!-- 등록/수정 -->
+<div class='write' id='panel_frm' style="display: none;">
+<form name='frm' id='frm' method='POST' action="./create.do">  
+<input type='hidden' name='categoryno' id='categoryno' value='1'>        
+<TABLE class='table' style='width: 70%;'>
+  <colgroup>
+    <col style='width: 70%;'/>
+    <col style='width: 20%;'/>
+  </colgroup>
+  <TR>
+    <TH class='th'>지출 카테고리</TH>
+    <TH class='th'>기타</TH>
+  </TR>
+  <tr>
+    <TD class='td'><input type='text' name='categorysort' id='categorysort' required="required"></TD>
+    <TD class='td'>      
+      <button type='submit'  id='btn'>등록</button> 
+      <button type="button" onclick="create_cancel()">취소</button> 
+     </TD>
+  </TR>
+</TABLE>
+</form>
+</div> 
 
 <!-- 삭제 -->
 <DIV id='panel_frm_remove' class='content' style='padding: 10px 0px 10px 0px; background-color: #FFFF00; width: 70%; text-align: center;'>
@@ -122,6 +143,8 @@ for(int index=0; index < list.size(); index++){
   <button type='button' onclick="location.href='../expense/list.do'">지출목록</button>
 </DIV>
 
+
+    
 <!-- -------------------------------------------- -->
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>
