@@ -12,6 +12,7 @@ CREATE TABLE buy(
     address1                          VARCHAR(80)    NOT NULL COMMENT '집주소1',
     address2                          VARCHAR(80)    NOT NULL COMMENT '집주소2',
     date                              DATETIME     NOT NULL COMMENT '날짜',
+    thumb                             VARCHAR(20)    NOT NULL COMMENT '썸네일',
     mno                               INT(10)    NULL  COMMENT '멤버 번호',
     itemno                            INT(10)    NULL  COMMENT '물건번호',
   FOREIGN KEY (mno) REFERENCES member (mno),

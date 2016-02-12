@@ -86,6 +86,7 @@ CREATE TABLE qa(
 		qano                          		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '질문답변번호',
 		title                         		VARCHAR(20)		 NOT NULL COMMENT '제목',
 		content                       		VARCHAR(200)		 NOT NULL COMMENT '내용',
+		passwd                        		VARCHAR(15)		 NOT NULL COMMENT '패스워드',
 		rdate                         		DATE		 NOT NULL COMMENT '등록일',
 		step                          		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '스텝',
 		depth                         		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '깊이',

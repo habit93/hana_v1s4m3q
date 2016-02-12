@@ -10,9 +10,7 @@ CREATE TABLE shopcode(
 
 등록
 INSERT INTO shopcode(code)
-VALUES ('의류');
-INSERT INTO shopcode(code)
-VALUES ('기념일');
+VALUES ('테스트');
 
 목록
 SELECT codeno, code

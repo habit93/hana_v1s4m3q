@@ -12,7 +12,7 @@ String root = request.getContextPath();
     ARTBox ver 0.8
   </DIV>
   <DIV class='menu_list'>
-    <a class='menuLink' href='<%=root %>/index.do'>HOME</a></li>
+    <a class='menuLink' href='<%=root %>/index.jsp'>HOME</a></li>
     <%
     if (session.getAttribute("id") == null){
     %>
@@ -20,25 +20,12 @@ String root = request.getContextPath();
     <%
     }else{
     %>
-      <a class='menuLink' href='<%=root %>/member/logout.do'>${id} 로그아웃</a>   
+      <a class='menuLink' href='<%=root %>/member/logout.do'>${id}님 로그아웃</a>   
       <a class='menuLink' href='<%=root %>/member/read.do?mno=${mno}'>마이페이지</a>   
     <%  
      }
     %>
       
-    
-    <%
-    if (session.getAttribute("act") == null){
-    %>
-      <a class='menuLink' href='<%=root %>/admin1/login_ck_form.jsp'>Admin</a>
-    <%
-    }else{
-    %>
-      <a class='menuLink' href='<%=root %>/admin1/logout_proc.jsp'>Logout</a>
-      <a class='menuLink' href='<%=root %>/admin1/list.jsp'>관리자</a>
-    <%
-    }
-    %>
     ||||||||||||||
     <a class='menuLink' href='<%=root %>/category/list.do'>지출카테고리</a>
     <a class='menuLink' href='<%=root %>/expense/list.do'>지출</a>

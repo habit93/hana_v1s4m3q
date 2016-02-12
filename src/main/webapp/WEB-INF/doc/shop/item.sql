@@ -15,7 +15,7 @@ CREATE TABLE item(
 
 등록
 INSERT INTO item(title, price, content, thumb, categoryno)
-VALUES ('GAP 후드티', '25000', '테스트1', 'thubm.jpg', 1);
+VALUES ('아이폰 케이스', '25000', 'ㅇㅇ', 'thubm.jpg', 1);
 
 목록
 SELECT itemno, title, content, price, categoryno
