@@ -1,12 +1,4 @@
 /**********************************/
-/* Table Name: 지출내역카테고리 */
-/**********************************/
-CREATE TABLE category(
-		categoryno                    		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '지출내역카테고리번호',
-		categorysort                  		VARCHAR(50)		 NOT NULL COMMENT '분류'
-) COMMENT='지출내역카테고리';
-
-/**********************************/
 /* Table Name: 멤버 */
 /**********************************/
 CREATE TABLE member(
@@ -20,6 +12,16 @@ CREATE TABLE member(
 		admin                         		INT(10)		 DEFAULT 0		 NOT NULL COMMENT '관리자',
   CONSTRAINT id UNIQUE (id)
 ) COMMENT='멤버';
+
+/**********************************/
+/* Table Name: 지출내역카테고리 */
+/**********************************/
+CREATE TABLE category(
+		categoryno                    		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '지출내역카테고리번호',
+		categorysort                  		VARCHAR(50)		 NOT NULL COMMENT '분류',
+		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
+  FOREIGN KEY (mno) REFERENCES member (mno)
+) COMMENT='지출내역카테고리';
 
 /**********************************/
 /* Table Name: 지출 */
@@ -89,9 +91,7 @@ CREATE TABLE qa(
 		depth                         		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '깊이',
 		ref                           		VARCHAR(10)		 NOT NULL COMMENT '레프',
 		itemno                        		INT(10)		 NULL  COMMENT '물건번호',
-		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
-  FOREIGN KEY (itemno) REFERENCES item (itemno),
-  FOREIGN KEY (mno) REFERENCES member (mno)
+  FOREIGN KEY (itemno) REFERENCES item (itemno)
 ) COMMENT='질문답변';
 
 /**********************************/

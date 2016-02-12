@@ -44,7 +44,7 @@ String root = request.getContextPath();
     <a class='menuLink' href='<%=root %>/expense/list.do'>지출</a>
     <a class='menuLink' href='<%=root %>/income/list.do'>수입</a>
     <a class='menuLink' href='<%=root %>/expense/sum.do'>돈정산</a>
-    <a class='menuLink' href='<%=root %>/schedule/list.do'>스케줄</a>
+    <a class='menuLink' href='<%=root %>/calendar/calendar2.jsp'>스케줄</a>
     ||||||||||||||
     <a class='menuLink' href='<%=root %>/code/list.do'>블로그코드</a>
     <a class='menuLink' href='<%=root %>/blogcategory/list.do'>블로그카테고리</a>

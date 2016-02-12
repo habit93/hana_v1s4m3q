@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hana.blogcategory.BlogcategoryVO;
 import com.hana.category.CategoryDAO;
 import com.hana.category.CategoryVO;
+import com.hana.code.CodeVO;
 import com.hana.income.IncomeDAO;
 
 @Controller
@@ -98,7 +100,7 @@ public class ExpenseCont {
  
     return mav;
   }
-  
+
   @RequestMapping(value = "/expense/delete.do", method = RequestMethod.POST)
   public ModelAndView delete(int expenseno) {
     ModelAndView mav = new ModelAndView();
@@ -121,6 +123,41 @@ public class ExpenseCont {
     return mav;
   }
 
+  @RequestMapping(value="/expense/update_category.do", method=RequestMethod.GET)
+  public ModelAndView update_category(){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/expense/update_category");
+    
+    ArrayList<CategoryVO> category_list = categoryDAO.list();
+    mav.addObject("category_list", category_list);
+    
+    return mav;
+  }
+  
+  @RequestMapping(value="/expense/update_category.do", method=RequestMethod.POST)
+  public ModelAndView update_category(ExpenseVO expenseVO){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/expense/popup_message");
+    
+    ArrayList<String> msgs = new ArrayList<String>();
+    ArrayList<String> links = new ArrayList<String>();
+    
+    int cnt = expenseDAO.update_category(expenseVO);
+    
+    if(cnt != 1 ){
+      msgs.add("카테고리 수정에 실패했습니다.");
+      msgs.add("죄송하지만 다시한번 시도해주세요.");
+      links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");
+      links.add("<button type='button' onclick=\"popup_close()\">닫기</button>");
+    }
+    
+    mav.addObject("cnt", cnt);
+    mav.addObject("msgs", msgs);
+    mav.addObject("links", links);
+    
+    return mav;
+  }
+  
   @RequestMapping(value = "/expense/sum.do", method = RequestMethod.GET)
   public ModelAndView sum() {
     ModelAndView mav = new ModelAndView();

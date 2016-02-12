@@ -44,9 +44,16 @@ public class ExpenseDAO implements ExpenseMapperInter{
   }
 
   @Override
+  public int update_category(ExpenseVO expenseVO) {
+    return  mapper().update_category(expenseVO);
+  }
+  
+  @Override
   public ArrayList<ExpenseVO> sumlist(String month) {
     return mapper().sumlist(month);
   }
+
+
 
   
   

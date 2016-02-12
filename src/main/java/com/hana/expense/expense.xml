@@ -36,6 +36,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE expenseno=#{expenseno}
   </delete>
 
+  <update id="update_category" parameterType="ExpenseVO">
+    UPDATE expense
+    SET categoryno = #{categoryno}
+    WHERE expenseno=#{expenseno}
+  </update>
+
   <select id="sumlist" resultType="ExpenseVO" parameterType="String">
     SELECT expenseno, SUBSTRING(rdate, 1, 7) as rdate, categoryno, expenseitem, expensemoney, mno
     FROM expense 

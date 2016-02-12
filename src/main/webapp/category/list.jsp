@@ -74,6 +74,7 @@ function remove_cancel(){
 <div class='write' id='panel_frm' style="display: none;">
 <form name='frm' id='frm' method='POST' action="./create.do">  
 <input type='hidden' name='categoryno' id='categoryno' value='1'>        
+<input type='hidden' name='mno' id='mno' value='${mno}'>        
 <TABLE class='table' style='width: 70%;'>
   <colgroup>
     <col style='width: 70%;'/>

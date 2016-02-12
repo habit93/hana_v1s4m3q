@@ -12,22 +12,20 @@ CREATE TABLE qa(
     depth                             MEDIUMINT(10)    DEFAULT 0     NOT NULL COMMENT '깊이',
     ref                               VARCHAR(10)    NOT NULL COMMENT '레프',
     itemno                            INT(10)    NULL  COMMENT '물건번호',
-    mno                               INT(10)    NULL  COMMENT '멤버 번호',
-  FOREIGN KEY (itemno) REFERENCES item (itemno),
-  FOREIGN KEY (mno) REFERENCES member (mno)
+  FOREIGN KEY (itemno) REFERENCES item (itemno)
 ) COMMENT='질문답변';
 
 등록
-INSERT INTO qa(title, content, rdate, grpno, indent, ansnum, itemno, mno)
-VALUES ('제목', '내용', now(), 0, 0, 0, 1, 1);
+INSERT INTO qa(title, content, rdate, grpno, indent, ansnum, itemno)
+VALUES ('제목', '내용', now(), 0, 0, 0, 1);
 
 목록
-SELECT qano, title, content, rdate, grpno, indent, ansnum, itemno, mno
+SELECT qano, title, content, rdate, grpno, indent, ansnum, itemno
 FROM qa
 ORDER BY qano DESC;
 
 조회
-SELECT qano, title, content, rdate, grpno, indent, ansnum, itemno, mno
+SELECT qano, title, content, rdate, grpno, indent, ansnum, itemno
 FROM qa
 WHERE qano=1;
 

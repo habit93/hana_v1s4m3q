@@ -31,7 +31,7 @@
     <!-- 아래부분은 매핑할 xml파일이 있는 패키지경로를 설정한다. -->
     <property name="typeAliasesPackage" 
                   value="com.hana.category,com.hana.expense,com.hana.income,com.hana.schedule,
-                  com.hana.blog,com.hana.blogcategory,com.hana.code,com.hana.member,
+                  com.hana.blogreply,com.hana.blog,com.hana.blogcategory,com.hana.code,com.hana.member,
                   com.hana.buy,com.hana.item,com.hana.shopcategory,com.hana.shopcode,com.hana.review"/> 
     <property name="mapperLocations" value="classpath:com/hana/**/*.xml" />
   </bean>

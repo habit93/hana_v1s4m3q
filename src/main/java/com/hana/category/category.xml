@@ -6,12 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.hana.category.CategoryMapperInter">
 
   <insert id="create" parameterType="CategoryVO">
-    INSERT INTO category(categorysort)
-    VALUES (#{categorysort})
+    INSERT INTO category(categorysort, mno)
+    VALUES (#{categorysort}, #{mno})
   </insert>
 
   <select id="list" resultType="CategoryVO">
-    SELECT categoryno, categorysort
+    SELECT categoryno, categorysort, mno
     FROM category  
     ORDER BY categoryno ASC
   </select>

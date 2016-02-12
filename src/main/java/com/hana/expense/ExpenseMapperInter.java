@@ -14,6 +14,8 @@ public interface ExpenseMapperInter {
   
   public int delete(int expenseno);
   
+  public int update_category(ExpenseVO expenseVO);
+  
   public ArrayList<ExpenseVO> sumlist(String month);
 
 }
