@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.schedule.ScheduleMapperInter">
+
+  <insert id="create" parameterType="ScheduleVO">
+    INSERT INTO schedule(rdate, contents, mno)
+    VALUES (#{rdate}, #{contents}, #{mno})
+  </insert> 
+  
+  <select id="list" resultType="ScheduleVO">
+    SELECT scheduleno, rdate, contents
+    FROM schedule
+    ORDER BY rdate DESC
+  </select>
+  
+
+  <update id="update" parameterType="ScheduleVO">
+    UPDATE schedule
+    SET rdate=#{rdate}, contents=#{contents}
+    WHERE scheduleno=#{scheduleno}
+  </update> 
+  
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM schedule
+    WHERE scheduleno=#{scheduleno}
+  </delete>
+
+</mapper>

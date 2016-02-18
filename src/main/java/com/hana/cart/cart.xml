@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.cart.CartMapperInter">
+
+<insert id="create" parameterType="CartVO">
+  INSERT INTO cart(name, cnt, price, mno, itemno, thumb)
+  VALUES (#{name}, #{cnt}, #{price}, #{mno}, #{itemno}, #{thumb});
+</insert>
+ 
+ <select id="list" resultType="CartVO" parameterType="int">
+  SELECT cartno, name, cnt, price, mno, itemno, thumb
+  FROM cart
+  WHERE mno=#{mno}
+ </select>
+ 
+<delete id="delete" parameterType="int">
+  DELETE FROM cart
+  WHERE cartno=#{cartno}
+</delete>
+
+ <select id="read" resultType="CartVO" parameterType="int">
+  SELECT cartno, name, cnt, price, mno, itemno, thumb
+  FROM cart
+  WHERE cartno=#{cartno}
+ </select>
+ 
+</mapper>

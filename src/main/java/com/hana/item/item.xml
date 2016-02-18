@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.item.ItemMapperInter">
+
+<insert id="create" parameterType="ItemVO">
+  INSERT INTO item(title, price, content, thumb, categoryno)
+  VALUES (#{title}, #{price}, #{content}, #{thumb}, #{categoryno})
+</insert>
+
+<select id="list2" resultType="ItemVO">
+  SELECT itemno, title, price, content, thumb, categoryno
+  FROM item
+  ORDER BY itemno ASC;
+</select>
+
+  <!-- blogcategoryno 컬럼의 값을 기준으로 게시판별 목록 -->
+  <select id="list" resultType="ItemVO" parameterType="ItemVO">
+    SELECT itemno, title, price, content, thumb, categoryno
+    FROM item
+    WHERE categoryno = #{categoryno}
+    ORDER BY itemno DESC
+  </select> 
+  
+  <select id="read" resultType="ItemVO" parameterType="int">
+    SELECT itemno, title, content, thumb, price, categoryno
+    FROM item
+    WHERE itemno=#{itemno}
+  </select>
+  
+  <update id="update" parameterType="ItemVO">
+    UPDATE item
+    SET title=#{title}, content=#{content}, price=#{price}, thumb=#{thumb}, categoryno=#{categoryno}
+    WHERE itemno=#{itemno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+   DELETE FROM item
+   WHERE itemno=#{itemno}
+  </delete>
+</mapper>

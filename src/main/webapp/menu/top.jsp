@@ -40,6 +40,15 @@ String root = request.getContextPath();
     <a class='menuLink' href='<%=root %>/shopcode/list.do'>샵코드</a>
     <a class='menuLink' href='<%=root %>/shopcategory/list.do'>샵카테고리(아이템 메뉴)</a>
     <a class='menuLink' href='<%=root %>/review/list.do'>리뷰</a>
+    
+    <%
+    if (session.getAttribute("id") != null){
+    %>
+    <a class='menuLink' href='<%=root %>/cart/list.do?mno=${mno}''>쇼핑카트</a>
+    <%  
+     }
+    %>
+    
     ||||||||||||||
     <a class='menuLink' href='<%=root %>/pds5/list.jsp'>답변형 게시판</a>
   </DIV>    

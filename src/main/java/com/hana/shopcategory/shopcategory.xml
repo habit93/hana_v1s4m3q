@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.shopcategory.ShopcategoryMapperInter">
+
+<insert id="create" parameterType="ShopcategoryVO">
+  INSERT INTO shopcategory(category, sort, codeno)
+  VALUES (#{category}, #{sort}, #{codeno})
+</insert>
+
+<select id="list" resultType="ShopcategoryVO">
+  SELECT c.codeno, c.code, t.categoryno, t.category, t.sort, t.codeno
+  FROM shopcode c, shopcategory t
+  WHERE c.codeno = t.codeno
+</select>
+ 
+ <update id="update" parameterType="ShopcategoryVO">
+  UPDATE shopcategory
+  SET category=#{category}, sort=#{sort}, codeno=#{codeno}
+  WHERE categoryno=#{categoryno}
+ </update>
+ 
+ <delete id="delete" parameterType="int">
+   DELETE FROM shopcategory
+   WHERE categoryno=#{categoryno}
+ </delete>
+ 
+</mapper>

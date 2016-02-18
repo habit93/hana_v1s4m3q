@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.income.IncomeMapperInter">
+
+  <insert id="create" parameterType="IncomeVO">
+    INSERT INTO income(rdate, incomeitem, incomemoney, mno)
+    VALUES (#{rdate}, #{incomeitem}, #{incomemoney}, #{mno})
+  </insert> 
+  
+  <select id="list" resultType="IncomeVO">
+    SELECT incomeno, rdate, incomeitem, incomemoney, mno
+    FROM income
+    ORDER BY rdate DESC
+  </select>
+  
+  <update id="update" parameterType="IncomeVO">
+    UPDATE income
+    SET rdate=#{rdate}, incomeitem=#{incomeitem}, incomemoney=#{incomemoney}
+    WHERE incomeno=#{incomeno}
+  </update> 
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM income
+    WHERE incomeno=#{incomeno}
+  </delete>
+
+  <select id="sumlist" resultType="IncomeVO" parameterType="String">
+    SELECT incomeno, SUBSTRING(rdate, 1, 7) as rdate, incomeitem, incomemoney, mno
+    FROM income 
+    WHERE SUBSTRING(rdate, 1, 7) = #{month}
+    ORDER BY rdate DESC 
+  </select>
+  
+</mapper>

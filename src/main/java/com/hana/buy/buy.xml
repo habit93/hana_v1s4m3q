@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.buy.BuyMapperInter">
+
+<insert id="create" parameterType="BuyVO">
+  INSERT INTO buy(name, cnt, price, zipcode, address1, address2, date, mno, itemno, thumb)
+  VALUES (#{name}, #{cnt}, #{price}, #{zipcode}, #{address1}, #{address2}, now(), #{mno}, #{itemno}, #{thumb});
+</insert>
+ 
+ <select id="list" resultType="BuyVO" parameterType="int">
+  SELECT buyno, name, cnt, price, zipcode, address1, address2, date, mno, itemno, thumb
+  FROM buy
+  WHERE mno=#{mno}
+ </select>
+ 
+<delete id="delete" parameterType="int">
+  DELETE FROM buy
+  WHERE buyno=#{buyno}
+</delete>
+
+</mapper>

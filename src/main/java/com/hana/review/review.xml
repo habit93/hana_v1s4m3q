@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.review.ReviewMapperInter">
+
+  <insert id="create" parameterType="ReviewVO"> 
+    INSERT INTO review(title, contents, rdate, itemno, mno)
+    VALUES(#{title}, #{contents}, now(), #{itemno}, #{mno})
+  </insert>
+  
+  <select id="list" resultType="ReviewVO">
+    SELECT reviewno, title, contents, rdate, itemno, mno
+    FROM review
+    ORDER BY reviewno DESC;
+  </select> 
+
+  <select id="read" resultType="ReviewVO" parameterType="int">
+    SELECT reviewno, title, contents, rdate, itemno, mno
+    FROM review
+    WHERE reviewno=#{reviewno}
+  </select>
+
+  <update id="update" parameterType="ReviewVO">
+    UPDATE review
+    SET title=#{title}, contents=#{contents}
+    WHERE reviewno=#{reviewno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM review
+    WHERE reviewno=#{reviewno}
+  </delete>
+
+</mapper>

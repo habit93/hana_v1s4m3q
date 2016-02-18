@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.hana.member.MemberMapperInter">
+  <insert id="create" parameterType="MemberVO">
+    INSERT INTO member(id, passwd, mname, nickname, birthday, gender, admin)
+    VALUES (#{id}, #{passwd}, #{mname}, #{nickname}, #{birthday}, #{gender}, 'N') 
+  </insert>
+
+  <select id='checkId' resultType='int' parameterType='String'>
+    SELECT COUNT(id) as cnt
+    FROM member
+    WHERE id=#{id}
+  </select>
+  
+  <!-- 검색을하지 않는 전체 목록 -->
+  <select id="list" resultType="MemberVO">
+    SELECT mno, id, passwd, mname, nickname, birthday, gender, admin
+    FROM member
+    ORDER BY mno ASC
+  </select>
+
+  <!-- 조회 -->
+  <select id="read" resultType="MemberVO" parameterType="int">
+    SELECT mno, id, passwd, mname, nickname, birthday, gender, admin
+    FROM member
+    WHERE mno = #{mno}
+  </select>
+  
+  <update id="update" parameterType="MemberVO">
+    UPDATE member 
+    SET id=#{id}, passwd=#{passwd}, mname=#{mname}, nickname=#{nickname}, birthday=#{birthday},
+          gender=#{gender} 
+    WHERE mno=#{mno}
+  </update>  
+
+  <select id="passwdCheck" resultType="int" parameterType="Map">
+    SELECT COUNT(mno) as cnt
+    FROM member
+    WHERE mno=#{mno} AND passwd=#{passwd}
+  </select>
+
+  <update id="update_admin" parameterType="MemberVO">
+    UPDATE member
+    SET admin=#{admin}
+    WHERE mno=#{mno}
+  </update> 
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM member
+    WHERE mno=#{mno}
+  </delete>  
+  
+  <select id="login" resultType="int" parameterType="MemberVO">
+    SELECT COUNT(mno) as cnt
+    FROM member
+    WHERE id=#{id} AND passwd=#{passwd}
+  </select>
+  
+  <select id="mno" resultType='MemberVO' parameterType="String"> 
+    SELECT mno, id, passwd, mname, nickname, birthday, gender, admin
+    FROM member
+    WHERE id = #{id}
+  </select>
+  
+</mapper>
+
+
+
+
+

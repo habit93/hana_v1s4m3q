@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.blogreply.BlogreplyMapperInter">
+
+  <insert id="create" parameterType="BlogreplyVO"> 
+    INSERT INTO blogreply(content, rdate, blogno, indent, ansnum)
+    VALUES(#{content}, now(), #{blogno}, 0, (SELECT IFNULL(MAX(ansnum), 0)+1 FROM blogreply as ansnum))
+  </insert>
+<!--   
+  <select id="list" resultType="BlogreplyVO">
+    SELECT blogreplyno, content, rdate, blogno, indent, ansnum
+    FROM blogreply
+    WHERE blogno = #{blogno}
+    ORDER BY ansnum ASC
+  </select> 
+
+  <select id="read" resultType="BlogreplyVO" parameterType="int">
+    SELECT blogreplyno, content, rdate, blogno, indent, ansnum
+    FROM blogreply
+    WHERE blogreplyno=#{blogreplyno}
+  </select>
+  
+  <update id="update" parameterType="BlogreplyVO">
+    UPDATE blogreply
+    SET content=#{content}
+    WHERE blogreplyno=#{blogreplyno}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM blogreply
+    WHERE blogreplyno=#{blogreplyno}
+  </delete>
+ -->
+</mapper>

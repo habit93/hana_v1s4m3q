@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.code.CodeMapperInter">
+
+  <insert id="create" parameterType="CodeVO">
+    INSERT INTO code(sort)
+    VALUES (#{sort})
+  </insert>
+
+  <select id="list" resultType="CodeVO">
+    SELECT codeno, sort
+    FROM code 
+    ORDER BY codeno ASC
+  </select>
+  
+  <update id="update" parameterType="CodeVO">
+    UPDATE code
+    SET sort=#{sort}
+    WHERE codeno=#{codeno}
+  </update> 
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM code
+    WHERE codeno=#{codeno}
+  </delete>
+</mapper>
+

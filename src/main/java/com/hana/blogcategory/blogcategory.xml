@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.blogcategory.BlogcategoryMapperInter">
+  <insert id="create" parameterType="BlogcategoryVO">
+    INSERT INTO blogcategory(codeno, title, orderno, visible, ids, cnt)
+    VALUES(#{codeno}, #{title}, #{orderno}, #{visible}, #{ids}, 0)
+  </insert>
+  
+<!--   <select id="list" resultType="BlogcategoryVO">
+    SELECT blogcategoryno, codeno, title, orderno, visible, ids, cnt
+    FROM blogcategory
+    ORDER BY codeno, orderno
+  </select>
+ -->
+  <select id="list" resultType="BlogcategoryVO">
+    SELECT c.sort, t.blogcategoryno, t.codeno, t.title, t.orderno, t.visible, t.ids, t.cnt
+    FROM code c, blogcategory t
+    WHERE c.codeno = t.codeno
+    ORDER BY codeno, orderno
+  </select>
+    
+  <select id="read" resultType="BlogcategoryVO" parameterType="int">
+    SELECT blogcategoryno, codeno, title, orderno, visible, ids, cnt
+    FROM blogcategory
+    WHERE blogcategoryno = #{blogcategoryno}
+  </select>  
+  
+  <update id="update" parameterType="BlogcategoryVO">
+    UPDATE blogcategory
+    SET codeno=#{codeno}, title = #{title}, orderno=#{orderno}, visible=#{visible}, ids=#{ids}, cnt=#{cnt}
+    WHERE blogcategoryno=#{blogcategoryno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    DELETE FROM blogcategory
+    WHERE blogcategoryno=#{blogcategoryno}
+  </delete>
+  
+  <update id="update_codeno" parameterType="BlogcategoryVO">
+    UPDATE blogcategory
+    SET codeno = #{codeno}
+    WHERE blogcategoryno=#{blogcategoryno}
+  </update>
+  
+  <update id="update_orderno" parameterType="BlogcategoryVO">
+    UPDATE blogcategory
+    SET orderno = #{orderno}
+    WHERE blogcategoryno=#{blogcategoryno}
+  </update>
+  
+  <update id="update_visible" parameterType="BlogcategoryVO">
+    UPDATE blogcategory
+    SET visible = #{visible}
+    WHERE blogcategoryno=#{blogcategoryno}
+  </update>
+</mapper>
+

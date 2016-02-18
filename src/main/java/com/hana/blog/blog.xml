@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hana.blog.BlogMapperInter">
+
+  <insert id="create" parameterType="BlogVO"> 
+    INSERT INTO blog(title, content, file, good, rdate, cnt, replycnt, blogcategoryno,mno)
+    VALUES(#{title}, #{content}, #{file}, 0, now(), 0, 0, #{blogcategoryno}, #{mno})
+  </insert>
+  
+  <select id="list" resultType="BlogVO">
+    SELECT blogno, title, content, file, good, rdate, cnt, replycnt, blogcategoryno, mno
+    FROM blog
+    ORDER BY blogno DESC
+  </select> 
+
+  <select id="read" resultType="BlogVO" parameterType="int">
+    SELECT blogno, title, content, file, good, rdate, cnt, replycnt, blogcategoryno, mno
+    FROM blog
+    WHERE blogno=#{blogno}
+  </select>
+  
+  <update id="update" parameterType="BlogVO">
+    UPDATE blog
+    SET title=#{title}, content=#{content}, file=#{file} 
+    WHERE blogno=#{blogno}
+  </update>
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM blog
+    WHERE blogno=#{blogno}
+  </delete>
+     
+  <!--   blogcategoryno 컬럼의 값을 기준으로 게시판별 목록 -->
+  <select id="list2" resultType="BlogVO" parameterType="BlogVO">
+    SELECT blogno, title, content, file, good, rdate, cnt, replycnt, blogcategoryno, mno
+    FROM blog
+    WHERE blogcategoryno = #{blogcategoryno}
+    ORDER BY blogno DESC
+  </select> 
+  
+</mapper>

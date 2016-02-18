@@ -88,9 +88,9 @@ CREATE TABLE qa(
 		content                       		VARCHAR(200)		 NOT NULL COMMENT '내용',
 		passwd                        		VARCHAR(15)		 NOT NULL COMMENT '패스워드',
 		rdate                         		DATE		 NOT NULL COMMENT '등록일',
-		step                          		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '스텝',
-		depth                         		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '깊이',
-		ref                           		VARCHAR(10)		 NOT NULL COMMENT '레프',
+		grpno                         		MEDIUMINT(10)		 DEFAULT 0		 NOT NULL COMMENT '부모글번호',
+		indent                        		SMALLINT(10)		 DEFAULT 0		 NOT NULL COMMENT '답변여부',
+		ansnum                        		SMALLINT(10)		 DEFAULT 0		 NOT NULL COMMENT '답변순서',
 		itemno                        		INT(10)		 NULL  COMMENT '물건번호',
   FOREIGN KEY (itemno) REFERENCES item (itemno)
 ) COMMENT='질문답변';
