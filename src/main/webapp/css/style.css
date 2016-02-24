@@ -329,6 +329,7 @@
   }
  
  .label{
+   color: black;
    width: 150px;
    text-align: right;
    float: left;

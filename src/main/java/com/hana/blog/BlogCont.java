@@ -69,8 +69,7 @@ public class BlogCont {
     // --------------------------------------------------
     
     if (blogDAO.create(blogVO) == 1){ 
-      msgs.add("글을 등록했습니다.");
-      links.add("<button type='button' onclick=\"location.href='./create.do'\">계속 등록</button>");
+      mav.setViewName("redirect:/blog/list2.do?blogcategoryno=" + blogVO.getBlogcategoryno());
     }else{
       msgs.add("글 등록에 실패했습니다.");
       msgs.add("다시 시도해주세요.");

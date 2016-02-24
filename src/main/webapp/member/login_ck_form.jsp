@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
  
 <%
-String url_address = request.getParameter("url_address"); // 로그인 후 이동할 주소
-
 Cookie[] cookies = request.getCookies();
 Cookie cookie = null;
 String ck_id = "";
@@ -24,31 +22,33 @@ for (int i=0; i < cookies.length; i++){
   }
 }
 %>
+
 <!DOCTYPE html> 
 <html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<title>로그인</title> 
+  <head>
+    <title>로그인</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/javascript" src="../js/tool.js"></script>
+<DIV class='title' >회원 로그인</DIV>
 
-</head> 
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<jsp:include page="/menu/top.jsp" flush='false' />
-<!-- ----------------------------------------- -->
-
-<DIV class='title' style='width: 20%;'>회원 로그인</DIV>
-
-<DIV class='content' style='width: 50%;'>
+<DIV class='content' >
 <FORM name='frm' method='POST' action='./login.do'>
-  <input type='hidden' name='url_address' value='<%=url_address %>'>
-  <fieldset>
     <ul>
       <li>
-        <label class='label' for='id'>아이디</label> <%-- <%=ck_id %> --%>
-        <input type='text' name='id' id='id' value='user1' style='width: 40%;' autocomplete="off" required="required">
+        <label class='label'  for='id'>아이디</label> <%-- <%=ck_id %> --%>
+        <input type='text' name='id' id='id' value='user1' style='width: 20%;' autocomplete="off" required="required">
         <label>
           <%
           if (ck_id_save.equals("Y")){
@@ -61,12 +61,11 @@ for (int i=0; i < cookies.length; i++){
           <%  
           }
           %>
-        
         </label>
       </li>
-      <li>
+      <li> 
         <label class='label' for='passwd'>패스워드</label><%-- <%=ck_passwd %> --%>
-        <input type='password' name='passwd' id='passwd' value='1234' style='width: 40%;' autocomplete="off" required="required">
+        <input type='password' name='passwd' id='passwd' value='1234' style='width: 20%;' autocomplete="off" required="required">
         <label>
           <%
           if (ck_passwd_save.equals("Y")){
@@ -79,21 +78,24 @@ for (int i=0; i < cookies.length; i++){
           <%  
           }
           %>
-        
         </label>
       </li>
-      <li class='center'>
-        <button type='submit'>로그인</button>
-        <button type='button' onclick="location.href='./create.do'">회원가입</button> 
-        
+      <li class='feature'>
+        <button type='submit' class="btn-sm">로그인</button>
+        <button type='button' class="btn-sm" onclick="location.href='./create.do'">회원가입</button> 
       </li>
     </ul>
-  </fieldset>
 </FORM>
 </DIV>
 
-<!-- -------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
-</html> 
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
+</html>

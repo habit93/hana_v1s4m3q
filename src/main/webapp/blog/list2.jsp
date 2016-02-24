@@ -2,98 +2,79 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.hana.blog.BlogVO" %>
 <%@ page import="com.hana.tool.Tool" %>
+<% ArrayList<BlogVO> list = (ArrayList<BlogVO>)request.getAttribute("list"); %>
+<% BlogVO blogVO = (BlogVO)request.getAttribute("blogVO");%>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="ko"> 
-<head>
-<meta charset="UTF-8">
-<title></title>
+  <head>
+    <title>게시판</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/javascript" src="../js/tool.js"></script>
-<script type="text/JavaScript" 
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript">
-$(function(){
-});
-</script>
-
-<script type="text/javascript">
-</script>
-</head>
-
-<%-- body 시작 --%>
-<body>
-<jsp:include page="/menu/top.jsp" flush='false' />
-<%-- ---------------------------------------------------------------------------------------------- --%>
-  <% ArrayList<BlogVO> list = (ArrayList<BlogVO>)request.getAttribute("list"); %>
-  <% BlogVO blogVO = (BlogVO)request.getAttribute("blogVO");%>
+<div style="text-align: center;">${title }</div>
   
-  <div style="text-align: center;">${title } 게시판</div>
+<!-- 리스트 -->
+<div class="container">
+  <table class="table table-hover"> 
+    <thead>
+      <tr>
+        <th style="width: 60%;">제목(댓글수)</th>
+        <th style="width: 15%;">등록일</th>
+        <th style="width: 15%;">조회수</th>
+        <th style="width: 10%;">기타</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+        for(int index = 0; index < list.size(); index++){
+          BlogVO vo = list.get(index);
+          int blogno = vo.getBlogno();
+      %>
+      <tr>
+        <td class="td_left">
+          <a href="./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>"><%=Tool.textLength(10, vo.getTitle())%></a> 
+        </td>
+        <td class="td"><%=vo.getRdate() %></td>
+        <td class="td"><%=vo.getReplycnt() %></td>
+        <td class="td">
+          <a href="./update.do?blogno=<%=blogno%>"><img src="./images/update.png" title="수정"  border='0'/></a>
+          <a href="./delete.do?blogno=<%=blogno %>"><img src="./images/delete.png" title="삭제"  border='0'/></a>
+        </td> 
+     </tr>
+     <%
+      }
+      %>
+  </tbody>
+ </table>
+</div>
   
-  <div class='content_menu' style='width: 90%;'>
-    <A href='../blogcategory/list.do'>블로그 카테고리 목록</A> ｜
-    <A href='./list.do'>전체 게시판</A>｜
-    <A href='./create.do?blogcategoryno=<%=blogVO.getBlogcategoryno() %>'>등록</A>｜
-    <A href="javascript:location.reload();">새로고침</A>
-  </div>
-  <div class="content" style='width: 90%;'>
-    <table class="table" style='width: 100%;'>
-      <colgroup>
-        <col style="width: 5%;"></col>
-        <col style="width: 35%;"></col>
-        <col style="width: 5%;"></col>
-        <col style="width: 15%;"></col>
-        <col style="width: 10%;"></col>
-        <col style="width: 15%;"></col>
-        <col style="width: 5%;"></col>
-        <col style="width: 10%;"></col>
-      </colgroup>
-          
-      <%-- table 컬럼 --%>
-      <thead>
-        <tr>
-          <th class="th">번호</th>
-          <th class="th">제목(댓글수)</th>
-          <th class="th">썸파일</th>
-          <th class="th">등록일</th>
-          <th class="th">조회수</th>
-          <th class="th">기타</th>
-        </tr>
-      </thead>
-      
-      <%-- table 내용 --%>
-      <tbody>
-        <%
-          for(int index = 0; index < list.size(); index++){
-            BlogVO vo = list.get(index);
-            int blogno = vo.getBlogno();
-          %>
-          <tr>
-            <td class="td"><%=blogno %></td>
-            <td class="td_left">
-              <a href="./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>"><%=Tool.textLength(10, vo.getTitle())%></a> 
-            </td>
-            <td class="td"><%=vo.getFile() %></td>
-            <td class="td"><%=vo.getRdate().substring(0, 10) %></td>
-            <td class="td"><%=vo.getReplycnt() %></td>
-            <td class="td">
-              <a href="./update.do?blogno=<%=blogno%>"><img src="./images/update.png" title="수정"  border='0'/></a>
-              <a href="./delete.do?blogno=<%=blogno %>"><img src="./images/delete.png" title="삭제"  border='0'/></a>
-              <%=vo.getBlogcategoryno() %>
-            </td>
-          </tr>
-          <% 
-        }
-        %>
-      </tbody>
-    </table>
-    <br><br>
-  </div>
-<%-- ---------------------------------------------------------------------------------------------- --%>
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<%-- body 종료 --%>
+<div class="feature">
+    <button type='button' class="btn-sm" onclick="location.href='./create.do?blogcategoryno=<%=blogVO.getBlogcategoryno() %>' ">등록</button>
+    <button type='button' class="btn-sm" onclick="javascript:location.reload();">새로고침</button>
+</div>
+
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
 
 

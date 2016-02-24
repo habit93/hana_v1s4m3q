@@ -4,15 +4,17 @@
 
 <!DOCTYPE html> 
 <html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<title></title> 
-
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script>
-<script type="text/javascript" src="../js/tool.js"></script>
+  <head>
+    <title>수입내역</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
 <script type="text/javascript">
 $(function(){ 
   $('#panel_frm').hide();
@@ -55,96 +57,87 @@ function remove_cancel(){
 <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- ----------------------------------------- -->
 
-
-
 <!-- 삭제 -->
-<DIV id='panel_frm_remove' class='content' style='padding: 10px 0px 10px 0px; background-color: #FFFF00; width: 70%; text-align: center;'>
-<FORM name='frm_remove' id='frm_remove' method='POST' action='./delete.do'>
+<div id='panel_frm_remove'>
+<form name='frm_remove' id='frm_remove' method='POST' action='./delete.do'>
   <input type='hidden' name='incomeno' id='incomeno'> 
   삭제하면 복구 할 수 없습니다. 정말로 삭제하시겠습니까?
   <button type="submit" id='submit'>삭제</button>
   <button type="button" onclick="remove_cancel()">취소</button>
-</FORM>
-</DIV>
+</form>
+</div>
 
 <!-- 리스트 -->
-<div class='content' style='margin: 0px auto;'>
-<TABLE class='table' style='width: 100%;'>
-  <colgroup> 
-    <col style='width: 15%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 25%;'/>
-    <col style='width: 10%;'/>
-  </colgroup>  
-  <TR>
-    <TH class='th'>날짜</TH>
-    <TH class='th'>수입내용</TH>
-    <TH class='th'>수입금액</TH>
-    <TH class='th'>기타</TH>
-  </TR>  
-  
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>수입 내용</th>
+        <th>수입 금액</th>
+        <th>기타</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%
+    ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("list");
 
-<%
-ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("list");
-
-for(int index=0; index < list.size(); index++){
-  IncomeVO vo = list.get(index);
-  int incomeno = vo.getIncomeno();
-%> 
-  <TR> 
-    <TD class='td'><%=vo.getRdate() %></TD>
-    <TD class='td'><%=vo.getIncomeitem() %></TD>
-    <TD class='td'><%=vo.getIncomemoney() %></TD>
-    <TD class='td'> 
-      <A href="javascript:update(<%=incomeno%>,'<%=vo.getRdate() %>', '<%=vo.getIncomeitem() %>','<%=vo.getIncomemoney()%>')"><IMG src='./images/update.png' title='수정'></A>
-      <A href="javascript:remove(<%=incomeno%>)"><IMG src='./images/delete.png' title='삭제'></A> 
-    </TD> 
-   </TR>
-<%
-  }
-%>
-
-</TABLE> 
+    for(int index=0; index < list.size(); index++){
+      IncomeVO vo = list.get(index);
+      int incomeno = vo.getIncomeno();
+    %> 
+    <tr>
+      <td><%=vo.getRdate() %></td>
+      <td><%=vo.getIncomeitem() %></td>
+      <td><%=vo.getIncomemoney() %></td>
+      <td> 
+        <a href="javascript:update(<%=incomeno%>,'<%=vo.getRdate() %>', '<%=vo.getIncomeitem() %>','<%=vo.getIncomemoney()%>')"><img src='./images/update.png' title='수정'></a>
+        <a href="javascript:remove(<%=incomeno%>)"><img src='./images/delete.png' title='삭제'></a> 
+      </td> 
+    </tr>
+    <%
+     }
+    %>
+  </tbody>
+ </table>
 </div>
 
 <!-- 등록/수정 -->
-<div class='content' id='panel_frm' >
-<form name='frm' id='frm' method='POST' action="./create.do">  
-<input type='hidden' name='incomeno' id='incomeno' value='1'>        
-<input type='hidden' name='mno' id='mno' value='${mno}'>
-<TABLE class='table' style='width: 100%;'>
-  <colgroup> 
-    <col style='width: 15%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 25%;'/>
-    <col style='width: 10%;'/>
-  </colgroup> 
-  <TR>
-    <TD class='td'><input type="date" name='rdate' id='rdate' required="required"></TD>
-    <TD class='td'><input type='text' name='incomeitem' id='incomeitem' required="required"></TD>
-    <TD class='td'><input type='text' name='incomemoney' id='incomemoney' required="required"></TD>
-    <TD class='td'>      
-      <button type='submit'  id='btn'>등록</button> 
-      <button type="button" onclick="create_cancel()">취소</button> 
-     </TD>
-  </TR>
-</TABLE>
-</form>
-</div> 
+<div class="container" id='panel_frm' >
+  <form name='frm' id='frm' method='POST' action="./create.do">  
+  <input type='hidden' name='incomeno' id='incomeno' value='1'>        
+  <input type='hidden' name='mno' id='mno' value='${mno}'>
+  <table class="table table-hover">
+    <tr>
+      <td><input type="date" name='rdate' id='rdate' required="required"></td>
+      <td><input type='text' name='incomeitem' id='incomeitem' required="required"></td>
+      <td><input type='text' name='incomemoney' id='incomemoney' required="required"></td>
+      <td>      
+        <button type='submit'  id='btn'>등록</button> 
+        <button type="button" onclick="create_cancel()">취소</button> 
+     </td>
+   </tr>
+ </table>
+ </form>
+</div>
 
-<DIV class='bottom'>
-  <button type='button' onclick="create();">등록</button>
-  <button type='button' onclick="location.reload();">새로 고침</button>
-  
+<div class='feature'>
+  <button type='button' class="btn-sm" onclick="create();">등록</button>
+  <button type='button' class="btn-sm" onclick="location.reload();">새로 고침</button><br /><br /> 
   <form method="get" action="./sumlist.do">
     <input type="month" name="month" id="month">
-    <button type='submit' >정산</button> 
+    <button type='submit' class="btn-sm">정산</button> 
   </form>
-  
-</DIV>
-<!-- -------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
+</div>
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
 

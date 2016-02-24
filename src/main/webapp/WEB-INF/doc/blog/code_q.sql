@@ -11,7 +11,7 @@ CREATE TABLE code(
 
 2. 등록
 INSERT INTO code(sort)
-VALUES ('개발');
+VALUES ('공부');
 
 INSERT INTO code(sort)
 VALUES ('여행');

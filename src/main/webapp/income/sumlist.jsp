@@ -5,45 +5,35 @@
 
 <!DOCTYPE html> 
 <html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<title></title> 
-
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script>
-<script type="text/javascript" src="../js/tool.js"></script>
-<script type="text/javascript">
-
-$(function(){ 
-}); 
- 
-</script>
-</head> 
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<jsp:include page="/menu/top.jsp" flush='false' />
-<!-- ----------------------------------------- -->
+  <head>
+    <title>월 수입 내역</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
 
 <!-- 리스트 -->
-<div class='content' style='margin: 0px auto;'>  
-<TABLE class='table' style='width: 100%;'>
-  <colgroup> 
-    <col style='width: 15%;'/>
-    <col style='width: 25%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 10%;'/>
-  </colgroup>
-  <TR>
-    <TH class='th'>날짜</TH>
-    <TH class='th'>수입내용</TH>
-    <TH class='th'>수입금액</TH>
-    <TH class='th'>기타</TH>
-  </TR>  
-  
-
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>수입 내용</th>
+        <th>수입 금액</th>
+        <th>기타</th>
+      </tr>
+    </thead>
+    <tbody>
 <%
 ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("sumlist");
   
@@ -66,12 +56,13 @@ ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("sumlist");
     <TD class='td'> 
       <A href="javascript:update(<%=incomeno%>,'<%=vo.getRdate() %>','<%=vo.getIncomeitem()%>','<%=vo.getIncomemoney()%>')"><IMG src='./images/update.png' title='수정'></A>
       <A href="javascript:remove(<%=incomeno%>)"><IMG src='./images/delete.png' title='삭제'></A> 
-    </TD> 
-  </TR>
-<%
-  }
-%>
-</TABLE>
+      </td> 
+    </tr>
+    <%
+     }
+    %>
+  </tbody> 
+ </table>
 </div>
 
 <div class='title'>
@@ -79,9 +70,15 @@ ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("sumlist");
 </div>
 
 
-<!-- -------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
 

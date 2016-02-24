@@ -3,15 +3,20 @@
 
 <!DOCTYPE html> 
 <html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<title></title> 
-
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/javascript" src="../js/tool.js"></script>
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- 
+  <head>
+    <title>지출내역 변경</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <style type="text/css">
+      body { background:#171717; color: white;}
+    </style>
+    
 <script type="text/javascript">
 $(function(){
   var cnt = ${cnt};
@@ -25,13 +30,12 @@ function popup_close(){
   window.close(); 
 }
 </script>
-  <style type="text/css">
-   body { background:#171717; color: white;}
- </style>
-</head> 
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<!-- ----------------------------------------- -->
+
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 <%
 ArrayList<String> msgs = (ArrayList<String>)request.getAttribute("msgs");
 ArrayList<String> links = (ArrayList<String>)request.getAttribute("links");
@@ -60,7 +64,14 @@ ArrayList<String> links = (ArrayList<String>)request.getAttribute("links");
   </fieldset>
 </DIV>
  
-<!-- -------------------------------------------- -->
-</body>
-<!-- -------------------------------------------- -->
-</html> 
+<!-- --------------------------------------------------------- -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
+</html>
+

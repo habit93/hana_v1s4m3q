@@ -1,16 +1,41 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-
-
-
-<!DOCTYPE html>
-<html> 
-<head>
-<meta charset="UTF-8">
-<title> 등록 </title>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.hana.expense.ExpenseVO"%>
+<%@ page import="com.hana.category.CategoryVO" %> 
+<%-- 
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Date" %>
+<%
+SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd"); 
+String root = request.getContextPath();// 절대경로추출
+%>
  
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
+<%
+Date date = new Date(); //오늘날짜생성
+ String today = sd.format(date); //date -> string 
+%>
+  --%>
+ 
+<!DOCTYPE html> 
+<html lang="ko"> 
+  <head>
+    <title>일정 등록</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+window.onload = function(){
+  var today = new Date();
+   $('#rdate').attr('value', today);   
+}
+
+
 function checkData(f){ // f == document.frmData 객체
     var msg; // 에러 메세지
     var str; // 임시 문자열 저장 변수
@@ -34,66 +59,43 @@ function checkData(f){ // f == document.frmData 객체
         f.content.focus();
         return false;
     }
-    
     return true;
 }
+
 </script>
-</head>
+  </head> 
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
-<!-- *********************************************** -->
-<body style="margin: 0px">
-<jsp:include page="/menu/top.jsp" flush="false"/>
-<!-- *********************************************** -->
-
-<DIV style='text-align: center'>
-  <DIV class="title" style='width: 20%;'>일정 등록</DIV>
-</DIV> 
-    
-<FORM name="frm" action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
-  <input type='hidden' name='mno' id='mno' value='${mno }'>  
-  <table style='border: 0px none #FFFFFF; width: 70%;'>
-    <tr>
-      <th width='20%'>날짜</th>
-      <td width='80%' style='text-align: left; border: 0px none #FFFFFF'>
-        <input type='date' name='rdate' id='rdate' size='10'>
-      </td>
-    </tr>  
-    <tr>
-      <th>출력 레이블</th>
-      <td style='text-align: left; border: 0px none #FFFFFF'>
-        <input type='text' name='label' id='label' size='20'>
-        </td>
-    </tr>  
-    <tr>
-      <th>제목</th>
-      <td style='text-align: left; border: 0px none #FFFFFF'>
-        <input type='text' name='title' id='title' size='50'>    
-      </td>
-    </tr>
-    <tr>
-      <th>내용</th>
-      <td style='text-align: left; border: 0px none #FFFFFF'>
-        <TEXTAREA name='contents' id='contents' style = 'border:1px solid; width: 100%' rows="10"></TEXTAREA>
-      </td>
-    </tr>      
-     
-  </table>
-
+ 
+<form class="left" action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
+  <input type='hidden' name='mno' id='mno' value='${mno }'>   
+  <label for="rdate">날짜 <input type='date' name='rdate' id='rdate'></label><br />
+  <label for="label">출력 레이블 <input type='text' name='label' id='label' size="40"></label><br />
+  <label for="title">제목 <input type='text' name='title' id='title' ></label><br />
+  <label for="contents">내용 <input type='text' name='contents' id='contents' ></label><br /> 
   <DIV style='text-align: center; border: 0px none #FFFFFF'>  
     <DIV class='bottom'> 
-      <input type='submit' value='등록'>
-      <input type='button' value='목록'
-             onclick="location.href='./list.jsp'">   
+      <input type='submit' class="btn-sm" value='등록'>
+      <input type='button' class="btn-sm" value='목록' onclick="location.href='./list.jsp'">   
     </DIV>
   </DIV>
   
 </FORM>
 
-<!-- *********************************************** -->
-<jsp:include page="/menu/bottom.jsp" flush="false"/>
-</body>
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
-<!-- *********************************************** -->
 
 
 

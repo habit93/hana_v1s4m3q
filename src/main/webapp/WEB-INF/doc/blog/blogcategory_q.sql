@@ -17,16 +17,16 @@ CREATE TABLE blogcategory(
 
 2. 등록
 INSERT INTO blogcategory(codeno, title, orderno, visible, ids, cnt)
-VALUES(1, 'JAVA', 1, 'Y', 'admin', 0);
+VALUES(2, '지금은 연애중', 1, 'Y', 'admin', 0);
 
 INSERT INTO blogcategory(codeno, title, orderno, visible, ids, cnt)
-VALUES(1, 'JSP', 1, 'Y', 'admin', 0);
+VALUES(2, '사랑해도 될까요?', 2, 'Y', 'admin', 0);
 
 INSERT INTO blogcategory(codeno, title, orderno, visible, ids, cnt)
-VALUES(2, '휴양림', 1, 'Y', 'admin', 0);
+VALUES(2, '헤어진 다음 날', 3, 'Y', 'admin', 0);
 
 INSERT INTO blogcategory(codeno, title, orderno, visible, ids, cnt)
-VALUES(2, '캠핑', 1, 'Y', 'admin', 0);
+VALUES(2, '화성남과 금성녀', 4, 'Y', 'admin', 0);
 
 
 3. 목록

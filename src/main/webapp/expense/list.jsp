@@ -5,17 +5,18 @@
 
 <!DOCTYPE html> 
 <html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<title></title> 
-
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script>
-<script type="text/javascript" src="../js/tool.js"></script>
+  <head>
+    <title>지출내역</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
 <script type="text/javascript">
-
 $(function(){ 
   $('#panel_frm').hide(); 
   $('#panel_frm_remove').hide();
@@ -62,122 +63,113 @@ function update_category(expenseno, categoryno){
   win.moveTo(x, y); // 화면 이동
 }
 </script>
-</head> 
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<jsp:include page="/menu/top.jsp" flush='false' />
-<!-- ----------------------------------------- -->
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
  
  <!-- 삭제 -->
-<DIV id='panel_frm_remove' class='content' style='padding: 10px 0px 10px 0px; background-color: #FFFF00; width: 70%; text-align: center;'>
-<FORM name='frm_remove' id='frm_remove' method='POST' action='./delete.do'>
+<div id='panel_frm_remove'>
+<form name='frm_remove' id='frm_remove' method='POST' action='./delete.do'>
   <input type='hidden' name='expenseno' id='expenseno'> 
   삭제하면 복구 할 수 없습니다. 정말로 삭제하시겠습니까?
   <button type="submit" id='submit'>삭제</button>
   <button type="button" onclick="remove_cancel()">취소</button>
-</FORM>
-</DIV>
+</form>
+</div>
 
 <!-- 리스트 -->
-<div class='content' style='margin: 0px auto;'>  
-<TABLE class='table' style='width: 100%;'>
-  <colgroup> 
-    <col style='width: 15%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 25%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 10%;'/>
-  </colgroup>
-  <TR>
-    <TH class='th'>날짜</TH>
-    <TH class='th'>지출 카테고리</TH>
-    <TH class='th'>지출내용</TH>
-    <TH class='th'>지출금액</TH>
-    <TH class='th'>기타</TH>
-  </TR>  
-  
-
-<%
-ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("list");
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>지출 카테고리</th>
+        <th>지출 내용</th>
+        <th>지출 금액</th>
+        <th>기타</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%
+    ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("list");
     
-  for(int index=0; index < list.size(); index++){
-    ExpenseVO vo = list.get(index);
-    int expenseno = vo.getExpenseno();
-%> 
-  <TR> 
-    <TD class='td'><%=vo.getRdate() %></TD> 
-    <TD class='td'><A href="#" onclick="update_category(<%=vo.getExpenseno()%>, <%=vo.getCategoryno() %>)"><%=vo.getCategorysort() %></A></TD>
-    <TD class='td'><%=vo.getExpenseitem() %></TD>
-    <TD class='td'><%=vo.getExpensemoney() %></TD> 
-    <TD class='td'> 
-      <A href="javascript:update(<%=expenseno%>,'<%=vo.getRdate() %>','<%=vo.getCategoryno()%>','<%=vo.getExpenseitem()%>','<%=vo.getExpensemoney()%>')"><IMG src='./images/update.png' title='수정'></A>
-      <A href="javascript:remove(<%=expenseno%>)"><IMG src='./images/delete.png' title='삭제'></A> 
-    </TD> 
-  </TR>
-<%
-  }
-%>
-</TABLE>
+    for(int index=0; index < list.size(); index++){
+     ExpenseVO vo = list.get(index);
+     int expenseno = vo.getExpenseno();
+    %> 
+    <tr>
+      <td><%=vo.getRdate() %></td> 
+      <td><a href="#" onclick="update_category(<%=vo.getExpenseno()%>, <%=vo.getCategoryno() %>)"><%=vo.getCategorysort() %></a></td> 
+      <td><%=vo.getExpenseitem() %></td> 
+      <td><%=vo.getExpensemoney() %></td> 
+      <td> 
+        <a href="javascript:update(<%=expenseno%>,'<%=vo.getRdate() %>','<%=vo.getCategoryno()%>','<%=vo.getExpenseitem()%>','<%=vo.getExpensemoney()%>')"><img src='./images/update.png' title='수정'></a>
+        <a href="javascript:remove(<%=expenseno%>)"><img src='./images/delete.png' title='삭제'></a> 
+      </td> 
+    </tr>
+    <%
+     }
+    %>
+  </tbody>
+ </table>
 </div>
 
 
 <!-- 등록/수정 -->
-<div class='content' id='panel_frm' >
-<form name='frm' id='frm' method='POST' action="./create.do">  
-<input type='hidden' name='mno' id='mno' value='${mno}'>
-<input type='hidden' name='expenseno' id='expenseno' value='1'>
-<TABLE class='table' style='width: 100%;'>
-  <colgroup> 
-    <col style='width: 15%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 25%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 10%;'/>
-  </colgroup> 
-  <TR>
-    <TD class='td'><input type="date" name='rdate' id='rdate' required="required"></TD>
-    <TD class='td'>
-      <input type="text" name='categoryno' id='categoryno'  required="required" list="category"  autocomplete="off">
-      <datalist id="category" >
-      <%
-      ArrayList<CategoryVO> category_list = (ArrayList<CategoryVO>)request.getAttribute("category_list");
-      for (int i=0; i<category_list.size(); i++){
+<div class="container" id='panel_frm' >
+  <form name='frm' id='frm' method='POST' action="./create.do">  
+  <input type='hidden' name='mno' id='mno' value='${mno}'>
+  <input type='hidden' name='expenseno' id='expenseno' value='1'>
+  <table class="table table-hover">
+    <tr>
+      <td><input type="date" name='rdate' id='rdate' required="required"></TD>
+      <td>
+       <input type="text" name='categoryno' id='categoryno'  required="required" list="category"  autocomplete="off">
+       <datalist id="category" >
+       <%
+       ArrayList<CategoryVO> category_list = (ArrayList<CategoryVO>)request.getAttribute("category_list");
+       for (int i=0; i<category_list.size(); i++){
         CategoryVO categoryVO = category_list.get(i);
       %>
         <option value="<%=categoryVO.getCategoryno() %>"  ><%=categoryVO.getCategorysort() %></option>
-        <%  
-        }
-        %>
-     </datalist>
-     </TD>
+      <%  
+      }
+      %>
+       </datalist>
+      </td>
+      <td><input type='text' name='expenseitem' id='expenseitem' required="required"></td>
+      <td><input type='text' name='expensemoney' id='expensemoney' required="required"></td>
+      <td>      
+        <button type='submit'  class="btn-sm" id='btn'>등록</button> 
+        <button type="button" class="btn-sm" onclick="create_cancel()">취소</button> 
+     </td>
+   </tr>
+ </table>
+ </form>
+</div>
 
-    <TD class='td'><input type='text' name='expenseitem' id='expenseitem' required="required"></TD>
-    <TD class='td'><input type='text' name='expensemoney' id='expensemoney' required="required"></TD>
-    <TD class='td'>      
-      <button type='submit'  id='btn'>등록</button> 
-      <button type="button" onclick="create_cancel()">취소</button> 
-     </TD>
-  </TR>
-</TABLE>
-</form>
-</div> 
-
-<DIV class='bottom'>
-  <button type='button' onclick="create();">등록</button>
-  <button type='button' onclick="location.reload();">새로 고침</button> <br />
-  
+<div class="feature">
+  <button type='button' class="btn-sm" onclick="create();">등록</button>
+  <button type='button' class="btn-sm" onclick="location.reload();">새로 고침</button><br /><br />
   <form method="get" action="./sumlist.do">
     <input type="month" name="month" id="month">
-    <button type='submit' >정산</button> 
+    <button type='submit' class="btn-sm">정산</button> 
   </form>
-</DIV>
+</div>
 
 
-
-<!-- -------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
 
