@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hana.item.ItemDAO;
 import com.hana.shopcode.ShopcodeDAO;
 import com.hana.shopcode.ShopcodeVO;
 
@@ -21,6 +22,10 @@ public class ShopcategoryCont {
   @Autowired
   @Qualifier("com.hana.shopcode.ShopcodeDAO")
   private ShopcodeDAO shopcodeDAO;
+  
+  @Autowired
+  @Qualifier("com.hana.item.ItemDAO")
+  private ItemDAO itemDAO;
   
   public ShopcategoryCont(){
     System.out.println("--> ShopcategoryCont created.");
@@ -115,4 +120,75 @@ public class ShopcategoryCont {
     }
     return mav;
   }
+  /**
+   * codeno 수정 GET
+   * @return
+   */
+  @RequestMapping(value="/shopcategory/codeno_update.do", method=RequestMethod.GET)
+  public ModelAndView codeno_update(){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/shopcategory/codeno_update"); // /webapp/blogcategory/create.jsp
+    
+    ArrayList<ShopcodeVO> shopcode_list = shopcodeDAO.list();
+    mav.addObject("shopcode_list", shopcode_list);
+    
+    return mav;
+  }
+
+  /**
+   * codeno 수정 POST
+   * @param memberVO
+   * @return
+   */
+  @RequestMapping(value="/shopcategory/codeno_update.do", method=RequestMethod.POST)
+  public ModelAndView codeno_update(ShopcategoryVO shopcategoryVO){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/shopcategory/popup_message");
+    
+    ArrayList<String> msgs = new ArrayList<String>();
+    ArrayList<String> links = new ArrayList<String>();
+    
+    int cnt = shopcategoryDAO.update_codeno(shopcategoryVO);
+    
+    if(cnt != 1 ){
+      msgs.add("codeno 수정에 실패했습니다.");
+      msgs.add("죄송하지만 다시한번 시도해주세요.");
+      links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");
+      links.add("<button type='button' onclick=\"popup_close()\">닫기</button>");
+    }
+    
+    mav.addObject("cnt", cnt);
+    mav.addObject("msgs", msgs);
+    mav.addObject("links", links);
+    
+    return mav;
+  }
+  /**
+   * 출력 순서 변경
+   * @param blogcategoryVO
+   * @return
+   */
+  @RequestMapping(value="/shopcategory/update_sort.do", method=RequestMethod.GET)
+  public ModelAndView update_orderno(ShopcategoryVO shopcategoryVO){  
+    ModelAndView mav = new ModelAndView();                  
+
+    if (shopcategoryDAO.update_sort(shopcategoryVO) == 1) {
+      mav.setViewName("redirect:/shopcategory/list.do");
+    } else {
+      ArrayList<String> msgs = new ArrayList<String>();
+      ArrayList<String> links = new ArrayList<String>();
+
+      mav.setViewName("/blogcategory/message");
+      msgs.add("죄송합니다, 우선순위 조정에 실패했습니다.");
+      msgs.add("다시 시도 해주십시오.");
+      links.add("<button type='button' onclick=\"history.back()\">뒤로가기</button>"); 
+      links.add("<button type='button' onclick=\"location.href='./list.do'\">회원 목록</button>");
+      
+      mav.addObject("msgs", msgs);
+      mav.addObject("links", links);    
+    }
+    
+    return mav;
+  } 
+
 }

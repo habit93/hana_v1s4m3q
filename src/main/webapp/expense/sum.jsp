@@ -42,14 +42,14 @@
   total = in_sum - ex_sum;
 %>
 
-<div class="feature"> 
-  총수입 : <%=in_sum %> <br />
-  총지출 : <%=ex_sum %> <br />
-  합계 : <%=total %> <br /><br />
+<div class="title">  
+  <span style="color:blue;">총수입 : <%=in_sum %></span><br />
+  <span style="color:red;">총지출 : <%=ex_sum %></span><br />
+  <b>합계 : <%=total %></b><br /><br /> 
   
   <form method="get" action="./summonth.do">
     <input type="month" name="month" id="month">
-    <button type='submit' class="btn-sm">정산</button> 
+    <button type='submit' class="btn-sm">정산</button>
   </form>
 </div>
 

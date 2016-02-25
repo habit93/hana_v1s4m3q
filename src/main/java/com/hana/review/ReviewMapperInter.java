@@ -6,7 +6,9 @@ public interface ReviewMapperInter {
   
   public int create(ReviewVO reviewVO);
   
-  public ArrayList<ReviewVO> list(); 
+  public ArrayList<ReviewVO> list(int itemno); 
+
+  public ArrayList<ReviewVO> list_all(); 
 
   public ReviewVO read(int reviewno);
 
@@ -14,7 +16,7 @@ public interface ReviewMapperInter {
 
   public int delete(int reviewno);
 
-
+  
 }
 
 

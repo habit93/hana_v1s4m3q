@@ -65,10 +65,8 @@ function send(){
 
 <DIV class='title'>회원가입</DIV>
 
-<DIV class='content'>
-<FORM name='frm' method='POST' action='./create.do'
-           onsubmit = 'return send();'>
-  <fieldset>
+<div class='content'>
+<form name='frm' method='POST' action='./create.do' onsubmit = 'return send();'>
     <ul>
       <li>
         <label class='label' for='id'>아이디</label>
@@ -95,11 +93,11 @@ function send(){
       </li>
       <li>
         <label class='label' for='birthday'>생일</label>
-        <input type="date" name='birthday' id='birthday' required="required">
+        <input type="date" name='birthday' id='birthday' value="1980-01-01" required="required">
       </li>
       <li>
         <label class='label' for='birthday'>성별</label>
-        <label><input type="radio" name='gender' id='gender' value='1'>남자</label>
+        <label><input type="radio" name='gender' id='gender' value='1'>남자</label> 
         <label><input type="radio" name='gender' id='gender' value='2'>여자</label>
         
       </li>
@@ -108,9 +106,8 @@ function send(){
         <button type="button" class="btn-sm" onclick="location.href='./list.do'">목록</button>
       </li>         
     </ul>
-  </fieldset>
-</FORM>
-</DIV>
+</form>
+</div>
 
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />

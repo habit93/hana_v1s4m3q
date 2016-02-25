@@ -27,8 +27,8 @@ public class ItemDAO implements ItemMapperInter{
   }
 
   @Override
-  public ArrayList<ItemVO> list2() {
-    return mapper().list2();
+  public ArrayList<ItemVO> list_all() {
+    return mapper().list_all();
   }
 
   @Override

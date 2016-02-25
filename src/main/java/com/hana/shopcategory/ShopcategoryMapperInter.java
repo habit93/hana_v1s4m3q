@@ -15,4 +15,11 @@ public interface ShopcategoryMapperInter {
   
   // <delete id="delete" parameterType="int">
   public int delete(int categoryno);
+  
+  // <update id="update_codeno" parameterType="ShopcategoryVO">
+  public int update_codeno(ShopcategoryVO shopcategoryVO);
+  
+  // <update id="update_orderno" parameterType="BlogcategoryVO">
+  public int update_sort(ShopcategoryVO shopcategoryVO);
+
 }

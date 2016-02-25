@@ -44,8 +44,8 @@ function delete_cancel(){
 }
 
 // 그룹 변경
-function codeno_update(blogcategoryno, codeno){
-  var win = window.open("./codeno_update.do?blogcategoryno="+ blogcategoryno+"&codeno="+codeno, "codeno_UPDATE", "width=450,height=400,scrollbars=no,left=525,top=250");
+function codeno_update(shopcategoryno, codeno){
+  var win = window.open("./codeno_update.do?shopcategoryno="+ shopcategoryno+"&codeno="+codeno, "codeno_UPDATE", "width=450,height=400,scrollbars=no,left=525,top=250");
 
   var x = (screen.width - 450) / 2;
   var y = (screen.height - 400) / 2;
@@ -54,46 +54,25 @@ function codeno_update(blogcategoryno, codeno){
 }
 
 // 출력 순서 감소, 순위 상승
-function up_orderno(blogcategoryno, orderno) {      
-  if (orderno <= 1){
+function up_sort(shopcategoryno, sort) {      
+  if (sort <= 1){
     return;
   }else{
-    orderno = orderno - 1;
-    location.href='./update_orderno.do?blogcategoryno=' + blogcategoryno + '&orderno=' + orderno;
+    sort = sort - 1;
+    location.href='./update_sort.do?categoryno=' + shopcategoryno + '&sort=' + sort;
   } 
 }
 
 // 출력 순서 증가, 순위 하강
-function down_orderno(blogcategoryno, orderno){  
-  if(orderno >= 50) {
+function down_sort(shopcategoryno, sort){  
+  if(sort >= 50) {
     alert('최대 50순위까지만 가능합니다.');
     return;    
   } else {
-    orderno = orderno + 1;
-    location.href='./update_orderno.do?blogcategoryno=' + blogcategoryno + '&orderno=' + orderno;    
+    sort = sort + 1;
+    location.href='./update_sort.do?categoryno=' + shopcategoryno + '&sort=' + sort;    
   }
 }
-
-//출력모드 변환
-function update_visible(blogcategoryno,visible){
-  $('#frm').attr('action', './update_visible.do');
-  $('#blogcategoryno',frm).attr('value', blogcategoryno);
-  $('#visible').attr('value', visible);
-  $('#frm').submit();
-}
-
-/* function update(codeno, sort, content){
-  $('#panel_frm').show();
-  $('#frm').attr('action', './update.do');
-  // $('#codeno').val(codeno); // Chrome Elements에 변경이 안됨
-  $('#codeno').attr('value', codeno);
-  // $('#sort').val(sort);          // Chrome Elements에 변경이 안됨
-  $('#sort').attr('value', sort);
-  // $('#content').val(content); // Chrome Elements에 변경이 안됨
-  $('#content').attr('value', content);
-  $('#submit').html('저장');
-  $('#sort').focus();
-} */
 
 </script>
 </head> 
@@ -180,8 +159,8 @@ ArrayList<ShopcategoryVO> list = (ArrayList<ShopcategoryVO>)request.getAttribute
     </TD>
     <TD class='td'>
       <%=vo.getSort() %>
-      <a href="javascript: up_orderno(<%=categoryno %>, <%=vo.getSort() %>)"><img src='./images/plus.jpg' title="우선순위 증가" width='15px'></a>
-      <a href="javascript: down_orderno(<%=categoryno %>, <%=vo.getSort() %>)"><img src='./images/minus.jpg' title="우선순위 감소" width='16px'></a>
+      <a href="javascript: up_sort(<%=categoryno %>, <%=vo.getSort() %>)"><img src='./images/plus.jpg' title="우선순위 증가" width='15px'></a>
+      <a href="javascript: down_sort(<%=categoryno %>, <%=vo.getSort() %>)"><img src='./images/minus.jpg' title="우선순위 감소" width='16px'></a>
     </TD>
     <TD class='td'>
       <A href="javascript:update(<%=categoryno%>, '<%=vo.getCodeno()%>', '<%=vo.getCategory()%>', '<%=vo.getSort() %>')"><IMG src='./images/update.png' title='수정'></A>
@@ -201,6 +180,7 @@ ArrayList<ShopcategoryVO> list = (ArrayList<ShopcategoryVO>)request.getAttribute
   <button type='button' onclick="location.href='../shopcode/list.do'">코드 목록</button>
   <button type='button' onclick="location.href='../blog/list.do'">전체 게시판 글</button>
 </DIV>
+
 <!-- -------------------------------------------- -->
 <jsp:include page="/menu/bottom.jsp" flush='false' />
 </body>

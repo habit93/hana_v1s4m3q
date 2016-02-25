@@ -21,73 +21,20 @@
   <body >
   <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- --------------------------------------------------------- -->
-
 <%
-ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("sumlist1");
-    
-  int ex_sum = 0;
-  int in_sum = 0;
-  int total = 0;
-  
-  for(int index=0; index < list.size(); index++){
-    ExpenseVO exvo = list.get(index);
-    ex_sum += exvo.getExpensemoney();
-  }
-%>
-
-<div class='title'>
-  총지출 : <%=ex_sum %> <br />
-</div>
-
-<!-- 지출 리스트 -->
-<div class="container">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>번호</th>
-        <th>지출 카테고리</th>
-        <th>지출 내용</th>
-        <th>지출 금액</th>
-        <th>기타</th>
-      </tr>
-    </thead>
-    <tbody>
-<%
-  for(int index=0; index < list.size(); index++){
-    ExpenseVO vo = list.get(index);
-    int expenseno = vo.getExpenseno();
-%> 
-
-    <tr> 
-      <td><%=vo.getRdate() %></td>
-      <td><%=vo.getCategoryno() %></td>
-      <td><%=vo.getExpenseitem() %></td>
-      <td><%=vo.getExpensemoney() %></td>
-      <td> 
-        <a href="javascript:update(<%=expenseno%>,'<%=vo.getRdate() %>','<%=vo.getCategoryno()%>','<%=vo.getExpenseitem()%>','<%=vo.getExpensemoney()%>')"><img src='./images/update.png' title='수정'></a>
-        <a href="javascript:remove(<%=expenseno%>)"><img src='./images/delete.png' title='삭제'></a> 
-      </td> 
-    </tr>
-    <%
-     }
-    %>
-  </tbody>
- </table>
-</div>
-
-
-
-
-  <%
 ArrayList<IncomeVO> list2 = (ArrayList<IncomeVO>)request.getAttribute("sumlist2");
-  
+
+int ex_sum = 0;
+int in_sum = 0;
+int total = 0;
+
   for(int index=0; index < list2.size(); index++){
     IncomeVO invo = list2.get(index);
     in_sum += invo.getIncomemoney();
   }
 %>
 <div class='title'> 
-  총수입 : <%=in_sum %> <br />
+  <span class='sumin'>총수입 : <%=in_sum %></span><br />
 </div>
 
 <!-- 수입 리스트 -->
@@ -95,7 +42,7 @@ ArrayList<IncomeVO> list2 = (ArrayList<IncomeVO>)request.getAttribute("sumlist2"
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>번호</th>
+        <th>날짜</th>
         <th>수입 내용</th>
         <th>수입 금액</th>
         <th>기타</th>
@@ -123,9 +70,58 @@ ArrayList<IncomeVO> list2 = (ArrayList<IncomeVO>)request.getAttribute("sumlist2"
  </table>
 </div>
 
+<%
+ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("sumlist1");
+  
+  for(int index=0; index < list.size(); index++){
+    ExpenseVO exvo = list.get(index);
+    ex_sum += exvo.getExpensemoney();
+  }
+%>
+
+<div class='title'>
+  <span class='sumex'>총지출 : <%=ex_sum %></span><br />
+</div>
+
+<!-- 지출 리스트 -->
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>지출 카테고리</th>
+        <th>지출 내용</th>
+        <th>지출 금액</th>
+        <th>기타</th>
+      </tr>
+    </thead>
+    <tbody>
+<%
+  for(int index=0; index < list.size(); index++){
+    ExpenseVO vo = list.get(index);
+    int expenseno = vo.getExpenseno();
+%> 
+    <tr> 
+      <td><%=vo.getRdate() %></td>
+      <td><%=vo.getCategoryno() %></td>
+      <td><%=vo.getExpenseitem() %></td>
+      <td><%=vo.getExpensemoney() %></td>
+      <td> 
+        <a href="javascript:update(<%=expenseno%>,'<%=vo.getRdate() %>','<%=vo.getCategoryno()%>','<%=vo.getExpenseitem()%>','<%=vo.getExpensemoney()%>')"><img src='./images/update.png' title='수정'></a>
+        <a href="javascript:remove(<%=expenseno%>)"><img src='./images/delete.png' title='삭제'></a> 
+      </td> 
+    </tr>
+    <%
+     }
+    %>
+  </tbody>
+ </table>
+</div>
+
+
 <div class='title'> 
   <%total = in_sum - ex_sum; %>
-  결과 : <%=total %>
+  <b>결과 : <%=total %></b>
 </div>
 
 <!-- --------------------------------------------------------- -->

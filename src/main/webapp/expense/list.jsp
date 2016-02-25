@@ -137,7 +137,7 @@ function update_category(expenseno, categoryno){
         <option value="<%=categoryVO.getCategoryno() %>"  ><%=categoryVO.getCategorysort() %></option>
       <%  
       }
-      %>
+      %> 
        </datalist>
       </td>
       <td><input type='text' name='expenseitem' id='expenseitem' required="required"></td>

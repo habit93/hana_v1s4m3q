@@ -44,7 +44,7 @@
       %>
       <tr>
         <td class="td_left">
-          <a href="./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>"><%=Tool.textLength(10, vo.getTitle())%></a> 
+          <a href="./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>"><%=Tool.textLength(20, vo.getTitle())%></a> 
         </td>
         <td class="td"><%=vo.getRdate() %></td>
         <td class="td"><%=vo.getReplycnt() %></td>

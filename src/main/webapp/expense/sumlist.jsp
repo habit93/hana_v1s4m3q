@@ -21,13 +21,29 @@
   <body >
   <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- --------------------------------------------------------- -->
+<%
+ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("sumlist");  
+
+int ex_sum = 0;
+String mdate = null;
+
+for(int index=0; index < list.size(); index++){
+  ExpenseVO vo = list.get(index);
+  ex_sum += vo.getExpensemoney();
+  mdate = vo.getRdate();
+}
+%>
+
+<div class='title'>
+  <span class='sumex'><%=mdate %> 총 지출 : <%=ex_sum %></span><br />
+</div>
 
 <!-- 리스트 -->
 <div class="container">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>번호</th>
+        <th>날짜</th> 
         <th>지출 카테고리</th>
         <th>지출 내용</th>
         <th>지출 금액</th>
@@ -36,24 +52,13 @@
     </thead>
     <tbody>
 <%
-ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("sumlist");
-    
-  int ex_sum = 0;
-  String mdate = null;
-  
-  for(int index=0; index < list.size(); index++){
-    ExpenseVO exvo = list.get(index);
-    ex_sum += exvo.getExpensemoney();
-  }
-  
   for(int index=0; index < list.size(); index++){
     ExpenseVO vo = list.get(index);
     int expenseno = vo.getExpenseno();
-    mdate = vo.getRdate();
 %> 
     <tr>
       <td><%=vo.getRdate() %></td>
-      <td><%=vo.getCategoryno() %></td>
+      <td><%=vo.getCategoryno()%></td> 
       <td><%=vo.getExpenseitem() %></td>
       <td><%=vo.getExpensemoney() %></td>
       <td> 
@@ -68,9 +73,7 @@ ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("sumlist"
  </table>
 </div>
 
-<div class='title'>
-<%=mdate %> 총 지출 : <%=ex_sum %> <br />
-</div>
+
 
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />

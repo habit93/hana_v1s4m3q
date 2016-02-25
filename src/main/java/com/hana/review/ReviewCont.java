@@ -29,16 +29,17 @@ public class ReviewCont {
   public ReviewCont(){
     System.out.println("--> ReviewCont created.");
   }
-  
-/*  
+
   @RequestMapping(value = "/review/create.do", method = RequestMethod.GET)
-  public ModelAndView create() {
+  public ModelAndView create(int itemno,int mno) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/review/create"); 
+    mav.addObject("itemno", itemno);
+    mav.addObject("mno", mno);
 
     return mav;
   }
-  */
+
   
   @RequestMapping(value="/review/create.do", method=RequestMethod.POST)
   public ModelAndView create(ReviewVO reviewVO){
@@ -49,24 +50,31 @@ public class ReviewCont {
     ArrayList<String> links = new ArrayList<String>();
     
     if (reviewDAO.create(reviewVO) == 1){ 
-      mav.setViewName("redirect:/review/list.do"); 
+      mav.setViewName("redirect:/item/read.do?itemno=" + reviewVO.getItemno()); 
     }else{
       msgs.add("리뷰 등록에 실패했습니다.");
       msgs.add("다시 시도해주세요.");
-      links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");
+      links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");      
     }
-    links.add("<button type='button' onclick=\"location.href='./home.do'\">홈페이지</button>");
     mav.addObject("msgs", msgs);
     mav.addObject("links", links);
+    return mav;
+  }
+  
+  @RequestMapping(value = "/review/list_all.do", method = RequestMethod.GET)
+  public ModelAndView list(){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/review/list");
+    mav.addObject("list", reviewDAO.list_all());
     
     return mav;
   }
   
   @RequestMapping(value = "/review/list.do", method = RequestMethod.GET)
-  public ModelAndView list(){
+  public ModelAndView list(int itemno){
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/review/list");
-    mav.addObject("list", reviewDAO.list());
+    mav.addObject("list", reviewDAO.list(itemno));
     
     return mav;
   }
@@ -85,8 +93,7 @@ public class ReviewCont {
   public ModelAndView update(int reviewno){  
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/review/update");
-    
-    ReviewVO reviewVO = reviewDAO.read(reviewno); 
+
     mav.addObject("reviewVO", reviewDAO.read(reviewno)); 
 
     
@@ -129,9 +136,8 @@ public class ReviewCont {
 
     ArrayList<String> msgs = new ArrayList<String>();
     ArrayList<String> links = new ArrayList<String>();
-
       if(reviewDAO.delete(reviewVO.getReviewno()) ==1){
-      mav.setViewName("redirect:/review/list.do"); 
+        mav.setViewName("redirect:/shopcategory/list.do"); 
     } else {
       msgs.add("리뷰 삭제에 실패했습니다.");
       links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");

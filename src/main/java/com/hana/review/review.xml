@@ -10,9 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     VALUES(#{title}, #{contents}, now(), #{itemno}, #{mno})
   </insert>
   
-  <select id="list" resultType="ReviewVO">
+  <select id="list" resultType="ReviewVO" parameterType="int">
     SELECT reviewno, title, contents, rdate, itemno, mno
     FROM review
+    WHERE itemno = #{itemno}
     ORDER BY reviewno DESC;
   </select> 
 
@@ -32,5 +33,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM review
     WHERE reviewno=#{reviewno}
   </delete>
+  
+  <select id="list_all" resultType="ReviewVO">
+    SELECT reviewno, title, contents, rdate, itemno, mno
+    FROM review
+    ORDER BY reviewno DESC;
+  </select> 
 
 </mapper>

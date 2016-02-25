@@ -10,10 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   VALUES (#{title}, #{price}, #{content}, #{thumb}, #{categoryno})
 </insert>
 
-<select id="list2" resultType="ItemVO">
+<select id="list_all" resultType="ItemVO">
   SELECT itemno, title, price, content, thumb, categoryno
   FROM item
-  ORDER BY itemno ASC;
+  ORDER BY itemno DESC;
 </select>
 
   <!-- blogcategoryno 컬럼의 값을 기준으로 게시판별 목록 -->
@@ -40,4 +40,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    DELETE FROM item
    WHERE itemno=#{itemno}
   </delete>
+  
 </mapper>

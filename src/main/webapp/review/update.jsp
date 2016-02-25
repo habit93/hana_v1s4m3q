@@ -30,9 +30,9 @@ ReviewVO reviewVO = (ReviewVO)request.getAttribute("reviewVO");
 %>
 
 <DIV class='content' style='width: 80%;'>
-  <FORM name='frm' method='POST' action='./update.do'
-             enctype="multipart/form-data">
+  <FORM name='frm' method='POST' action='./update.do'>
     <input type='hidden' name='reviewno' id='reviewno' value='<%=reviewVO.getReviewno() %>'>
+    <input type='hidden' name='itemno' id='itemno' value='<%=reviewVO.getItemno() %>'>
     <ul>
       <li>
         <label for='title'>제목</label>

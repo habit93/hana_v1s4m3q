@@ -10,8 +10,8 @@ public interface ItemMapperInter {
   // <select id="list" resultType="ItemVO" parameterType="int">
   public ArrayList<ItemVO> list(ItemVO itemVO);
   
-  // <select id="list2" resultType="ItemVO">
-  public ArrayList<ItemVO> list2();
+  // <select id="list_all" resultType="ItemVO">
+  public ArrayList<ItemVO> list_all();
   
   // <select id="read" resultType="ItemVO" parameterType="int">
   public ItemVO read(int itemno);

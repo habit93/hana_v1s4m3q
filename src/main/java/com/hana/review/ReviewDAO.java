@@ -27,8 +27,8 @@ public class ReviewDAO implements ReviewMapperInter{
   }
 
   @Override
-  public ArrayList<ReviewVO> list() {
-    return mapper().list();
+  public ArrayList<ReviewVO> list(int itemno) {
+    return mapper().list(itemno);
   }
 
   @Override
@@ -46,7 +46,10 @@ public class ReviewDAO implements ReviewMapperInter{
     return mapper().delete(reviewno);
   }
 
-  
+  @Override
+  public ArrayList<ReviewVO> list_all() {
+    return mapper().list_all();
+  }
   
 }
 

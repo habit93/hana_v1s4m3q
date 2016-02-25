@@ -20,20 +20,6 @@
   <body >
   <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- --------------------------------------------------------- -->
-
-
-<!-- 리스트 -->
-<div class="container">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>번호</th>
-        <th>수입 내용</th>
-        <th>수입 금액</th>
-        <th>기타</th>
-      </tr>
-    </thead>
-    <tbody>
 <%
 ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("sumlist");
   
@@ -41,13 +27,33 @@ ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("sumlist");
   String mdate = null;
   
   for(int index=0; index < list.size(); index++){
-    IncomeVO invo = list.get(index);
-    in_sum += invo.getIncomemoney();
+    IncomeVO vo = list.get(index);
+    in_sum += vo.getIncomemoney();
+    mdate = vo.getRdate();
   }
+%>
+
+<div class='title'>
+  <span class='sumin'><%=mdate%> 총 수입 : <%=in_sum %></span><br />
+</div>
+
+<!-- 리스트 -->
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>수입 내용</th>
+        <th>수입 금액</th>
+        <th>기타</th>
+      </tr>
+    </thead>
+    <tbody>
+<%
   for(int index=0; index < list.size(); index++){
     IncomeVO vo = list.get(index);
     int incomeno = vo.getIncomeno();
-    mdate = vo.getRdate();
+
 %> 
   <TR> 
     <TD class='td'><%=vo.getRdate() %></TD>
@@ -65,9 +71,7 @@ ArrayList<IncomeVO> list = (ArrayList<IncomeVO>)request.getAttribute("sumlist");
  </table>
 </div>
 
-<div class='title'>
-  <%=mdate%> 총 수입 : <%=in_sum %> <br />
-</div>
+
 
 
 <!-- --------------------------------------------------------- -->

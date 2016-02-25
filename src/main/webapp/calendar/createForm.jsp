@@ -70,7 +70,7 @@ function checkData(f){ // f == document.frmData 객체
 <!-- --------------------------------------------------------- -->
 
  
-<form class="left" action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
+<%-- <form class="left" action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
   <input type='hidden' name='mno' id='mno' value='${mno }'>   
   <label for="rdate">날짜 <input type='date' name='rdate' id='rdate'></label><br />
   <label for="label">출력 레이블 <input type='text' name='label' id='label' size="40"></label><br />
@@ -82,9 +82,38 @@ function checkData(f){ // f == document.frmData 객체
       <input type='button' class="btn-sm" value='목록' onclick="location.href='./list.jsp'">   
     </DIV>
   </DIV>
-  
-</FORM>
 
+</FORM>   --%>
+
+<DIV class='title'>일정 등록</DIV>
+
+<div class='content'>
+<form name='frm' action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
+    <input type='hidden' name='mno' id='mno' value='${mno }'>
+    <ul> 
+      <li> 
+        <label class='label'>날짜</label>
+        <input type='date' name=rdate id='rdate' required="required">
+      </li>
+      <li>
+        <label class='label'>달력 레이블</label>
+        <input type='text' name='label' id='label' required="required">
+      </li>
+      <li>
+        <label class='label'>제목</label>
+        <input type='text' name='title' id='title' required="required">
+      </li>
+      <li>
+        <label class='label'>내용</label>
+        <input type="text" name='contents' id='contents' required="required">
+      </li>
+      <li class='feature'>
+        <button type="submit" class="btn-sm" >등록</button>
+        <button type="button" class="btn-sm" onclick="location.href='./list.do'">목록</button>
+      </li>         
+    </ul>
+</form>
+</div>
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />
     <script src="../assets/js/jquery.min.js"></script>

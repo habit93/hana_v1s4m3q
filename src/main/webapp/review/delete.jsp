@@ -27,8 +27,7 @@ int reviewno = (Integer)request.getAttribute("reviewno");
 <!-- ----------------------------------------- -->
 
 <DIV class = 'content'>
-  <FORM name='frm' method='POST' action='./delete.do'
-             onsubmit = 'return send();'>
+  <FORM name='frm' method='POST' action='../review/delete.do'>
     <input type='hidden' name='reviewno' id='reviewno'  value='<%=reviewno%>'>
     
     <fieldset>

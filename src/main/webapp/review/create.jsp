@@ -2,10 +2,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.hana.review.ReviewVO" %>
 
-<%
-ReviewVO reviewVO = (ReviewVO)request.getAttribute("ReviewVO");
-%>
-
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
@@ -31,10 +27,14 @@ $(function(){
 <body leftmargin="0" topmargin="0">
 <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- ----------------------------------------- -->
-
+<%
+int itemno = (Integer)request.getAttribute("itemno");
+int mno = (Integer)request.getAttribute("mno");
+%>
 <DIV class='content' style='width: 80%;'>
-<FORM name='frm' method='POST' action='./create.do'
-           enctype="multipart/form-data">
+<FORM name='frm' method='POST' action='./create.do'>
+        <input type="hidden" name='itemno' id='itemno' value='<%=itemno%>'>
+        <input type="hidden" name='mno' id='mno' value='<%=mno%>'>
     <ul>
       <li>
         <label for='title'>제목</label>
@@ -43,13 +43,9 @@ $(function(){
       <li>
         <textarea name='contents' id='contents'  rows='7' style='width: 100%;'>빠른 배송 ㅎㄷㄷ</textarea>
       </li>
-      <li>
-        <input type="hidden" name='itemno' id='itemno' value='${itemno }'>
-        <input type="hidden" name='mno' id='mno' value='${mno }'>
-      </li>
       <li class='right'>
         <button type="submit">등록</button>
-      </li>         
+      </li>
     </ul>
 </FORM>
 </DIV>

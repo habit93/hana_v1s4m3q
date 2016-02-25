@@ -1,11 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.hana.item.ItemVO" %>
+<%@ page import="com.hana.review.ReviewVO" %>
 <%@ page import="com.hana.tool.Tool" %>
- 
-<% 
+<%@ page import="java.util.ArrayList" %>
+
+ <% 
 ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");  
 %>
- 
+
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
 <script type="text/javascript" src='../js/tool.js'></script>
 <script type="text/JavaScript"
@@ -41,6 +43,7 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
   <jsp:include page="/menu/top.jsp" flush='false' />
   <!-- ----------------------------------------- -->
   <DIV class='content'>
+
     <FORM name='frm' method="get" action='./update.do'>
       <input type="hidden" name="itemno" id='itemno' value="<%=itemVO.getItemno() %>">
       <input type="hidden" name="price_basic" id='price_basic' value="<%=itemVO.getPrice() %>">
@@ -202,6 +205,60 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
      </ul>
     </FORM> 
   </DIV>
+  <!-- 리뷰 -->
+<form name='frm_review' method="POST" action='../review/create.do'>
+  <%
+  ArrayList<ReviewVO> list = (ArrayList<ReviewVO>)request.getAttribute("review_list");
+  %>
+  
+  <div class="content" style='width: 90%;'>
+    <table class="table" style='width: 100%;'>
+      <colgroup>
+        <col style="width: 5%;"></col>
+        <col style="width: 35%;"></col>
+        <col style="width: 10%;"></col>
+        <col style="width: 10%;"></col>
+      </colgroup>
+          
+      <%-- table 컬럼 --%>
+      <thead>
+        <tr>
+          <th class="th">리뷰번호</th>
+          <th class="th">제목</th>
+          <th class="th">등록일</th>
+          <th class="th">멤버번호</th>
+          <th class="th">기타</th>
+        </tr>
+      </thead>
+      
+      <%-- table 내용 --%>
+      <tbody>
+         <%
+          for(int index = 0; index < list.size(); index++){
+            ReviewVO vo = list.get(index);
+            int reviewno = vo.getReviewno();
+          %>
+          <tr>
+            <td class="td"><%=reviewno %></td>
+            <td class="td"><a href="../review/read.do?reviewno=<%=reviewno %>"><%=vo.getTitle() %></a></td>
+            <td class="td"><%=vo.getRdate() %></td>
+            <td class="td"><%=vo.getMno()%></td>
+            <td class="td">
+              <a href="../review/update.do?reviewno=<%=reviewno%>"><img src="./images/update.png" title="수정" ></a>
+              <a href="../review/delete.do?reviewno=<%=reviewno %>"><img src="./images/delete.png" title="삭제" ></a>
+            </td>
+          </tr>
+          <% 
+            }
+          %>
+      </tbody>
+    </table>
+   <DIV class='bottom'>
+      <button type="button" onclick="location.href='../review/create.do?itemno=<%=itemVO.getItemno()%>&mno=${mno}'">등록</button>
+  </DIV>
+  </div>
+  <!-- 리뷰끝 -->
+</form>
   <DIV class='bottom'>
       <button type="button" onclick="location.href='./update.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">수정</button>
       <button type="button" onclick="location.href='./delete.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">삭제</button>

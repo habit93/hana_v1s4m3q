@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hana.review.ReviewDAO;
 import com.hana.tool.Tool;
 import com.hana.tool.Upload;
  
@@ -20,10 +21,20 @@ public class ItemCont {
   @Autowired
   @Qualifier("com.hana.item.ItemDAO")
   private ItemDAO itemDAO;
-  
+  @Autowired
+  @Qualifier("com.hana.review.ReviewDAO")
+  private ReviewDAO reviewDAO;
   
   public ItemCont(){
     System.out.println("--> ItemCont created.");
+  }
+  
+  @RequestMapping(value = "/item/shopmain.do", method = RequestMethod.GET)
+  public ModelAndView shopmain() {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/item/shopmain");
+    mav.addObject("list_all", itemDAO.list_all());
+    return mav;
   }
   
   @RequestMapping(value = "/item/create.do", method = RequestMethod.GET)
@@ -92,7 +103,7 @@ public class ItemCont {
   public ModelAndView list2() {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/item/list2");
-    mav.addObject("list2", itemDAO.list2());
+    mav.addObject("list2", itemDAO.list_all());
 
     return mav;
   }
@@ -102,6 +113,7 @@ public class ItemCont {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/item/read");
     mav.addObject("itemVO", itemDAO.read(itemno));
+    mav.addObject("review_list", reviewDAO.list(itemno));
     
     return mav;
   }

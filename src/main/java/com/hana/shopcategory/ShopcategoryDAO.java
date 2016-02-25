@@ -41,4 +41,14 @@ public class ShopcategoryDAO implements ShopcategoryMapperInter{
     return mapper().delete(categoryno);
   }
 
+  @Override
+  public int update_codeno(ShopcategoryVO shopcategoryVO) {
+    return mapper().update_codeno(shopcategoryVO);
+  }
+
+  @Override
+  public int update_sort(ShopcategoryVO shopcategoryVO) {
+    return mapper().update_sort(shopcategoryVO);
+  }
+
 }

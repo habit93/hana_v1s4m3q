@@ -41,7 +41,7 @@ $(function(){
       <%-- table 컬럼 --%>
       <thead>
         <tr>
-          <th class="th">리부번호</th>
+          <th class="th">리뷰번호</th>
           <th class="th">제목</th>
           <th class="th">등록일</th>
           <th class="th">아이템번호</th>
@@ -74,7 +74,9 @@ $(function(){
       </tbody>
     </table>
   </div>
-  
+  <DIV class='bottom'>
+  <button type='button' onclick="location.href='./create.do'">등록</button>
+</DIV>
   
   
 <%-- ---------------------------------------------------------------------------------------------- --%>

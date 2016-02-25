@@ -27,4 +27,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    WHERE categoryno=#{categoryno}
  </delete>
  
+ <update id="update_codeno" parameterType="ShopcategoryVO">
+    UPDATE shopcategory
+    SET codeno = #{codeno}
+    WHERE categoryno=#{categoryno}
+ </update>
+ 
+ <update id="update_sort" parameterType="ShopcategoryVO">
+    UPDATE shopcategory
+    SET sort = #{sort}
+    WHERE categoryno=#{categoryno}
+ </update>
+
 </mapper>
