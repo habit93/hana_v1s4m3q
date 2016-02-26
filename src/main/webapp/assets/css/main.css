@@ -1708,6 +1708,21 @@
     color: red;
   }
   
+  .name{
+    font-weight: bold;
+  }
+  
+  .price{
+    color: pink;
+    font-weight: bold;
+  }
+  
+  .table{
+    border-style: none;
+  }
+  
+  
+  
 /****************** 사용자 정의  끝******************/
 
 

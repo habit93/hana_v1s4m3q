@@ -47,7 +47,7 @@
           <a href="./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>"><%=Tool.textLength(20, vo.getTitle())%></a> 
         </td>
         <td class="td"><%=vo.getRdate() %></td>
-        <td class="td"><%=vo.getReplycnt() %></td>
+        <td class="td"><%=vo.getCnt() %></td>
         <td class="td">
           <a href="./update.do?blogno=<%=blogno%>"><img src="./images/update.png" title="수정"  border='0'/></a>
           <a href="./delete.do?blogno=<%=blogno %>"><img src="./images/delete.png" title="삭제"  border='0'/></a>

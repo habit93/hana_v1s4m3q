@@ -28,51 +28,29 @@ $(function(){
 <%-- ---------------------------------------------------------------------------------------------- --%>
   <% ArrayList<ReviewVO> list = (ArrayList<ReviewVO>)request.getAttribute("list"); %>
   
-  <div class="content" style='width: 90%;'>
-    <table class="table" style='width: 100%;'>
-      <colgroup>
-        <col style="width: 5%;"></col>
-        <col style="width: 35%;"></col>
-        <col style="width: 10%;"></col>
-        <col style="width: 15%;"></col>
-        <col style="width: 10%;"></col>
-      </colgroup>
-          
-      <%-- table 컬럼 --%>
-      <thead>
-        <tr>
-          <th class="th">리뷰번호</th>
-          <th class="th">제목</th>
-          <th class="th">등록일</th>
-          <th class="th">아이템번호</th>
-          <th class="th">멤버번호</th>
-          <th class="th">기타</th>
-        </tr>
-      </thead>
-      
-      <%-- table 내용 --%>
-      <tbody>
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>제목</th>
+        <th>등록일</th>
+      </tr>
+    </thead>
+    <tbody>
          <%
           for(int index = 0; index < list.size(); index++){
             ReviewVO vo = list.get(index);
             int reviewno = vo.getReviewno();
-          %>
+          %> 
           <tr>
-            <td class="td"><%=reviewno %></td>
             <td class="td"><a href="./read.do?reviewno=<%=reviewno %>"><%=vo.getTitle() %></a></td>
             <td class="td"><%=vo.getRdate() %></td>
-            <td class="td"><%=vo.getItemno()%></td>
-            <td class="td"><%=vo.getMno()%></td>
-            <td class="td">
-              <a href="./update.do?reviewno=<%=reviewno%>"><img src="./images/update.png" title="수정" border='0'/></a>
-              <a href="./delete.do?reviewno=<%=reviewno %>"><img src="./images/delete.png" title="삭제"  border='0'/></a>
-            </td>
           </tr>
           <% 
             }
           %>
       </tbody>
-    </table>
+    </table> 
   </div>
   <DIV class='bottom'>
   <button type='button' onclick="location.href='./create.do'">등록</button>

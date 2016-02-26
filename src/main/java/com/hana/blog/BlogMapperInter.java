@@ -16,6 +16,7 @@ public interface BlogMapperInter {
   
   public ArrayList<BlogVO> list2(BlogVO blogVO); 
   
+  public int cnt_up(int blogno);
 }
 
 

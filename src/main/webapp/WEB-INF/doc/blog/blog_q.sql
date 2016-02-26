@@ -34,7 +34,7 @@ ORDER BY blogno DESC;
 4) 조회
 SELECT blogno, title, content, file, good, rdate, cnt, replycnt, blogcategoryno, mno
 FROM blog
-WHERE blogno=1;
+WHERE blogno=22;
 
 5) 수정
 UPDATE blog

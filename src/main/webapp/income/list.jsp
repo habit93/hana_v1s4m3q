@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.hana.income.IncomeVO"%>
-
+<%@ page import="java.util.Date" %> 
+<%@ page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html> 
 <html lang="ko"> 
   <head>
@@ -101,7 +102,14 @@ function remove_cancel(){
   </tbody>
  </table>
 </div>
-
+<%
+  SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM");
+  SimpleDateFormat sd2 = new SimpleDateFormat("yyyy-MM-dd");
+  Date date = new Date(); //오늘날짜생성
+  
+  String today = sd.format(date); //date -> string
+  String today2 = sd2.format(date);
+  %>
 <!-- 등록/수정 -->
 <div class="container" id='panel_frm' >
   <form name='frm' id='frm' method='POST' action="./create.do">  
@@ -109,7 +117,7 @@ function remove_cancel(){
   <input type='hidden' name='mno' id='mno' value='${mno}'>
   <table class="table table-hover">
     <tr>
-      <td><input type="date" name='rdate' id='rdate' required="required"></td>
+      <td><input type="date" name='rdate' id='rdate' value='<%=today2 %>' required="required"></td>
       <td><input type='text' name='incomeitem' id='incomeitem' required="required"></td>
       <td><input type='text' name='incomemoney' id='incomemoney' required="required"></td>
       <td>      
@@ -125,7 +133,7 @@ function remove_cancel(){
   <button type='button' class="btn-sm" onclick="create();">등록</button>
   <button type='button' class="btn-sm" onclick="location.reload();">새로 고침</button><br /><br /> 
   <form method="get" action="./sumlist.do">
-    <input type="month" name="month" id="month">
+    <input type="month" name="month" id="month" value='<%=today%>'>
     <button type='submit' class="btn-sm">정산</button> 
   </form>
 </div>

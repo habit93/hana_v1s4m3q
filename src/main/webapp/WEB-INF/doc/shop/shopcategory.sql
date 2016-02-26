@@ -13,7 +13,7 @@ CREATE TABLE shopcategory(
 
 등록
 INSERT INTO shopcategory(category, sort, codeno)
-VALUES ('테스트', 1, 2);
+VALUES ('여자친구선물', 1, 1);
 
 목록
 SELECT categoryno, category, sort, codeno

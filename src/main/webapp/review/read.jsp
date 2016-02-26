@@ -6,17 +6,23 @@
 ReviewVO reviewVO = (ReviewVO)request.getAttribute("reviewVO");  
 %>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title></title>
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-</head>
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
+<!DOCTYPE html> 
+<html lang="ko"> 
+  <head>
+    <title>글 조회</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
   <jsp:include page="/menu/top.jsp" flush='false' />
-  <!-- ----------------------------------------- -->
+<!-- --------------------------------------------------------- -->
 
   <DIV class='content'>
     <FORM name='frm' method="get" action='./update.do'>
@@ -53,9 +59,14 @@ ReviewVO reviewVO = (ReviewVO)request.getAttribute("reviewVO");
     </FORM>
   </DIV>
 
-  <!-- -------------------------------------------- -->
-  <jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
-

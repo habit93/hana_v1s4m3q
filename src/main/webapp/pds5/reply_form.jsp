@@ -1,26 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ include file="./ssi.jsp" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>답변</title>
-<script type="text/javascript" src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
-
+<!DOCTYPE html> 
+<html lang="ko"> 
+  <head>
+    <title>답변 작성</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/JavaScript">
   window.onload=function(){
-    CKEDITOR.replace('content');  // <TEXTAREA>태그 id 값
+   CKEDITOR.replace('content');
   };
-</script>
+</script>  
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-
-</head>
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<jsp:include page="/menu/top.jsp" flush='false' />
-<!-- ----------------------------------------- -->
 <%
 // 현재 답변을 붙일 글 번호
 int qano = Integer.parseInt(request.getParameter("qano"));
@@ -30,6 +34,7 @@ int qano = Integer.parseInt(request.getParameter("qano"));
 <FORM name='frm' method='POST' action='./reply_proc.jsp'>
             
   <input type='hidden' name='qano' value='<%=qano %>'>
+  <input type='hidden' name='itemno' value='1'>
   <input type='hidden' name='col' value='<%=col %>'>
   <input type='hidden' name='word' value='<%=word %>'>
   <input type='hidden' name='nowPage' value='<%=nowPage %>'>
@@ -50,16 +55,22 @@ int qano = Integer.parseInt(request.getParameter("qano"));
     </TR>
 
   </TABLE>
-  <DIV class='bottom'>
-    <input type='submit' value='답변 등록'>
-    <input type='button' value='취소' onclick="location.href='./list.jsp?col=<%=col %>&word=<%=word %>&<%=nowPage %>'"> 
+  <DIV class='feature'>
+    <input type='submit' class="btn-sm" value='답변 등록'>
+    <input type='button' class="btn-sm" value='취소' onclick="location.href='./list.jsp?col=<%=col %>&word=<%=word %>&<%=nowPage %>'"> 
   </DIV> 
 </FORM>
 
-<!-- ------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- ------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
 
 

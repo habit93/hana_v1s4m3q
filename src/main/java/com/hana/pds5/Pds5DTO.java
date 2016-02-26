@@ -9,8 +9,14 @@ public class Pds5DTO {
   private int grpno;
   private int indent;
   private int ansnum;
-  
+  private int itemno;
 
+  public int getItemno() {
+    return itemno;
+  }
+  public void setItemno(int itemno) {
+    this.itemno = itemno;
+  }
   public int getQano() {
     return qano;
   }

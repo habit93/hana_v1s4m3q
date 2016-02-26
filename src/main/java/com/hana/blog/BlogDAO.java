@@ -50,6 +50,11 @@ public class BlogDAO implements BlogMapperInter{
   public ArrayList<BlogVO> list2(BlogVO blogVO) {
     return mapper().list2(blogVO);
   }
+
+  @Override
+  public int cnt_up(int blogno) {
+    return mapper().cnt_up(blogno);
+  }
   
 }
 

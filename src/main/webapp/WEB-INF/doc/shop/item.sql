@@ -5,10 +5,10 @@ DROP TABLE item;
    
 CREATE TABLE item(
     itemno                            INT(10)    NOT NULL    PRIMARY KEY AUTO_INCREMENT COMMENT '물건번호',
-    title                             VARCHAR(10)    NOT NULL COMMENT '이름',
+    title                             VARCHAR(30)    NOT NULL COMMENT '이름',
     price                             INT(10)    NOT NULL COMMENT '가격',
     content                           VARCHAR(200)     NOT NULL COMMENT '내용',
-    thumb                             VARCHAR(20)    NOT NULL COMMENT '썸네일',
+    thumb                             VARCHAR(50)    NOT NULL COMMENT '썸네일',
     categoryno                        INT(10)    NULL  COMMENT '카테고리번호',
   FOREIGN KEY (categoryno) REFERENCES shopcategory (categoryno)
 ) COMMENT='상품';

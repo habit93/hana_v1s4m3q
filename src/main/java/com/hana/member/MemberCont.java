@@ -321,18 +321,21 @@ public class MemberCont {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/member/message"); // /webapp/member/message.jsp
     
+    /*    
     ArrayList<String> msgs = new ArrayList<String>();
     ArrayList<String> links = new ArrayList<String>();
     
     msgs.add("이용해주셔서 감사합니다.");
     msgs.add("from 왕눈이...");
     links.add("<button type='button' onclick=\"location.href='../index.jsp'\">홈페이지</button>");
-    
+    */
+    mav.setViewName("redirect:/index.jsp");
     session.invalidate(); // session 변수 삭제
     
+    /*    
     mav.addObject("msgs", msgs);
     mav.addObject("links", links);
-    
+    */
     return mav;
   }  
 }

@@ -1,23 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.hana.item.ItemVO" %>
 <%@ page import="com.hana.review.ReviewVO" %>
+<%@ page import="com.hana.pds5.Pds5DTO" %>
+<%@ page import="com.hana.pds5.Pds5DAO" %>
 <%@ page import="com.hana.tool.Tool" %>
 <%@ page import="java.util.ArrayList" %>
 
  <% 
 ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");  
+int itemno = itemVO.getItemno();
 %>
-
 <link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/javascript" src='../js/tool.js'></script>
 <script type="text/JavaScript"
           src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
  <script type="text/javascript">
- 
  function price_b(){
    var cnt = document.getElementById("cnt").value;
    var price = document.getElementById("price_basic").value;
-   var tot = parseInt(cnt) * parseInt(price);
+   var tot = parseInt(cnt) * parseInt(price) + '원';
    document.getElementById("price_b").innerHTML=tot;
    document.getElementById("price_hb").value=tot;
  }
@@ -25,42 +25,52 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
  function price_c(){
    var cnt = document.getElementById("cnt2").value;
    var price = document.getElementById("price_basic").value;
-   var tot = parseInt(cnt) * parseInt(price);
+   var tot = parseInt(cnt) * parseInt(price) + '원';
    document.getElementById("price_c").innerHTML=tot;
    document.getElementById("price_hc").value=tot;
+ }
+ function print(bbsno){
+   var str = './print.jsp?bbsno=' + bbsno;
+   window.open(str, "print", ('scrollbars=yes, resizeable=no, width=800, height=700'));
  }
 </script>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title></title>
-
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-
+    <title>커플아이템</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+     <link rel="stylesheet" href="../assets/css/main.css" />
+     <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+     <script type="text/javascript" src="../js/tool.js"></script>
+     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <!-- ----------------------------------------- -->
 <body leftmargin="0" topmargin="0">
   <jsp:include page="/menu/top.jsp" flush='false' />
   <!-- ----------------------------------------- -->
-  <DIV class='content'>
-
+  <DIV class='container'>
+  <DIV class='col-lg-5'>
     <FORM name='frm' method="get" action='./update.do'>
+    
       <input type="hidden" name="itemno" id='itemno' value="<%=itemVO.getItemno() %>">
       <input type="hidden" name="price_basic" id='price_basic' value="<%=itemVO.getPrice() %>">
       <fieldset class="fieldset">
         <ul>
           <li>
-            <label for='thumb' class="label" style="width:150px;"></label>
-            <IMG src='./storage/<%=itemVO.getThumb()%>' id='thumb'>
+            <label for='thumb' class="label"></label>
+            <IMG src='./storage/<%=itemVO.getThumb()%>' id='thumb' style="width:450px;">
           </li>
+   <div class="feature">
           <li>
             <label for='title' class="label" style="width:150px;"></label>
-            <span><%=itemVO.getTitle() %></span>
+            <span class="name"><%=itemVO.getTitle() %></span>
           </li>
           <li>
             <label for="price2" class="label" style="width:150px;"></label>
-           <%=itemVO.getPrice()%>
+            <span class="price"><%=itemVO.getPrice()%>원</span>
           </li>
+    </div>
           <li>
             <label for="content" class="label" style="width:150px;"></label>
             <span><%=itemVO.getContent()%></span>
@@ -68,7 +78,8 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
         </ul>
       </fieldset>
     </FORM>
-    <HR>
+    </DIV>
+    <DIV class='col-lg-7'>
     <!-- 구매 폼 -->
     <FORM name='frm_buy' method="POST" action='../buy/buy.do'>
       <input type='hidden' name='name' id='name' value='<%=itemVO.getTitle()%>'>
@@ -78,8 +89,7 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
       <input type='hidden' name='mno' id='mno' value='${mno }'>
       <ul>
       <li>
-       <label>이름</label>
-       <span><%=itemVO.getTitle() %></span>
+       <span class="name"><%=itemVO.getTitle() %></span>
       </li>
       <li>
         <label for='cnt'>수량</label>
@@ -87,19 +97,19 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
       </li>
       <li>
         <label>총 상품 가격</label>
-        <span id='price_b'><%=itemVO.getPrice() %></span>
+        <span id='price_b'><%=itemVO.getPrice() %>원</span>
       </li>
       <li>
-        <label class='label' for='zipcode'>우편번호</label>
+        <label for='zipcode'>우편번호</label>
         <input type='text' name='zipcode' id='zipcode' value='' placeholder="우편번호">
         <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>        
       </li>
       <li>
-        <label class='label' for='address1'>주소</label>
+        <label for='address1'>주소</label>
         <input type='text' name='address1' id='address1' value='' size='60' placeholder="주소">  
       </li>
       <li>
-        <label class='label' for='address2'>상세 주소</label>
+        <label for='address2'>상세 주소</label>
         <input type='text' name='address2' id='address2' value='' size='40' placeholder="상세 주소">      
       </li>
       <li>
@@ -179,6 +189,7 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
      </ul>
     </FORM>
     <hr>
+    
     <!-- 쇼핑카트 폼 -->
     <FORM name='frm_buy' method="POST" action='../cart/cart.do'>
       <input type='hidden' name='name' id='name' value='<%=itemVO.getTitle()%>'>
@@ -188,16 +199,15 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
       <input type='hidden' name='mno' id='mno' value='${mno }'>
       <ul>
       <li>
-       <label>이름</label>
-       <span><%=itemVO.getTitle() %></span>
-      </li>
+       <span class="name"><%=itemVO.getTitle() %></span>
+      </li> 
       <li>
         <label for='cnt2'>수량</label>
         <input type='number' name='cnt' id='cnt2' value='1' min='0' step="1" max='99' onchange="price_c()" required="required">
       </li>
       <li>
         <label>총 상품 가격</label>
-        <span id='price_c'><%=itemVO.getPrice() %></span>
+        <span id='price_c'><%=itemVO.getPrice() %>원</span>
       </li>
       <li class='right'>
         <button type='submit' >쇼핑카트에 추가</button>
@@ -205,60 +215,92 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
      </ul>
     </FORM> 
   </DIV>
+ </DIV>
   <!-- 리뷰 -->
+    <DIV class='container'>
+      <DIV class='col-lg-6'>
+  <DIV class='title'>리뷰</DIV> 
 <form name='frm_review' method="POST" action='../review/create.do'>
-  <%
-  ArrayList<ReviewVO> list = (ArrayList<ReviewVO>)request.getAttribute("review_list");
-  %>
-  
-  <div class="content" style='width: 90%;'>
-    <table class="table" style='width: 100%;'>
-      <colgroup>
-        <col style="width: 5%;"></col>
-        <col style="width: 35%;"></col>
-        <col style="width: 10%;"></col>
-        <col style="width: 10%;"></col>
-      </colgroup>
-          
-      <%-- table 컬럼 --%>
-      <thead>
-        <tr>
-          <th class="th">리뷰번호</th>
-          <th class="th">제목</th>
-          <th class="th">등록일</th>
-          <th class="th">멤버번호</th>
-          <th class="th">기타</th>
-        </tr>
-      </thead>
-      
-      <%-- table 내용 --%>
-      <tbody>
-         <%
+         <% 
+         ArrayList<ReviewVO> list = (ArrayList<ReviewVO>)request.getAttribute("review_list");
+            
           for(int index = 0; index < list.size(); index++){
             ReviewVO vo = list.get(index);
             int reviewno = vo.getReviewno();
           %>
-          <tr>
-            <td class="td"><%=reviewno %></td>
-            <td class="td"><a href="../review/read.do?reviewno=<%=reviewno %>"><%=vo.getTitle() %></a></td>
-            <td class="td"><%=vo.getRdate() %></td>
-            <td class="td"><%=vo.getMno()%></td>
-            <td class="td">
-              <a href="../review/update.do?reviewno=<%=reviewno%>"><img src="./images/update.png" title="수정" ></a>
-              <a href="../review/delete.do?reviewno=<%=reviewno %>"><img src="./images/delete.png" title="삭제" ></a>
-            </td>
-          </tr>
+            <a href="../review/read.do?reviewno=<%=reviewno %>">
+              <label style="width: 75%"><%=vo.getTitle() %></label>
+              <label><%=vo.getRdate() %></label>
+            </a>
           <% 
             }
           %>
-      </tbody>
-    </table>
+          
    <DIV class='bottom'>
       <button type="button" onclick="location.href='../review/create.do?itemno=<%=itemVO.getItemno()%>&mno=${mno}'">등록</button>
   </DIV>
-  </div>
-  <!-- 리뷰끝 -->
+  
 </form>
+</DIV>
+  <!-- 리뷰끝 -->
+  
+  
+  <!-- QA시작 -->
+    <DIV class='col-lg-6'>
+  <DIV class='title'>QA</DIV> 
+ <form name='frm_qa' method="POST" action='../review/create.do'>
+  <TABLE class='table' style='width: 100%;'>
+<%
+Pds5DAO pds5DAO = new Pds5DAO();
+ArrayList<Pds5DTO> list2 = pds5DAO.list(itemno);
+for(int index = 0; index < list2.size(); index++){
+  Object obj = list2.get(index); // NewsDTO 추출하는데 광범위한 공통 타입인 Object 타입으로 추출
+  Pds5DTO pds5DTO = (Pds5DTO)obj;// 광범위한 Object 타입을 구체적인 클래스 타입으로 변환해야 사용 가능
+  int qano = pds5DTO.getQano();  // 레코드 번호 추출
+%>  
+  <TR>
+    <TD class='td' style='text-align: left;'>
+      <%
+      int indent = pds5DTO.getIndent();
+      for(int i=0; i < indent; i++){
+        out.println("&nbsp;&nbsp;&nbsp;&nbsp;");
+      }
+      if (indent > 0){
+      %>
+        <img src='../pds5/images/reply2.png'>
+      <%  
+      }
+      String str = pds5DTO.getTitle();
+      if (str.length() >= 25){
+        str = str.substring(0, 20) + "...";
+      }
+      str = Tool.convertChar(str); // 태그를 단순 문자로 변환
+      %>      
+      <A href='../pds5/read.jsp?qano=<%=qano %>&itemno=<%=itemno%>'><%=str %></A>
+      <%
+      if (Tool.isNew(pds5DTO.getRdate(), 1)){ 
+      %> 
+        <IMG src='../pds5/images/new.gif'>
+      <%
+      }
+      %> 
+    </TD>
+    <TD class='td'><%=pds5DTO.getRdate() %></TD>
+  </TR>
+
+<%
+}
+%>
+</TABLE>
+<DIV class='bottom'>
+<button type='button' onclick="location.href='../pds5/create_form.jsp?itemno=<%=itemno%>'">등록</button>
+</DIV>
+  </form>
+  </DIV>
+  
+  <!-- QA끝 -->
+  
+  </DIV>
   <DIV class='bottom'>
       <button type="button" onclick="location.href='./update.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">수정</button>
       <button type="button" onclick="location.href='./delete.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">삭제</button>
@@ -266,6 +308,12 @@ ItemVO itemVO = (ItemVO)request.getAttribute("itemVO");
 
   <!-- -------------------------------------------- -->
   <jsp:include page="/menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
 </body>
 <!-- -------------------------------------------- -->
 </html>

@@ -31,13 +31,14 @@ public class Pds5DAO {
     int count = 0;     // INSER, UPDATE, DELETE 처리된 갯수 저장
     
     try {
-      sql   =" INSERT INTO pds5(title, content, passwd, rdate, grpno, indent, ansnum)";
-      sql +=" VALUES(?, ?, ?, now(), (SELECT IFNULL(MAX(grpno), 0)+1 FROM pds5 as grpno), 0, 0)";
+      sql   =" INSERT INTO pds5(title, content, passwd, rdate, grpno, indent, ansnum, itemno)";
+      sql +=" VALUES(?, ?, ?, now(), (SELECT IFNULL(MAX(grpno), 0)+1 FROM pds5 as grpno), 0, 0, ?)";
       
       pstmt = con.prepareStatement(sql);
       pstmt.setString(1, pds5DTO.getTitle());
       pstmt.setString(2, pds5DTO.getContent());
       pstmt.setString(3, pds5DTO.getPasswd());
+      pstmt.setInt(4, pds5DTO.getItemno());
       
       count = pstmt.executeUpdate();  // SQL 실행
       
@@ -54,20 +55,22 @@ public class Pds5DAO {
    * 전체 목록을 리턴합니다. 검색 기능 지원 안함, 페이징 기능 지원 안함
    * @return Pds5DTO 목록
    */
-  public ArrayList list(){
+  public ArrayList<Pds5DTO> list(int itemno){
     Connection con = this.dbopen.getConnection(); // DBMS 연결 객체
     PreparedStatement pstmt = null;   // SQL 실행
     ResultSet rs = null;              // SELECT 결과 저장
     String sql = "";                  // SQL 저장
     int count = 0;     // INSER, UPDATE, DELETE 처리된 갯수 저장
-    ArrayList list = null;            // 레코드 목록 저장 
+    ArrayList<Pds5DTO> list = null;            // 레코드 목록 저장 
     
     try {
-      sql  =" SELECT qano, title, content, passwd, rdate, grpno, indent, ansnum ";
+      sql  =" SELECT qano, title, content, passwd, rdate, grpno, indent, ansnum, itemno ";
       sql +=" FROM pds5";
-      sql +=" ORDER BY qano DESC";
+      sql +=" WHERE itemno = ?";
+      sql +=" ORDER BY grpno DESC, ansnum ASC";
       
       pstmt = con.prepareStatement(sql);
+      pstmt.setInt(1, itemno);
       rs = pstmt.executeQuery(); // SELECT
       
       list = new ArrayList();         // DTO 객체 저장소
@@ -85,7 +88,7 @@ public class Pds5DAO {
         pds5DTO.setGrpno(rs.getInt("grpno"));
         pds5DTO.setIndent(rs.getInt("indent"));
         pds5DTO.setAnsnum(rs.getInt("ansnum"));
-
+        pds5DTO.setItemno(rs.getInt("itemno"));
         list.add(pds5DTO); // 저장소(메모리, 향상된 배열)에 추가
       }
       
@@ -409,8 +412,8 @@ public class Pds5DAO {
       pstmt.setInt(2,  pds5DTO.getAnsnum()); // 그 부모글의 ansnum 번호
       pstmt.executeUpdate(); // 기존에 등록된 답변의 순서를 1씩 증가
 
-      sql   =" INSERT INTO pds5(title, content, passwd, rdate, grpno, indent, ansnum )";
-      sql +=" VALUES(?, ?, ?, now(), ?, ?, ?)";
+      sql   =" INSERT INTO pds5(title, content, passwd, rdate, grpno, indent, ansnum, itemno )";
+      sql +=" VALUES(?, ?, ?, now(), ?, ?, ?, ?)";
       pstmt = con.prepareStatement(sql);
       pstmt.setString(1, pds5DTO.getTitle());
       pstmt.setString(2, pds5DTO.getContent());
@@ -418,7 +421,7 @@ public class Pds5DAO {
       pstmt.setInt(4, pds5DTO.getGrpno());       // 부모글의 그룹번호 그대로 사용
       pstmt.setInt(5, pds5DTO.getIndent() + 1);   // 들여쓰기 부모보다 1 증가
       pstmt.setInt(6, pds5DTO.getAnsnum() + 1); // 답변순서 부모보다 1 증가
-
+      pstmt.setInt(7, pds5DTO.getItemno());
       count = pstmt.executeUpdate();  // SQL 실행
       
     } catch (Exception e) {
