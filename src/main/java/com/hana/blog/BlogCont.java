@@ -111,7 +111,6 @@ public class BlogCont {
   public ModelAndView read(int blogno) {
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/blog/read");
-    
     blogDAO.cnt_up(blogno);
     mav.addObject("blogVO", blogDAO.read(blogno));
  

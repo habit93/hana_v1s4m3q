@@ -1,20 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Date" %> 
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.hana.expense.ExpenseVO"%>
 <%@ page import="com.hana.category.CategoryVO" %> 
-<%-- 
-<%@ page import="java.text.SimpleDateFormat"%>
-<%@ page import="java.util.Date" %>
 <%
-SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd"); 
-String root = request.getContextPath();// 절대경로추출
-%>
- 
-<%
-Date date = new Date(); //오늘날짜생성
- String today = sd.format(date); //date -> string 
-%>
-  --%>
+  SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+  Date date = new Date(); //오늘날짜생성
+  String today = sd.format(date); //date -> string
+  %>
  
 <!DOCTYPE html> 
 <html lang="ko"> 
@@ -30,12 +24,6 @@ Date date = new Date(); //오늘날짜생성
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-window.onload = function(){
-  var today = new Date();
-   $('#rdate').attr('value', today);   
-}
-
-
 function checkData(f){ // f == document.frmData 객체
     var msg; // 에러 메세지
     var str; // 임시 문자열 저장 변수
@@ -91,9 +79,9 @@ function checkData(f){ // f == document.frmData 객체
 <form name='frm' action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
     <input type='hidden' name='mno' id='mno' value='${mno }'>
     <ul> 
-      <li> 
+      <li>  
         <label class='label'>날짜</label>
-        <input type='date' name=rdate id='rdate' required="required">
+        <input type='date' name=rdate id='rdate' value="<%=today%>" required="required">
       </li>
       <li>
         <label class='label'>달력 레이블</label>

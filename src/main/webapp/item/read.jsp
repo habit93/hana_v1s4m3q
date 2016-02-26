@@ -181,7 +181,6 @@ int itemno = itemVO.getItemno();
         element_wrap.style.display = 'block';
     }
 </script>
-
    <!-- ----- DAUM 우편번호 API 종료-----  --> 
       <li class='right'>
         <button type='submit' >구매</button>

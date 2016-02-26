@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.hana.blog.BlogMapperInter">
 
   <insert id="create" parameterType="BlogVO"> 
-    INSERT INTO blog(title, content, file, good, rdate, cnt, replycnt, blogcategoryno, mno)
+    INSERT INTO blog(title, content, file, good, rdate, cnt, replycnt, blogcategoryno,mno)
     VALUES(#{title}, #{content}, #{file}, 0, now(), 0, 0, #{blogcategoryno}, #{mno})
   </insert>
   
@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SELECT blogno, title, content, file, good, rdate, cnt, replycnt, blogcategoryno, mno
     FROM blog
     ORDER BY blogno DESC
+    LIMIT 5
   </select> 
 
   <select id="read" resultType="BlogVO" parameterType="int">
@@ -27,7 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SET title=#{title}, content=#{content}, file=#{file} 
     WHERE blogno=#{blogno}
   </update>
-
+  
+  <update id="cnt_up" parameterType="int">
+    UPDATE blog
+    SET cnt= cnt + 1
+    WHERE blogno=#{blogno}
+  </update>
+  
   <delete id="delete" parameterType="int">
     DELETE FROM blog
     WHERE blogno=#{blogno}
@@ -40,11 +47,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE blogcategoryno = #{blogcategoryno}
     ORDER BY blogno DESC
   </select> 
-  
-    <update id="cnt_up" parameterType="int">
-    UPDATE blog
-    SET cnt = cnt + 1
-    WHERE blogno=#{blogno}
-  </update>
   
 </mapper>

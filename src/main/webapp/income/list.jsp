@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.hana.income.IncomeVO"%>
 <%@ page import="java.util.Date" %> 
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.hana.income.IncomeVO"%>
+
 <!DOCTYPE html> 
 <html lang="ko"> 
   <head>

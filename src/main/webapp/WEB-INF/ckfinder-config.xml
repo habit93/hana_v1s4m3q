@@ -13,12 +13,12 @@
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/Extending
 	-->
 	<enabled>true</enabled>
-	<!--
+	<!-- 
 	Configure the location of uploaded files. See the following article for more details:
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
-	<baseDir>F:\hybrid2\ws_frame\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\blog_v1s4m3q\ckstorage</baseDir>
-	<baseURL>/blog/ckstorage</baseURL>
+	<baseDir>F:\hybrid2\ws_frame\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\hana_v1s4m3q\ckstorage</baseDir>
+	<baseURL>/member/ckstorage</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>
 	<!--

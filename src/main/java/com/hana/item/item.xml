@@ -13,7 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="list_all" resultType="ItemVO">
   SELECT itemno, title, price, content, thumb, categoryno
   FROM item
-  ORDER BY itemno DESC;
+  ORDER BY itemno DESC
+  LIMIT 4
 </select>
 
   <!-- blogcategoryno 컬럼의 값을 기준으로 게시판별 목록 -->

@@ -5,7 +5,7 @@
           <div id="header" class="container" style="height: 50px;">  
 
             <!-- Logo -->
-              <h1 id="logo"><a href="<%=root %>/index.jsp">hana</a></h1>  
+              <h1 id="logo"><a href="<%=root %>/index.do">hana</a></h1>  
 
             <!-- Nav -->
               <nav id="nav">
