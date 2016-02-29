@@ -72,10 +72,11 @@ CREATE TABLE shopcategory(
 /**********************************/
 CREATE TABLE item(
 		itemno                        		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '물건번호',
-		title                         		VARCHAR(10)		 NOT NULL COMMENT '이름',
+		title                         		VARCHAR(25)		 NOT NULL COMMENT '이름',
 		price                         		VARCHAR(10)		 NOT NULL COMMENT '가격',
-		contents                      		VARCHAR(200)		 NOT NULL COMMENT '내용',
-		categoryno                    		MEDIUMINT(10)		 NULL  COMMENT '카테고리번호',
+		content                       		MEDIUMTEXT		 NOT NULL COMMENT '내용',
+		thumb                         		VARCHAR(20)		 NULL  COMMENT '썸파일',
+		categoryno                    		INT(10)		 NULL  COMMENT '카테고리번호',
   FOREIGN KEY (categoryno) REFERENCES shopcategory (categoryno)
 ) COMMENT='상품';
 
@@ -126,7 +127,13 @@ CREATE TABLE schedule(
 CREATE TABLE buy(
 		buyno                         		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '구매 번호',
 		name                          		VARCHAR(20)		 NOT NULL COMMENT '물건 이름',
-		content                       		VARCHAR(200)		 NOT NULL COMMENT '구매 내용',
+		cnt                           		INT(10)		 NOT NULL COMMENT '갯수',
+		price                         		INT		 NOT NULL COMMENT '가격',
+		zipcode                       		VARCHAR(10)		 NOT NULL COMMENT '우편번호',
+		address1                      		VARCHAR(80)		 NOT NULL COMMENT '집주소1',
+		address2                      		VARCHAR(80)		 NOT NULL COMMENT '집주소2',
+		date                          		DATETIME		 NOT NULL COMMENT '날짜',
+		thumb                         		VARCHAR(20)		 NOT NULL COMMENT '썸파일',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
 		itemno                        		INT(10)		 NULL  COMMENT '물건번호',
   FOREIGN KEY (mno) REFERENCES member (mno),
@@ -184,22 +191,14 @@ CREATE TABLE reply(
 ) COMMENT='블로그 댓글';
 
 /**********************************/
-/* Table Name: 설문조사 */
-/**********************************/
-CREATE TABLE survey(
-		surveyno                      		MEDIUMINT(7)		 NULL  COMMENT 'surveyno',
-		title                         		VARCHAR(200)		 NOT NULL COMMENT 'title',
-		content                       		MEDIUMTEXT		 NOT NULL COMMENT 'content',
-		cnt                           		MEDIUMINT(7)		 NOT NULL COMMENT 'cnt',
-		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
-  FOREIGN KEY (mno) REFERENCES member (mno)
-) COMMENT='설문조사';
-
-/**********************************/
 /* Table Name: 쇼핑카트 */
 /**********************************/
 CREATE TABLE cart(
 		cartno                        		INT(10)		 NOT NULL		 PRIMARY KEY AUTO_INCREMENT COMMENT '카트 번호',
+		name                          		VARCHAR(20)		 NOT NULL COMMENT '물건이름',
+		cnt                           		MEDIUMINT(10)		 NOT NULL COMMENT '갯수',
+		price                         		MEDIUMINT(10)		 NOT NULL COMMENT '가격',
+		thumb                         		VARCHAR(20)		 NOT NULL COMMENT '썸파일',
 		itemno                        		INT(10)		 NULL  COMMENT '물건 번호',
 		mno                           		INT(10)		 NULL  COMMENT '멤버 번호',
   FOREIGN KEY (itemno) REFERENCES item (itemno),

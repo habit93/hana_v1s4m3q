@@ -160,7 +160,7 @@ if (nextMonth > 12) {
 
 <div class="feature">
   <button type="button" class="btn-sm" onclick="location.href='./createForm.jsp'">등록</button>
-  <button type="button" class="btn-sm" onclick="location.href='./list.jsp'">목록</button> 
+  <button type='button' class="btn-sm" onclick="location.reload();">새로고침</button>
 </div>
 
 <!-- --------------------------------------------------------- -->

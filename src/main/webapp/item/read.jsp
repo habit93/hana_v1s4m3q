@@ -71,10 +71,6 @@ int itemno = itemVO.getItemno();
             <span class="price"><%=itemVO.getPrice()%>원</span>
           </li>
     </div>
-          <li>
-            <label for="content" class="label" style="width:150px;"></label>
-            <span><%=itemVO.getContent()%></span>
-          </li>
         </ul>
       </fieldset>
     </FORM>
@@ -102,7 +98,7 @@ int itemno = itemVO.getItemno();
       <li>
         <label for='zipcode'>우편번호</label>
         <input type='text' name='zipcode' id='zipcode' value='' placeholder="우편번호">
-        <input type="button" onclick="DaumPostcode()" value="우편번호 찾기"><br>        
+        <input type="button" class="btn-sm" onclick="DaumPostcode()" value="우편번호 찾기"><br>        
       </li>
       <li>
         <label for='address1'>주소</label>
@@ -183,7 +179,7 @@ int itemno = itemVO.getItemno();
 </script>
    <!-- ----- DAUM 우편번호 API 종료-----  --> 
       <li class='right'>
-        <button type='submit' >구매</button>
+        <button type='submit'  class="btn-sm" >구매</button>
       </li>
      </ul>
     </FORM>
@@ -209,12 +205,19 @@ int itemno = itemVO.getItemno();
         <span id='price_c'><%=itemVO.getPrice() %>원</span>
       </li>
       <li class='right'>
-        <button type='submit' >쇼핑카트에 추가</button>
+        <button type='submit'  class="btn-sm" >쇼핑카트에 추가</button>
       </li>
      </ul>
     </FORM> 
   </DIV>
  </DIV>
+ 
+   <hr style="width:80%; margin: 0px auto">  
+      <DIV class='content_item' >
+        <%=itemVO.getContent() %>
+      </DIV>
+   <hr style="width:80%; margin: 0px auto">  
+   
   <!-- 리뷰 -->
     <DIV class='container'>
       <DIV class='col-lg-6'>
@@ -236,7 +239,7 @@ int itemno = itemVO.getItemno();
           %>
           
    <DIV class='bottom'>
-      <button type="button" onclick="location.href='../review/create.do?itemno=<%=itemVO.getItemno()%>&mno=${mno}'">등록</button>
+      <button type="button" class="btn-sm" onclick="location.href='../review/create.do?itemno=<%=itemVO.getItemno()%>&mno=${mno}'">등록</button>
   </DIV>
   
 </form>
@@ -248,8 +251,7 @@ int itemno = itemVO.getItemno();
     <DIV class='col-lg-6'>
   <DIV class='title'>QA</DIV> 
  <form name='frm_qa' method="POST" action='../review/create.do'>
-  <TABLE class='table' style='width: 100%;'>
-<%
+<%  
 Pds5DAO pds5DAO = new Pds5DAO();
 ArrayList<Pds5DTO> list2 = pds5DAO.list(itemno);
 for(int index = 0; index < list2.size(); index++){
@@ -257,8 +259,7 @@ for(int index = 0; index < list2.size(); index++){
   Pds5DTO pds5DTO = (Pds5DTO)obj;// 광범위한 Object 타입을 구체적인 클래스 타입으로 변환해야 사용 가능
   int qano = pds5DTO.getQano();  // 레코드 번호 추출
 %>  
-  <TR>
-    <TD class='td' style='text-align: left;'>
+  <label style="width: 75%">
       <%
       int indent = pds5DTO.getIndent();
       for(int i=0; i < indent; i++){
@@ -277,32 +278,32 @@ for(int index = 0; index < list2.size(); index++){
       %>      
       <A href='../pds5/read.jsp?qano=<%=qano %>&itemno=<%=itemno%>'><%=str %></A>
       <%
-      if (Tool.isNew(pds5DTO.getRdate(), 1)){ 
+      if (Tool.isNew(pds5DTO.getRdate(), 1)){  
       %> 
         <IMG src='../pds5/images/new.gif'>
       <%
-      }
+      } 
       %> 
-    </TD>
-    <TD class='td'><%=pds5DTO.getRdate() %></TD>
-  </TR>
+    </label>
+    <label><%=pds5DTO.getRdate() %></label><br>
 
 <%
 }
 %>
-</TABLE>
 <DIV class='bottom'>
-<button type='button' onclick="location.href='../pds5/create_form.jsp?itemno=<%=itemno%>'">등록</button>
+<button type='button' class="btn-sm" onclick="location.href='../pds5/create_form.jsp?itemno=<%=itemno%>'">등록</button>
 </DIV>
   </form>
   </DIV>
   
   <!-- QA끝 -->
   
-  </DIV>
+  </DIV> 
+  
+  
   <DIV class='bottom'>
-      <button type="button" onclick="location.href='./update.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">수정</button>
-      <button type="button" onclick="location.href='./delete.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">삭제</button>
+      <button type="button" class="btn-sm" onclick="location.href='./update.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">수정</button>
+      <button type="button" class="btn-sm" onclick="location.href='./delete.do?itemno=<%=itemVO.getItemno()%>&categoryno=<%=itemVO.getCategoryno()%>'">삭제</button>
   </DIV>
 
   <!-- -------------------------------------------- -->

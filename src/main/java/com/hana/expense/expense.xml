@@ -43,9 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </update>
 
   <select id="sumlist" resultType="ExpenseVO" parameterType="String">
-    SELECT expenseno, SUBSTRING(rdate, 1, 7) as rdate, categoryno, expenseitem, expensemoney, mno
-    FROM expense 
-    WHERE SUBSTRING(rdate, 1, 7) = #{month}
+    SELECT c.categoryno, c.categorysort, p.expenseno, p.rdate, p.categoryno, p.expenseitem, p.expensemoney, p.mno
+    FROM category c, expense p
+    WHERE c.categoryno = p.categoryno and SUBSTRING(rdate, 1, 7) = #{month}
     ORDER BY rdate DESC
   </select>
   

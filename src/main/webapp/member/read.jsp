@@ -1,58 +1,37 @@
-s<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.hana.member.MemberVO" %>
+<%MemberVO memberVO = (MemberVO)request.getAttribute("memberVO");%>
+
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<title></title> 
+<title>마이페이지</title> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script>
-<script type="text/javascript" src="../js/tool.js"></script>
 
-<script type="text/javascript">
-</script>
-
-</head> 
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<jsp:include page="/menu/top.jsp" flush='false' />
-<!-- ----------------------------------------- -->
-<%
-MemberVO memberVO = (MemberVO)request.getAttribute("memberVO");
-%>
 <DIV class='title'>마이페이지</DIV>
 
 <DIV class='content'>
-<FORM name='frm' method='POST' action='./update.do'
-           onsubmit = 'return send();'>
-   <input type='hidden' id='mno' name='mno' value='<%=memberVO.getMno()%>'>
-  <fieldset>
-    <ul>
-      <li>
-        <label class='label' for='id'>아이디</label>
-        <span><%=memberVO.getId() %></span>
-      </li>
-      <li>
-        <label class='label' for='passwd'>패스워드</label>
-        <span><%=memberVO.getPasswd() %></span>
-      </li>
-      <li>
-        <label class='label' for='mname'>성명</label>
-        <span><%=memberVO.getMname() %></span>
-      </li>
-      <li>
-        <label class='label' for='nickname'>닉네임</label>
-        <span><%=memberVO.getNickname() %></span>
-      </li>
-      <li>
-        <label class='label' for='birthday'>생일</label>
-        <span><%=memberVO.getBirthday() %></span>
-      </li>
-      <li>
-        <label class='label' for='birthday'>성별</label>
+  <input type='hidden' id='mno' name='mno' value='<%=memberVO.getMno()%>'>
+  <label for='id'>아이디 : <span><%=memberVO.getId() %></span></label><br>
+  <label for='passwd'>패스워드 : <span><%=memberVO.getPasswd() %></span></label><br>
+  <label for='mname'>성명 : <span><%=memberVO.getMname() %></span></label><br>
+  <label for='nickname'>닉네임 : <span><%=memberVO.getNickname() %></span></label><br>
+  <label for='birthday'>생일 : <span><%=memberVO.getBirthday() %></span></label><br>
+  <label for='gender'>성별 :  
         <%
         if(memberVO.getGender() == 1){
         %>
@@ -63,20 +42,29 @@ MemberVO memberVO = (MemberVO)request.getAttribute("memberVO");
         <span>여자</span>
         <%
         }
-        %>     
-      </li>
-      <li>
-        <button type="button" onclick="location.href='../buy/list.do?mno=${mno}'">구매 내역 조회</button>
-        <button type="button" onclick="location.href='../cart/list.do?mno=${mno}'">쇼핑카트</button>
-      </li>         
-    </ul>
-  </fieldset>
-</FORM>
-</DIV>
+        %>      
+  </label><br> 
+  <div class="feature"> 
+        <button type="button" class="btn-sm" onclick="location.href='./update.do?mno=${mno}'">정보 수정</button> 
+        <button type="button" class="btn-sm" onclick="location.href='./delete.do?mno=${mno}'">회원탈퇴</button> 
+        <button type="button" class="btn-sm" onclick="location.href='../buy/list.do?mno=${mno}'">구매 내역 조회</button>
+        <button type="button" class="btn-sm" onclick="location.href='../cart/list.do?mno=${mno}'">쇼핑카트</button>
+ </div>
+</div>
 
-<!-- -------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
-</html> 
+
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
+</html>
+
+
+
 

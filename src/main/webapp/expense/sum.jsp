@@ -67,7 +67,7 @@
   <b>합계 : <%=total %></b><br /><br /> 
   
   <form name='frm' method="get" action="./summonth.do">
-    <input type="month" name="month" id="month" value='<%=today %>'>
+    <input type="month" class="input-sm" name="month" id="month" value='<%=today %>'>
     <button type='submit' class="btn-sm">정산</button>
   </form>
 </div>

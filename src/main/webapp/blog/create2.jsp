@@ -1,9 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.hana.blog.BlogVO" %>
+
+<%
+BlogVO blogVO = (BlogVO)request.getAttribute("blogVO");
+%>
 
 <!DOCTYPE html> 
 <html lang="ko"> 
   <head>
-    <title>Q&A 작성</title>
+    <title>글 작성</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -23,24 +29,27 @@ $(function(){
 <body >
 <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- --------------------------------------------------------- -->
-<%
-int itemno = Integer.parseInt(request.getParameter("itemno"));
-%> 
-  
-<DIV class='title'>Q&A 등록</DIV>    
 
-<div class='content'>
-<form name='frm' method='POST' action='./create_proc.jsp'>
-  <input type='hidden' name='itemno' id='itemno' value='<%=itemno%>'> 
-  <label>제목 : <input type='text' name='title' id='title' size='70'  value='비가와야...' ></label>
-  <textarea name='content' id='content' rows='10' style='width: 100%;'>손을 청결히...</textarea>
-  <label>패스워드 : <input type='password' name='passwd' id='passwd' value='1234'></label> 
-  <div class='feature'>
-    <input type='submit' value='등록'>
-    <input type='button' value='취소' onclick="location.href='./list.jsp'"> 
-  </div> 
-</form>
-</div>
+<div class='content_menu'>
+  <A href='./list2.do?blogcategoryno=<%=blogVO.getBlogcategoryno()%>'>게시판 돌아가기</A>｜새글 등록
+</div> 
+<DIV class='content'>
+<FORM name='frm' method='POST' action='./create2.do' enctype="multipart/form-data">
+   <!-- <input type='hidden' name='fileMF' id='fileMF'value='null'> -->
+   <input type='hidden' name='mno' id='mno' value='${mno }'>
+   <input type="hidden" name='blogcategoryno' id='blogcategoryno' value='<%=blogVO.getBlogcategoryno() %>'>
+    <ul>
+      <li><label for='title'>제목<input type='text' name='title' id='title' size='70' value='봄' required="required"></label></li>
+      <li><textarea name='content' id='content'  rows='7' style='width: 100%;'>추위끝</textarea></li>
+      <DIV hidden="true"><li><label for='fileMF'>Thumb 파일 : <input type="file" name='fileMF' id='fileMF' ></label></li></DIV>
+      <li class='feature'> 
+        <button type="submit">등록</button>
+      </li>         
+    </ul>
+</FORM>
+</DIV>
+ 
+
 
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />
@@ -53,9 +62,3 @@ int itemno = Integer.parseInt(request.getParameter("itemno"));
   </body>
 <!-- --------------------------------------------------------- -->
 </html>
-
-
-
-
-
-

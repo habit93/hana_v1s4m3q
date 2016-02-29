@@ -781,8 +781,13 @@
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>title</columnName>
                             <logicalName>이름</logicalName>
-                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
-                            <size>10</size>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType">
+                              <name>VARCHAR</name>
+                              <logicalName>String</logicalName>
+                              <supportSize>true</supportSize>
+                              <type>12</type>
+                            </columnType>
+                            <size>25</size>
                             <notNull>true</notNull>
                             <primaryKey>false</primaryKey>
                             <description></description>
@@ -801,11 +806,32 @@
                             <defaultValue></defaultValue>
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
-                            <columnName>contents</columnName>
+                            <columnName>content</columnName>
                             <logicalName>내용</logicalName>
-                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel/target/columns/net.java.amateras.db.visual.model.ColumnModel[2]/columnType"/>
-                            <size>200</size>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType">
+                              <name>MEDIUMTEXT</name>
+                              <logicalName>String</logicalName>
+                              <supportSize>false</supportSize>
+                              <type>12</type>
+                            </columnType>
+                            <size></size>
                             <notNull>true</notNull>
+                            <primaryKey>false</primaryKey>
+                            <description></description>
+                            <autoIncrement>false</autoIncrement>
+                            <defaultValue></defaultValue>
+                          </net.java.amateras.db.visual.model.ColumnModel>
+                          <net.java.amateras.db.visual.model.ColumnModel>
+                            <columnName>thumb</columnName>
+                            <logicalName>썸파일</logicalName>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType">
+                              <name>VARCHAR</name>
+                              <logicalName>String</logicalName>
+                              <supportSize>true</supportSize>
+                              <type>12</type>
+                            </columnType>
+                            <size>20</size>
+                            <notNull>false</notNull>
                             <primaryKey>false</primaryKey>
                             <description></description>
                             <autoIncrement>false</autoIncrement>
@@ -815,7 +841,7 @@
                             <columnName>categoryno</columnName>
                             <logicalName>카테고리번호</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType">
-                              <name>MEDIUMINT</name>
+                              <name>INT</name>
                               <logicalName>Integer</logicalName>
                               <supportSize>true</supportSize>
                               <type>4</type>
@@ -2057,7 +2083,7 @@
   </children>
   <dommains/>
   <dialectName>MySQL</dialectName>
-  <logicalMode>false</logicalMode>
+  <logicalMode>true</logicalMode>
   <jarFile>F:\hybrid2\setup\mysql-connector-java-5.1.37\mysql-connector-java-5.1.37-bin.jar</jarFile>
   <jdbcDriver>org.gjt.mm.mysql.Driver</jdbcDriver>
   <jdbcUrl>jdbc:mysql://localhost:3306/web</jdbcUrl>

@@ -58,7 +58,7 @@ for(int index=0; index < list.size(); index++){
 %> 
     <tr>
       <td><%=vo.getRdate() %></td>
-      <td><%=vo.getCategoryno()%></td> 
+      <td><%=vo.getCategorysort()%></td> 
       <td><%=vo.getExpenseitem() %></td>
       <td><%=vo.getExpensemoney() %></td>
       <td> 

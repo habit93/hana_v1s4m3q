@@ -1,16 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="com.hana.member.MemberVO" %>
+<% MemberVO memberVO = (MemberVO)request.getAttribute("memberVO"); %>
+
 <!DOCTYPE html> 
 <html lang="ko"> 
 <head> 
 <meta charset="UTF-8"> 
-<title></title> 
+<title>마이페이지</title> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script>
-<script type="text/javascript" src="../js/tool.js"></script>
 
 <script type="text/javascript">
 $(function(){
@@ -56,27 +61,22 @@ function send(){
   }
 }
 </script>
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
-</head> 
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<jsp:include page="/menu/top.jsp" flush='false' />
-<!-- ----------------------------------------- -->
-<%
-MemberVO memberVO = (MemberVO)request.getAttribute("memberVO");
-%>
 <DIV class='title'>회원수정</DIV>
 
 <DIV class='content'>
-<FORM name='frm' method='POST' action='./update.do'
-           onsubmit = 'return send();'>
+<FORM name='frm' method='POST' action='./update.do' onsubmit = 'return send();'>
    <input type='hidden' id='mno' name='mno' value='<%=memberVO.getMno()%>'>
-  <fieldset>
     <ul>
       <li>
         <label class='label' for='id'>아이디</label>
         <input type='text' name='id' id='id' value='<%=memberVO.getId() %>' required="required">
-        <button type='button' onclick="checkId()">중복확인</button>
+        <button type='button' class="btn-sm" onclick="checkId()" >중복확인</button>
         <SPAN id='panel_id'></SPAN>
       </li>
       <li>
@@ -116,18 +116,22 @@ MemberVO memberVO = (MemberVO)request.getAttribute("memberVO");
         }
         %>     
       </li>
-      <li class='right'>
-        <button type="submit">수정</button>
-        <button type="button" onclick="location.href='./list.do'">목록</button>
+      <li class='feature'>
+        <button type="submit" class="btn-sm" >수정</button>
       </li>         
     </ul>
-  </fieldset>
 </FORM>
 </DIV>
 
-<!-- -------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
-</html> 
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
+</html>
 

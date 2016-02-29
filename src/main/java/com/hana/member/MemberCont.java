@@ -1,5 +1,6 @@
 package com.hana.member;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -130,9 +131,12 @@ public class MemberCont {
     ArrayList<String> links = new ArrayList<String>();
 
     if (memberDAO.update(memberVO) == 1) {
+      mav.setViewName("redirect:/member/read.do?mno="+memberVO.getMno()); // 확장자 명시!!!
+      /*    
       msgs.add("회원정보가 수정되었습니다.");
       links.add("<button type='button' onclick=\"location.href='./read.do?mno="+memberVO.getMno()+"'\">변경된 회원정보 확인</button>");
       links.add("<button type='button' onclick=\"location.href='./list.do'\">목록</button>");
+      */
     } else {
       msgs.add("회원 정보 변경에 실패했습니다.");
       msgs.add("죄송하지만 다시한번 시도해주세요.");
@@ -140,7 +144,6 @@ public class MemberCont {
       links.add("<button type='button' onclick=\"location.href='./home.do'\">홈페이지</button>");
     }
 
-    links.add("<button type='button' onclick=\"location.href='./list.do'\">목록</button>");
 
     mav.addObject("msgs", msgs);
     mav.addObject("links", links);
@@ -214,8 +217,11 @@ public class MemberCont {
     ArrayList<String> links = new ArrayList<String>();
 
     if (memberDAO.delete(memberVO.getMno()) == 1) {
+      mav.setViewName("redirect:/index.do"); // 확장자 명시!!!
+      /*   
       msgs.add("회원을 삭제했습니다.");
       links.add("<button type='button' onclick=\"location.href='./home.do'\">홈페이지</button>");
+      */
     } else {
       msgs.add("회원 삭제에 실패했습니다.");
       msgs.add("죄송하지만 다시한번 시도해주세요.");
@@ -223,7 +229,6 @@ public class MemberCont {
       links.add("<button type='button' onclick=\"location.href='./home.do'\">홈페이지</button>");
     }
 
-    links.add("<button type='button' onclick=\"location.href='./list.do'\">목록</button>");
 
     mav.addObject("msgs", msgs);
     mav.addObject("links", links);
@@ -300,8 +305,8 @@ public class MemberCont {
       response.addCookie(ck_passwd_save);
       // ------------------------------------------------------------------
       
-      mav.setViewName("redirect:/index.jsp"); // 확장자 명시!!!
-      
+      mav.setViewName("redirect:/index_re.jsp"); // 확장자 명시!!!
+     
     } else {
       mav.setViewName("/member/message");
       msgs.add("로그인에 실패했습니다.");
@@ -319,20 +324,24 @@ public class MemberCont {
   @RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
   public ModelAndView logout(HttpSession session) {
     ModelAndView mav = new ModelAndView();
-    mav.setViewName("/member/message"); // /webapp/member/message.jsp
     
+    
+
+    mav.setViewName("redirect:/index.do"); // 확장자 명시!!!
+    
+    /*
+    mav.setViewName("/member/message"); // /webapp/member/message.jsp
     ArrayList<String> msgs = new ArrayList<String>();
     ArrayList<String> links = new ArrayList<String>();
-    
     msgs.add("이용해주셔서 감사합니다.");
     msgs.add("from 왕눈이...");
     links.add("<button type='button' onclick=\"location.href='../index.jsp'\">홈페이지</button>");
     
-    session.invalidate(); // session 변수 삭제
-    
     mav.addObject("msgs", msgs);
     mav.addObject("links", links);
+    */
     
+    session.invalidate(); // session 변수 삭제
     return mav;
   }  
 }

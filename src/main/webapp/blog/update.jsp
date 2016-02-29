@@ -13,7 +13,7 @@
     <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="../js/tool.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>  
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){

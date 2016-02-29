@@ -106,10 +106,10 @@ if (nextMonth > 12) {
             for(int i=0; i<list.size(); i++){
               CalendarDTO dto = (CalendarDTO)list.get(i);
               sb.append("<img src='"+request.getContextPath()+"/calendar/images/bu5.gif'>");
-              sb.append("<a href='./read.jsp?calendarno="+dto.getCalendarno()+"'>"+dto.getLabel()+"</a><br>");
+              sb.append("<a href='./read.jsp?calendarno="+dto.getCalendarno()+"'>"+dto.getLabel().substring(0,4)+"..."+"</a><br>");
             }
         
-          }
+          } 
           out.println("<br><span style='color:#00AA00'>" + sb.toString() + "</span></td>");
           // ------------------------------------------------
       
@@ -117,7 +117,7 @@ if (nextMonth > 12) {
           // System.out.println(cal.getActualMaximum ( Calendar.DAY_OF_MONTH ));
           if ((cal.getActualMaximum ( Calendar.DAY_OF_MONTH ) != cal.get(Calendar.DATE))) {
             if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){ // 토요일인 경우
-              out.println("</tr><tr>");
+              out.println("</tr><tr>"); 
             }
           }
 

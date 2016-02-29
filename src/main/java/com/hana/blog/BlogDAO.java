@@ -55,6 +55,11 @@ public class BlogDAO implements BlogMapperInter{
   public int cnt_up(int blogno) {
     return mapper().cnt_up(blogno);
   }
+
+  @Override
+  public int good_up(BlogVO blogVO) {
+    return mapper().good_up(blogVO);
+  }
   
 }
 

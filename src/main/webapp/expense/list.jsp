@@ -86,7 +86,7 @@ function update_category(expenseno, categoryno){
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>번호</th>
+        <th>날짜</th>
         <th>지출 카테고리</th>
         <th>지출 내용</th>
         <th>지출 금액</th>
@@ -132,10 +132,10 @@ function update_category(expenseno, categoryno){
   <input type='hidden' name='mno' id='mno' value='${mno}'>
   <input type='hidden' name='expenseno' id='expenseno' value='1'>
   <table class="table table-hover">
-    <tr>
-      <td><input type="date" name='rdate' id='rdate' value='<%=today2 %>'required="required"></TD>
+    <tr> 
+      <td><input type="date" class="input-sm" name='rdate' id='rdate' value='<%=today2 %>'required="required"></TD>
       <td>
-       <input type="text" name='categoryno' id='categoryno'  required="required" list="category"  autocomplete="off">
+       <input type="text" class="input-sm"  name='categoryno' id='categoryno'  required="required" list="category"  autocomplete="off">
        <datalist id="category" >
        <%
        ArrayList<CategoryVO> category_list = (ArrayList<CategoryVO>)request.getAttribute("category_list");
@@ -148,8 +148,8 @@ function update_category(expenseno, categoryno){
       %> 
        </datalist>
       </td>
-      <td><input type='text' name='expenseitem' id='expenseitem' required="required"></td>
-      <td><input type='text' name='expensemoney' id='expensemoney' required="required"></td>
+      <td><input type='text' class="input-sm" name='expenseitem' id='expenseitem' required="required"></td>
+      <td><input type='text' class="input-sm" name='expensemoney' id='expensemoney' required="required"></td>
       <td>      
         <button type='submit'  class="btn-sm" id='btn'>등록</button> 
         <button type="button" class="btn-sm" onclick="create_cancel()">취소</button> 
@@ -163,7 +163,7 @@ function update_category(expenseno, categoryno){
   <button type='button' class="btn-sm" onclick="create();">등록</button>
   <button type='button' class="btn-sm" onclick="location.reload();">새로 고침</button><br /><br />
   <form method="get" action="./sumlist.do">
-    <input type="month" name="month" id="month" value='<%=today%>'>
+    <input type="month" class="input-sm" name="month" id="month" value='<%=today%>'>
     <button type='submit' class="btn-sm">정산</button> 
   </form>
 </div>

@@ -28,6 +28,7 @@
 <!-- --------------------------------------------------------- -->
 
 <%
+int itemno = Integer.parseInt(request.getParameter("itemno"));
 int qano = Integer.parseInt(request.getParameter("qano"));
 Pds5DTO pds5DTO = pds5DAO.read(qano); // 조회
 %>
@@ -47,7 +48,7 @@ Pds5DTO pds5DTO = pds5DAO.read(qano); // 조회
   </TABLE>
   <DIV class='feature'>
     <input type='button' class="btn-sm" value='목록' onclick="location.href='./list.jsp?col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'">
-    <input type='button' class="btn-sm" value='답변' onclick="location.href='./reply_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'">
+    <input type='button' class="btn-sm" value='답변' onclick="location.href='./reply_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>&itemno=<%=itemno%>'">
     <input type='button' class="btn-sm" value='수정' onclick="location.href='./update_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'">
     <input type='button' class="btn-sm" value='삭제' onclick="location.href='./delete_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'">
   </DIV> 

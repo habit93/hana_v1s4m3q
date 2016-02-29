@@ -7,7 +7,7 @@ CREATE TABLE calendar(
     calendarno                        INT(10)    NOT NULL    PRIMARY KEY AUTO_INCREMENT COMMENT '스케줄번호',
     rdate                             DATE     NOT NULL COMMENT '날짜',
     label       VARCHAR(20)  NOT NULL, -- 달력에 출력될 레이블
-    title       VARCHAR(100) NOT NULL, -- 제목(*)
+    title       VARCHAR(100) NOT NULL, -- 제목(*) 
     contents                          VARCHAR(200)     NOT NULL COMMENT '내용',
     mno                               INT(10)    NULL  COMMENT '멤버 번호',
   FOREIGN KEY (mno) REFERENCES member (mno)

@@ -2,13 +2,13 @@
 /* Table Name: 물건 등록 */
 /**********************************/
 DROP TABLE item;
-   
+  
 CREATE TABLE item(
     itemno                            INT(10)    NOT NULL    PRIMARY KEY AUTO_INCREMENT COMMENT '물건번호',
-    title                             VARCHAR(30)    NOT NULL COMMENT '이름',
-    price                             INT(10)    NOT NULL COMMENT '가격',
-    content                           VARCHAR(200)     NOT NULL COMMENT '내용',
-    thumb                             VARCHAR(50)    NOT NULL COMMENT '썸네일',
+    title                             VARCHAR(25)    NOT NULL COMMENT '이름',
+    price                             VARCHAR(10)    NOT NULL COMMENT '가격',
+    content                          MEDIUMTEXT     NOT NULL COMMENT '내용',
+    thumb                             VARCHAR(20)    NULL  COMMENT '썸파일',
     categoryno                        INT(10)    NULL  COMMENT '카테고리번호',
   FOREIGN KEY (categoryno) REFERENCES shopcategory (categoryno)
 ) COMMENT='상품';

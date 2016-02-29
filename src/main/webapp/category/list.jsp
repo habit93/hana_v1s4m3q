@@ -14,17 +14,6 @@
     <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/tool.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
-    <!--     
-    <style type="text/css">
-     .write{
-     width:700px;
-     height:500px;
-     border:1px solid #333333; 
-     background-color:white; 
-     }
-    </style>
-     -->
      
 <script type="text/javascript">
 $(function(){ 
@@ -75,7 +64,7 @@ function remove_cancel(){
       <form name='frm' id='frm' method='post' action="./create.do">   
         <input type='hidden' name='categoryno' id='categoryno' value='1'> 
         <input type='hidden' name='mno' id='mno' value='${mno}'>
-        <input type='text' name='categorysort' id='categorysort' required="required">
+        <input type='text' class="input-sm" name='categorysort' id='categorysort' required="required">
         <button type='submit'  class="btn-sm"  id='btn'>등록</button>
         <button type="button" class="btn-sm"  onclick="create_cancel()">취소</button> 
       </form> 

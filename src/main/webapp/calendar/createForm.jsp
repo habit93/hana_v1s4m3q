@@ -80,28 +80,29 @@ function checkData(f){ // f == document.frmData 객체
     <input type='hidden' name='mno' id='mno' value='${mno }'>
     <ul> 
       <li>  
-        <label class='label'>날짜</label>
-        <input type='date' name=rdate id='rdate' value="<%=today%>" required="required">
+        <label class='form'>날짜</label>
+        <input type='date' class="input-sm" name=rdate id='rdate' value="<%=today%>" required="required">
       </li>
       <li>
-        <label class='label'>달력 레이블</label>
-        <input type='text' name='label' id='label' required="required">
+        <label class='form'>달력 레이블</label> 
+        <input type='text' class="input-sm" name='label' id='label' size="20" required="required"> 
       </li>
       <li>
-        <label class='label'>제목</label>
-        <input type='text' name='title' id='title' required="required">
+        <label class='form'>제목</label>
+        <input type='text' class="input-sm" name='title' id='title' required="required">
       </li>
       <li>
-        <label class='label'>내용</label>
-        <input type="text" name='contents' id='contents' required="required">
+        <label class='form'>내용</label>
+        <input type="text" class="input-sm" name='contents' id='contents' required="required">
       </li>
       <li class='feature'>
         <button type="submit" class="btn-sm" >등록</button>
-        <button type="button" class="btn-sm" onclick="location.href='./list.do'">목록</button>
+        <button type="button" class="btn-sm" onclick="location.href='./calendar.jsp'">달력보기</button>
       </li>         
     </ul>
 </form>
-</div>
+</div> 
+
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />
     <script src="../assets/js/jquery.min.js"></script>

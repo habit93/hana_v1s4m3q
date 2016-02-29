@@ -118,9 +118,9 @@ function remove_cancel(){
   <input type='hidden' name='mno' id='mno' value='${mno}'>
   <table class="table table-hover">
     <tr>
-      <td><input type="date" name='rdate' id='rdate' value='<%=today2 %>' required="required"></td>
-      <td><input type='text' name='incomeitem' id='incomeitem' required="required"></td>
-      <td><input type='text' name='incomemoney' id='incomemoney' required="required"></td>
+      <td><input type="date" class="input-sm" name='rdate' id='rdate' value='<%=today2 %>' required="required"></td>
+      <td><input type='text' class="input-sm" name='incomeitem' id='incomeitem' required="required"></td>
+      <td><input type='text' class="input-sm" name='incomemoney' id='incomemoney' required="required"></td>
       <td>      
         <button type='submit'  id='btn'>등록</button> 
         <button type="button" onclick="create_cancel()">취소</button> 
@@ -134,7 +134,7 @@ function remove_cancel(){
   <button type='button' class="btn-sm" onclick="create();">등록</button>
   <button type='button' class="btn-sm" onclick="location.reload();">새로 고침</button><br /><br /> 
   <form method="get" action="./sumlist.do">
-    <input type="month" name="month" id="month" value='<%=today%>'>
+    <input type="month" class="input-sm" name="month" id="month" value='<%=today%>'>
     <button type='submit' class="btn-sm">정산</button> 
   </form>
 </div>

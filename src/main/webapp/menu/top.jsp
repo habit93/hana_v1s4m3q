@@ -19,6 +19,7 @@
                       <li><a href='<%=root %>/item/list.do?categoryno=10'>기념일</a></li>
                       <li><a href='<%=root %>/item/list.do?categoryno=10'>남자친구선물</a></li>
                       <li><a href='<%=root %>/item/list.do?categoryno=10'>여자친구선물</a></li>
+                      <li><a href='<%=root %>/item/list.do?categoryno=1'>테스트</a></li>
                     </ul>
                   </li>
                     
@@ -42,15 +43,15 @@
                   <li class="break">
                     <a href="#">캐스트</a>
                     <ul>
-                      <li><a href='<%=root %>/blog/list2.do?blogcategoryno=1'>데이트</a></li>
-                      <li><a href='<%=root %>/blog/list2.do?blogcategoryno=2'>영화</a></li>
-                      <li><a href='<%=root %>/blog/list2.do?blogcategoryno=3'>음식</a></li>
-                      <li><a href='<%=root %>/blog/list2.do?blogcategoryno=4'>패션</a></li>
+                      <li><a href='<%=root %>/blog/list.do?blogcategoryno=1'>데이트</a></li>
+                      <li><a href='<%=root %>/blog/list.do?blogcategoryno=2'>영화</a></li>
+                      <li><a href='<%=root %>/blog/list.do?blogcategoryno=3'>음식</a></li>
+                      <li><a href='<%=root %>/blog/list.do?blogcategoryno=4'>패션</a></li>
                     </ul> 
                   </li>
                   
                   <li><a href="#">커뮤니티</a>
-                    <ul>
+                    <ul> 
                       <li><a href='<%=root %>/blog/list2.do?blogcategoryno=5'>지금은 연애중</a></li>
                       <li><a href='<%=root %>/blog/list2.do?blogcategoryno=6'>사랑해도 될까요?</a></li>
                       <li><a href='<%=root %>/blog/list2.do?blogcategoryno=9'>헤어진 다음 날</a></li>

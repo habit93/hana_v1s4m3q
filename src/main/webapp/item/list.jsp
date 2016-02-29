@@ -25,7 +25,7 @@
 ArrayList<ItemVO> list = (ArrayList<ItemVO>)request.getAttribute("list");
 int categoryno = Integer.parseInt(request.getParameter("categoryno"));
 %>
- <DIV class='content' >
+ <DIV class="list_center">
   <FORM name='frm' method='post' action='./list.jsp'>
 
   <DIV style='width: 100%; margin: 0px auto'>

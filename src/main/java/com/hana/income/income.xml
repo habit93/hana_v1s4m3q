@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </delete>
 
   <select id="sumlist" resultType="IncomeVO" parameterType="String">
-    SELECT incomeno, SUBSTRING(rdate, 1, 7) as rdate, incomeitem, incomemoney, mno
+    SELECT incomeno, rdate, incomeitem, incomemoney, mno
     FROM income 
     WHERE SUBSTRING(rdate, 1, 7) = #{month}
     ORDER BY rdate DESC 

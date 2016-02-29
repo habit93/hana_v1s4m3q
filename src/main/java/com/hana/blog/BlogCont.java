@@ -46,6 +46,15 @@ public class BlogCont {
     
     return mav;
   }
+  
+  @RequestMapping(value="/blog/create2.do", method=RequestMethod.GET)
+  public ModelAndView create2(BlogVO blogVO){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/blog/create2");   // /webapp/blog/create.jsp
+    mav.addObject("blogVO", blogVO);
+    
+    return mav;
+  }
 
   @RequestMapping(value="/blog/create.do", method=RequestMethod.POST)
   public ModelAndView create(BlogVO blogVO, HttpServletRequest request){
@@ -69,6 +78,40 @@ public class BlogCont {
     // --------------------------------------------------
     
     if (blogDAO.create(blogVO) == 1){ 
+      mav.setViewName("redirect:/blog/list.do?blogcategoryno=" + blogVO.getBlogcategoryno());
+    }else{
+      msgs.add("글 등록에 실패했습니다.");
+      msgs.add("다시 시도해주세요.");
+      links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");
+    }
+
+    mav.addObject("msgs", msgs);
+    mav.addObject("links", links);
+    
+    return mav;
+  }
+  @RequestMapping(value="/blog/create2.do", method=RequestMethod.POST)
+  public ModelAndView create2(BlogVO blogVO, HttpServletRequest request){
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("/blog/message");
+    
+    ArrayList<String> msgs = new ArrayList<String>();
+    ArrayList<String> links = new ArrayList<String>();
+    
+    // --------------------------------------------------
+    // Thumb 파일 전송 관련
+    // --------------------------------------------------
+    String absPath = Tool.getRealPath(request, "/blog/storage");
+    
+    String file = "";
+    MultipartFile fileMF = blogVO.getFileMF();  // 파일을 선택하지 않아도 객체가 생성됨.
+    if (fileMF.getSize() > 0){
+      file = Upload.saveFileSpring(fileMF, absPath);
+    }
+    blogVO.setFile(file); // 전송된 파일명 저장
+    // --------------------------------------------------
+    
+    if (blogDAO.create(blogVO) == 1){ 
       mav.setViewName("redirect:/blog/list2.do?blogcategoryno=" + blogVO.getBlogcategoryno());
     }else{
       msgs.add("글 등록에 실패했습니다.");
@@ -76,8 +119,6 @@ public class BlogCont {
       links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");
     }
     
-    links.add("<button type='button' onclick=\"location.href='./home.do'\">홈페이지</button>");
-    links.add("<button type='button' onclick=\"location.href='./list2.do?blogcategoryno="+blogVO.getBlogcategoryno()+"'\">목록</button>");
     mav.addObject("msgs", msgs);
     mav.addObject("links", links);
     
@@ -85,10 +126,14 @@ public class BlogCont {
   }
   
   @RequestMapping(value = "/blog/list.do", method = RequestMethod.GET)
-  public ModelAndView list(){
+  public ModelAndView list(BlogVO blogVO){
     ModelAndView mav = new ModelAndView();
     mav.setViewName("/blog/list");
-    mav.addObject("list", blogDAO.list());
+    mav.addObject("list", blogDAO.list2(blogVO));
+    mav.addObject("blogVO", blogVO);
+
+    BlogcategoryVO vo = blogcategoryDAO.read(blogVO.getBlogcategoryno());
+    mav.addObject("title", vo.getTitle());
     
     return mav;
   }
@@ -232,6 +277,13 @@ public class BlogCont {
     return mav;
   }
 
-
+  @RequestMapping(value="/blog/good_up.do", method=RequestMethod.GET)
+  public ModelAndView good_up(BlogVO blogVO){
+    ModelAndView mav = new ModelAndView();
+    blogDAO.good_up(blogVO);
+    mav.setViewName("redirect:/blog/read.do?blogno=" + blogVO.getBlogno());
+    
+    return mav;
+  }
 }
 

@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-    <title>커플아이템</title>
+    <title>리뷰 등록</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -31,26 +31,19 @@ $(function(){
 <%
 int itemno = (Integer)request.getAttribute("itemno");
 int mno = (Integer)request.getAttribute("mno");
-%>
+%> 
 
 <DIV class='title' >리뷰 작성</DIV> 
 
-<DIV class='content' >
+<div class='content'>
 <FORM name='frm' method='POST' action='./create.do'>
-        <input type="hidden" name='itemno' id='itemno' value='<%=itemno%>'>
-        <input type="hidden" name='mno' id='mno' value='<%=mno%>'>
-    <ul>
-      <li>
-        <label for='title'>제목</label>
-        <input type='text' name='title' id='title' size='70' value='완전 만족합니다.' required="required">
-      </li>
-      <li>
-        <textarea name='contents' id='contents'  rows='7' >빠른 배송 ㅎㄷㄷ</textarea>
-      </li>
-      <li class='feature'> 
-        <button type="submit">등록</button>
-      </li>  
-    </ul>
+  <input type="hidden" name='itemno' id='itemno' value='<%=itemno%>'>
+  <input type="hidden" name='mno' id='mno' value='<%=mno%>'>
+  <label>제목<input type='text' name='title' id='title' size='70' value='완전 만족합니다.' required="required"></label> 
+  <textarea name='contents' id='contents'  rows='7' >빠른 배송 ㅎㄷㄷ</textarea>
+  <div class='feature' > 
+    <button type="submit">등록</button>
+  </div>
 </FORM> 
 </DIV>
  

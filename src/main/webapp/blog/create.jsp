@@ -33,7 +33,7 @@ $(function(){
 <div class='content_menu'>
   <A href='./list2.do?blogcategoryno=<%=blogVO.getBlogcategoryno()%>'>게시판 돌아가기</A>｜새글 등록
 </div> 
-<DIV class='content'>
+<DIV class='content'> 
 <FORM name='frm' method='POST' action='./create.do' enctype="multipart/form-data">
    <input type='hidden' name='mno' id='mno' value='${mno }'>
    <input type="hidden" name='blogcategoryno' id='blogcategoryno' value='<%=blogVO.getBlogcategoryno() %>'>

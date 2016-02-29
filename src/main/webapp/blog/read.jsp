@@ -18,56 +18,41 @@ BlogVO blogVO = (BlogVO)request.getAttribute("blogVO");
     <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/tool.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+<script type="text/javascript">
+function good_up(blogno, good){
+  good = good +1;
+  location.href='./good_up.do?blogno='+blogno + '&good=' + good;
+}
+</script>
   </head>
 <!-- --------------------------------------------------------- -->
   <body >
   <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- --------------------------------------------------------- -->
 
-  <div class='content_menu'>
-    <A href='./list2.do?blogcategoryno=<%=blogVO.getBlogcategoryno() %>'>${title } 게시판</A>｜
-    <A href='./update.do?blogno=<%=blogVO.getBlogno()%>&blogcategoryno=<%=blogVO.getBlogcategoryno() %>'>글 수정</A>｜
+  <div class='content_menu'> 
+    <span style="font: 1em bold; "><%=blogVO.getTitle() %>(<%=blogVO.getGood() %>)</span>
+    <label style="float: right;"><%=blogVO.getRdate().substring(0,16)%>  
+    <A href='./update.do?blogno=<%=blogVO.getBlogno()%>&blogcategoryno=<%=blogVO.getBlogcategoryno() %>'>｜글 수정</A>｜
     <A href='./delete.do?blogno=<%=blogVO.getBlogno()%>&blogcategoryno=<%=blogVO.getBlogcategoryno() %>'>글 삭제</A>
+    </label>    
   </div> 
-  <DIV class='content'>
+  
+  <hr style="width:70%; margin: 0px auto">  
+
+  <DIV class='content_item'>
     <FORM name='frm' method="get" action='./update.do'>
       <input type="hidden" name="blogno" value="<%=blogVO.getBlogno() %>">
-     
-      <fieldset class="fieldset">
-        <ul>
-          <li>
-            <label for='title' class="label" style="width:150px;">제목 : </label>
-            <span><%=blogVO.getTitle() %></span><br>
-          </li>
-          <li>
-            <label for="file" class="label" style="width:120px;">Thumb 파일 : </label>
-            <%=Tool.checkNull(blogVO.getFile()) %><br>
-          </li>
-          <li>
-            <label for='content' class="label" style="width:150px;">내용 : </label>
             <span><%=blogVO.getContent() %></span>
-          </li>
-          <li>
-            <label for="rdate" class="label" style="width:150px;">등록일 : </label>
-            <span><%=blogVO.getRdate().substring(0, 16) %></span>
-          </li>
-          <li>
-            <label for="good" class="label" style="width:150px;">추천 수 : </label>
-            <span><%=blogVO.getGood()%></span>
-          </li>
-          <li>
-            <label for="good" class="label" style="width:150px;">댓글 수 : </label>
-            <span><%=blogVO.getReplycnt()%></span>
-          </li>
-          <li>
-            <label for="" class='label' style="width:150px;">블로그 카테고리 번호 : </label>
-            <span><%=blogVO.getBlogcategoryno() %></span>
-          </li>
-        </ul>
-      </fieldset>
+            <p style="font-size: 90px; margin-bottom: 5px; color: red;"><%=blogVO.getGood()%>  
+              <a href='javascript: good_up(<%=blogVO.getBlogno() %>, <%=blogVO.getGood() %>)'>
+                <img alt="좋아요"  title="좋아요" src="./images/good.png">  
+              </a> 
+            </p>
+            
+<%--             <span><%=blogVO.getReplycnt()%></span>   --%>
     </FORM>
-  </DIV>
+  </DIV> 
 
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />

@@ -35,6 +35,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     WHERE blogno=#{blogno}
   </update>
   
+  <update id="good_up" parameterType="BlogVO">
+    UPDATE blog
+    SET good = #{good}
+    WHERE blogno=#{blogno}
+  </update>
+  
   <delete id="delete" parameterType="int">
     DELETE FROM blog
     WHERE blogno=#{blogno}

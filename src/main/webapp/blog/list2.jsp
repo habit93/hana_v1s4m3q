@@ -23,7 +23,7 @@
   <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- --------------------------------------------------------- -->
 
-<div style="text-align: center;">${title }</div>
+<div class="title">${title }</div>
   
 <!-- 리스트 -->
 <div class="container">
@@ -46,8 +46,8 @@
         <td class="td_left">
           <a href="./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>"><%=Tool.textLength(20, vo.getTitle())%></a> 
         </td>
-        <td class="td"><%=vo.getRdate() %></td>
-        <td class="td"><%=vo.getCnt() %></td>
+        <td class="td"><%=vo.getRdate().substring(0, 10)%></td>
+        <td class="td"><%=vo.getReplycnt() %></td>
         <td class="td">
           <a href="./update.do?blogno=<%=blogno%>"><img src="./images/update.png" title="수정"  border='0'/></a>
           <a href="./delete.do?blogno=<%=blogno %>"><img src="./images/delete.png" title="삭제"  border='0'/></a>
@@ -61,7 +61,7 @@
 </div>
   
 <div class="feature">
-    <button type='button' class="btn-sm" onclick="location.href='./create.do?blogcategoryno=<%=blogVO.getBlogcategoryno() %>' ">등록</button>
+    <button type='button' class="btn-sm" onclick="location.href='./create2.do?blogcategoryno=<%=blogVO.getBlogcategoryno() %>' ">등록</button>
     <button type='button' class="btn-sm" onclick="javascript:location.reload();">새로고침</button>
 </div>
 

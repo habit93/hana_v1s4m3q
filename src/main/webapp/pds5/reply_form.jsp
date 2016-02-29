@@ -34,7 +34,7 @@ int qano = Integer.parseInt(request.getParameter("qano"));
 <FORM name='frm' method='POST' action='./reply_proc.jsp'>
             
   <input type='hidden' name='qano' value='<%=qano %>'>
-  <input type='hidden' name='itemno' value='1'>
+  <input type='hidden' name='itemno' value='2'>
   <input type='hidden' name='col' value='<%=col %>'>
   <input type='hidden' name='word' value='<%=word %>'>
   <input type='hidden' name='nowPage' value='<%=nowPage %>'>

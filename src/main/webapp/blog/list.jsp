@@ -2,95 +2,71 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.hana.blog.BlogVO" %>
 <%@ page import="com.hana.tool.Tool" %>
+<% ArrayList<BlogVO> list = (ArrayList<BlogVO>)request.getAttribute("list"); %>
+<% BlogVO blogVO = (BlogVO)request.getAttribute("blogVO");%>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title></title>
+<!DOCTYPE html> 
+<html lang="ko"> 
+  <head>
+    <title>게시판</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
 
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/javascript" src="../js/tool.js"></script>
-<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript">
-$(function(){
-});
-</script>
-
-<script type="text/javascript">
-</script>
-</head>
-
-<%-- body 시작 --%>
-<body>
-<jsp:include page="/menu/top.jsp" flush='false' />
-<%-- ---------------------------------------------------------------------------------------------- --%>
-  <% ArrayList<BlogVO> list = (ArrayList<BlogVO>)request.getAttribute("list"); %>
+<div class="title">${title }</div>
   
-   <div style="text-align: center;">게시판</div>
-    
-   <div class='content_menu' style='width: 90%;'>
-    <A href='../blogcategory/list.do'>블로그 카테고리 목록</A> ｜
-    <A href='./create.do'>등록</A>｜
-    <A href="javascript:location.reload();">새로고침</A>
-  </div>
-  <div class="content" style='width: 90%;'>
-    <table class="table" style='width: 100%;'>
-      <colgroup>
-        <col style="width: 5%;"></col>
-        <col style="width: 35%;"></col>
-        <col style="width: 5%;"></col>
-        <col style="width: 15%;"></col>
-        <col style="width: 10%;"></col>
-        <col style="width: 15%;"></col>
-        <col style="width: 5%;"></col>
-        <col style="width: 10%;"></col>
-      </colgroup>
-          
-      <%-- table 컬럼 --%>
-      <thead>
-        <tr>
-          <th class="th">번호</th>
-          <th class="th">제목(댓글수)</th>
-          <th class="th">썸파일</th>
-          <th class="th">등록일</th>
-          <th class="th">조회수</th>
-          <th class="th">기타</th>
-        </tr>
-      </thead>
-      
-      <%-- table 내용 --%>
-      <tbody>
-         <%
-          for(int index = 0; index < list.size(); index++){
-            BlogVO vo = list.get(index);
-            int blogno = vo.getBlogno();
+<!-- 리스트 -->
+<div class="list_center">
+   <FORM name='frm' method='post' action='./list.jsp'>
+  <DIV style='width: 100%; margin: 0px auto'>
+    <%
+      for (int index = 0; index < list.size(); index++) {
+        BlogVO vo = list.get(index);
+        int blogno = vo.getBlogno();
+        if(index != 0 && index % 4 == 0){
           %>
-          <tr>
-            <td class="td"><%=blogno %></td>
-            <td class="td_left">
-              <a href="./read.do?blogno=<%=blogno %>"><%=Tool.textLength(10, vo.getTitle())%></a> 
-            </td> 
-            <td class="td"><%=vo.getFile() %></td>
-            <td class="td"><%=vo.getRdate().substring(0, 10) %></td>
-            <td class="td"><%=vo.getCnt() %></td>
-            <td class="td">
-              <a href="./update.do?blogno=<%=blogno%>"><img src="./images/update.png" title="수정" border='0'/></a>
-              <a href="./delete.do?blogno=<%=blogno %>"><img src="./images/delete.png" title="삭제"  border='0'/></a>
-            </td>
-          </tr>
-          <% 
-            }
+          <DIV style='width: 100%; clear: both;'></DIV> <!-- 경계 -->
+          <%
+          }
           %>
-      </tbody>
-    </table>
-  </div>
+          <DIV style='margin: 10px 10px 0px 10px; padding: 0px; width: 295px; height: 300px; float: left; '>
   
+    <A href='./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>'><IMG src='./storage/<%=vo.getFile()%>' style='width: 280px; height: 230px'></A>
+    <br>
+    <A href='./read.do?blogno=<%=blogno %>&blogcategoryno=<%=vo.getBlogcategoryno() %>'><%=vo.getTitle() %></A>
+     </DIV>
+    <%
+      }
+    %>
+    </DIV>
+   </FORM>
+</div>
   
-<%-- ---------------------------------------------------------------------------------------------- --%>
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<%-- body 종료 --%>
+ <div class="feature" style='clear: both;'>
+    <button type='button' class="btn-sm" onclick="location.href='./create.do?blogcategoryno=<%=blogVO.getBlogcategoryno() %>'">등록</button>
+    <button type='button' class="btn-sm" onclick="javascript:location.reload();">새로고침</button>
+</div> 
+
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
 
 

@@ -53,13 +53,13 @@
           %>
           <tr>
             <td class="td_left">
-              <a href="./read.do?blogno=<%=blogno %>"><%=Tool.textLength(10, vo.getTitle())%></a> 
+              <a href="./read.do?blogno=<%=blogno %>"><%=Tool.textLength(25, vo.getTitle())%></a>  
             </td> 
             <td class="td"><%=vo.getRdate().substring(0, 10) %></td>
             <td class="td"><%=vo.getCnt() %></td>
             <td class="td">
-              <a href="./update.do?blogno=<%=blogno%>">수</a>
-              <a href="./delete.do?blogno=<%=blogno %>">삭</a>
+              <a href="./update.do?blogno=<%=blogno%>"><img src='./images/update.png' title='수정'></a>
+              <a href="./delete.do?blogno=<%=blogno %>"><img src='./images/delete.png' title='삭제'></a>
             </td>
           </tr>
           <% 
@@ -85,16 +85,18 @@ ArrayList<ItemVO> list2 = (ArrayList<ItemVO>)request.getAttribute("list2");
   
     <A href='./item/read.do?itemno=<%=vo.getItemno()%>&categoryno=<%=vo.getCategoryno()%>'><IMG src='./item/storage/<%=vo.getThumb()%>' style='width: 280px; height: 230px'></A>
     <br>
-    <A href='./item/read.do?itemno=<%=vo.getItemno()%>&categoryno=<%=vo.getCategoryno()%>'><%=vo.getTitle() %></A>
-    <%=vo.getPrice()%>원
+    <div class="feature">
+      <A href='./item/read.do?itemno=<%=vo.getItemno()%>&categoryno=<%=vo.getCategoryno()%>'><span class="name"><%=vo.getTitle() %></span></A>
+      <span class="price"><%=vo.getPrice()%>원</span>
+    </div>
      </DIV>
     <%
-      }
+      }    
     %>
     </DIV>
    </FORM>
   </DIV>
-    <jsp:include page="/menu/bottom.jsp" flush='false' />
+<%--     <jsp:include page="/menu/bottom.jsp" flush='false' /> --%>
     
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.dropotron.min.js"></script>
