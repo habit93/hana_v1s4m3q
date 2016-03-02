@@ -9,9 +9,13 @@ DROP TABLE blogreply;
 /**********************************/
 CREATE TABLE blogreply(
     blogreplyno                       MEDIUMINT    NOT NULL    PRIMARY KEY AUTO_INCREMENT COMMENT '블로그 댓글 번호',
-    content                           VARCHAR(80)     NOT NULL COMMENT '내용',
+    rname    VARCHAR(20)    NOT NULL, 
+    content  TEXT                NOT NULL, 
+    passwd  VARCHAR(15)    NOT NULL, 
     rdate                             DATETIME     NOT NULL COMMENT '등록일',
+    viewcnt  SMALLINT        DEFAULT 0,
     blogno                            MEDIUMINT    NOT NULL COMMENT '블로그 번호',
+    grpno    MEDIUMINT     DEFAULT 0,
     indent                            MEDIUMINT    DEFAULT 0     NOT NULL COMMENT '답변차수',
     ansnum                            SMALLINT     DEFAULT 0     NOT NULL COMMENT '답변순서',
   FOREIGN KEY (blogno) REFERENCES blog (blogno)

@@ -24,7 +24,7 @@
 
 <DIV class='title'>마이페이지</DIV>
 
-<DIV class='content'>
+<DIV class='container'> 
   <input type='hidden' id='mno' name='mno' value='<%=memberVO.getMno()%>'>
   <label for='id'>아이디 : <span><%=memberVO.getId() %></span></label><br>
   <label for='passwd'>패스워드 : <span><%=memberVO.getPasswd() %></span></label><br>

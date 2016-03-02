@@ -6,15 +6,16 @@
 
 <!DOCTYPE html> 
 <html lang="ko"> 
-<head> 
-<meta charset="UTF-8"> 
-<title></title> 
-
-<link href="../css/style.css" rel="Stylesheet" type="text/css">
-<script type="text/JavaScript"
-          src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.cookie.js"></script>
-<script type="text/javascript" src="../js/tool.js"></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/tool.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
 <script type="text/javascript">
 $(function(){
   $('#update_div').hide();
@@ -73,13 +74,13 @@ function down_sort(shopcategoryno, sort){
     location.href='./update_sort.do?categoryno=' + shopcategoryno + '&sort=' + sort;    
   }
 }
-
 </script>
-</head> 
-<!-- ----------------------------------------- -->
-<body leftmargin="0" topmargin="0">
-<jsp:include page="/menu/top.jsp" flush='false' />
-<!-- ----------------------------------------- -->
+  </head>
+<!-- --------------------------------------------------------- -->
+  <body >
+  <jsp:include page="/menu/top.jsp" flush='false' />
+<!-- --------------------------------------------------------- -->
+
 <!--출력모드 폼 겹칠시 이름 변경  -->
 <FORM name='frm' id='frm' method='POST' action=''>
   <input type='hidden' name='blogcategoryno' id='blogcategoryno'  value=''>
@@ -125,14 +126,8 @@ ArrayList<ShopcategoryVO> list = (ArrayList<ShopcategoryVO>)request.getAttribute
   </FORM>
 </DIV>
 
-<TABLE class='table' style='width: 70%;'>
-  <colgroup>
-    <col style='width: 10%;'/>
-    <col style='width: 30%;'/>
-    <col style='width: 30%;'/>
-    <col style='width: 10%;'/>
-    <col style='width: 20%;'/>
-  </colgroup>
+<div class="container">
+<TABLE class='table table-hover'>
   <TR>
     <TH class='th'>번호</TH>
     <TH class='th'>코드</TH>
@@ -140,7 +135,6 @@ ArrayList<ShopcategoryVO> list = (ArrayList<ShopcategoryVO>)request.getAttribute
     <TH class='th'>순서</TH>
     <TH class='th'>기타</TH>
   </TR>
-
 <%
 
   for(int index=0; index < list.size(); index++){
@@ -173,17 +167,23 @@ ArrayList<ShopcategoryVO> list = (ArrayList<ShopcategoryVO>)request.getAttribute
 %>
 
 </TABLE>
+</div>
 
-<DIV class='bottom'>
-  <button type='button' onclick="location.href='./create.do'">등록</button>
-  <button type='button' onclick="location.reload();">새로 고침</button>
-  <button type='button' onclick="location.href='../shopcode/list.do'">코드 목록</button>
-  <button type='button' onclick="location.href='../blog/list.do'">전체 게시판 글</button>
+<DIV class='feature'> 
+  <button type='button' class="btn-sm" onclick="location.href='./create.do'">등록</button>
+  <button type='button' class="btn-sm" onclick="location.reload();">새로 고침</button>
+  <button type='button' class="btn-sm" onclick="location.href='../shopcode/list.do'">코드 목록</button>
+  <button type='button' class="btn-sm" onclick="location.href='../blog/list.do'">전체 게시판 글</button>
 </DIV>
 
-<!-- -------------------------------------------- -->
-<jsp:include page="/menu/bottom.jsp" flush='false' />
-</body>
-<!-- -------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
+    <jsp:include page="../menu/bottom.jsp" flush='false' />
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/jquery.dropotron.min.js"></script>
+    <script src="../assets/js/skel.min.js"></script>
+    <script src="../assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/js/main.js"></script>
+  </body>
+<!-- --------------------------------------------------------- -->
 </html>
-

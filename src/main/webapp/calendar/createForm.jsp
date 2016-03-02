@@ -57,25 +57,9 @@ function checkData(f){ // f == document.frmData 객체
   <jsp:include page="/menu/top.jsp" flush='false' />
 <!-- --------------------------------------------------------- -->
 
- 
-<%-- <form class="left" action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
-  <input type='hidden' name='mno' id='mno' value='${mno }'>   
-  <label for="rdate">날짜 <input type='date' name='rdate' id='rdate'></label><br />
-  <label for="label">출력 레이블 <input type='text' name='label' id='label' size="40"></label><br />
-  <label for="title">제목 <input type='text' name='title' id='title' ></label><br />
-  <label for="contents">내용 <input type='text' name='contents' id='contents' ></label><br /> 
-  <DIV style='text-align: center; border: 0px none #FFFFFF'>  
-    <DIV class='bottom'> 
-      <input type='submit' class="btn-sm" value='등록'>
-      <input type='button' class="btn-sm" value='목록' onclick="location.href='./list.jsp'">   
-    </DIV>
-  </DIV>
-
-</FORM>   --%>
-
 <DIV class='title'>일정 등록</DIV>
 
-<div class='content'>
+<div class='container'>
 <form name='frm' action="./createProc.jsp" method="POST" onSubmit="return checkData(this)">
     <input type='hidden' name='mno' id='mno' value='${mno }'>
     <ul> 
@@ -85,15 +69,15 @@ function checkData(f){ // f == document.frmData 객체
       </li>
       <li>
         <label class='form'>달력 레이블</label> 
-        <input type='text' class="input-sm" name='label' id='label' size="20" required="required"> 
+        <input type='text' class="input-sm" name='label' id='label' size='70' required="required"> 
       </li>
       <li>
         <label class='form'>제목</label>
-        <input type='text' class="input-sm" name='title' id='title' required="required">
+        <input type='text' class="input-sm" name='title' id='title' size='70' required="required">
       </li>
       <li>
         <label class='form'>내용</label>
-        <input type="text" class="input-sm" name='contents' id='contents' required="required">
+        <input type="text" class="input-sm" name='contents' id='contents' size='70' required="required">
       </li>
       <li class='feature'>
         <button type="submit" class="btn-sm" >등록</button>

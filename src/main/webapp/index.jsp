@@ -53,7 +53,7 @@
           %>
           <tr>
             <td class="td_left">
-              <a href="./read.do?blogno=<%=blogno %>"><%=Tool.textLength(25, vo.getTitle())%></a>  
+              <a href="./blog/read.do?blogno=<%=blogno %>"><%=Tool.textLength(25, vo.getTitle())%></a>  
             </td> 
             <td class="td"><%=vo.getRdate().substring(0, 10) %></td>
             <td class="td"><%=vo.getCnt() %></td>

@@ -64,7 +64,7 @@
 <div class="title">  
   <span style="color:blue;">총수입 : <%=in_sum %></span><br />
   <span style="color:red;">총지출 : <%=ex_sum %></span><br />
-  <b>합계 : <%=total %></b><br /><br /> 
+  <b>잔액 : <%=total %></b><br /><br /> 
   
   <form name='frm' method="get" action="./summonth.do">
     <input type="month" class="input-sm" name="month" id="month" value='<%=today %>'>

@@ -40,7 +40,7 @@ public class CartCont {
 
     if (cartDAO.create(cartVO) == 1) {
       msgs.add("쇼핑카트에  추가했습니다..");
-      links.add("<button type='button' onclick=\"location.href='../shopcategory/list.do'\">카테고리로 이동</button>");
+      links.add("<button type='button' onclick=\"location.href='../index.do'\">홈으로</button>");
     } else {
       msgs.add("게시판 등록에 실패했습니다.");
       msgs.add("죄송하지만 다시한번 시도해주세요.");
@@ -81,12 +81,12 @@ public class CartCont {
 
     if (cartDAO.delete(cartVO.getCartno()) == 1) {
       msgs.add("쇼핑카트에서 제거했습니다.");
-      links.add("<button type='button' onclick=\"location.href='./index.do'\">홈</button>");
+      links.add("<button type='button' onclick=\"location.href='../index.do'\">홈</button>");
     } else {
       msgs.add("구매 취소에 실패했습니다.");
       msgs.add("죄송하지만 다시한번 시도해주세요.");
       links.add("<button type='button' onclick=\"history.back()\">다시시도</button>");
-      links.add("<button type='button' onclick=\"location.href='./home.do'\">홈페이지</button>");
+      links.add("<button type='button' onclick=\"location.href='../index.do'\">홈</button>");
     }
 
     mav.addObject("msgs", msgs);

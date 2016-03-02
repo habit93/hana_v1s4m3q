@@ -60,9 +60,12 @@ if (nextMonth > 12) {
 
 <table style='border: 0px none #FFFFFF; width: 100%;'>
   <tr>
-	  <td>
-		  <table class='calendar'>
-			  <tr>
+    <td style='text-align: center; border: 0px none #FFFFFF;'><%=year%>년 <%=month+1%>월</td>
+  </tr> 
+  <tr> 
+    <td>
+      <table class='calendar'>
+        <tr>
 					<td class='calendar_td' width='14%'>일</td>
 					<td class='calendar_td' width='14%'>월</td>
 					<td class='calendar_td' width='14%'>화</td>

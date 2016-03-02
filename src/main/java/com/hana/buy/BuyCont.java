@@ -35,7 +35,7 @@ public class BuyCont {
 
     if (buyDAO.create(buyVO) == 1) {
       msgs.add("구매에 성공했습니다.");
-      links.add("<button type='button' onclick=\"location.href='../shopcategory/list.do'\">카테고리로 이동</button>");
+      links.add("<button type='button' onclick=\"location.href='../index.do'\">홈으로</button>");
     } else {
       msgs.add("게시판 등록에 실패했습니다.");
       msgs.add("죄송하지만 다시한번 시도해주세요.");
@@ -76,7 +76,7 @@ public class BuyCont {
 
     if (buyDAO.delete(buyVO.getBuyno()) == 1) {
       msgs.add("구매를 취소했습니다.");
-      links.add("<button type='button' onclick=\"location.href='./index.do'\"></button>");
+      links.add("<button type='button' onclick=\"location.href='../index.do'\">홈으로</button>");
     } else {
       msgs.add("구매 취소에 실패했습니다.");
       msgs.add("죄송하지만 다시한번 시도해주세요.");

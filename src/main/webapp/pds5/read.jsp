@@ -33,26 +33,29 @@ int qano = Integer.parseInt(request.getParameter("qano"));
 Pds5DTO pds5DTO = pds5DAO.read(qano); // 조회
 %>
 
-<FORM name='frm'>
-  <TABLE class='table'>
-    <tr>
-      <TD>
-        <%=pds5DTO.getTitle() %>   | 작성일 <%=pds5DTO.getRdate() %>
-      </TD>
-    </tr>
-    <tr>
-      <TD>
-        <%=pds5DTO.getContent() %> 
-      </TD>
-    </tr>
-  </TABLE>
-  <DIV class='feature'>
+<div class='content_menu'> 
+    <span style="font: 1em bold; "><%=pds5DTO.getTitle() %></span>
+    <label style="float: right;"><%=pds5DTO.getRdate() %>  
+    <A href='./update_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'>｜Q&A 수정</A>｜
+    <A href='./delete_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'>Q&A 삭제</A> ｜
+    <A href='./reply_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>&itemno=<%=itemno%>'>답변달기</A>
+    </label>    
+  </div> 
+  
+  <hr style="width:70%; margin: 0px auto">  
+  
+  <DIV class='container'> 
+    <div class="content"><span><%=pds5DTO.getContent() %></span></div> 
+  </DIV>
+  
+ 
+  
+  <DIV class='feature'> 
     <input type='button' class="btn-sm" value='목록' onclick="location.href='./list.jsp?col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'">
     <input type='button' class="btn-sm" value='답변' onclick="location.href='./reply_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>&itemno=<%=itemno%>'">
     <input type='button' class="btn-sm" value='수정' onclick="location.href='./update_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'">
     <input type='button' class="btn-sm" value='삭제' onclick="location.href='./delete_form.jsp?qano=<%=qano %>&col=<%=col %>&word=<%=word %>&nowPage=<%=nowPage %>'">
   </DIV> 
-</FORM>
 
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />

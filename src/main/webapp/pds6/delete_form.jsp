@@ -1,11 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="com.hana.cart.CartVO" %>
-<% int cartno = (Integer)request.getAttribute("cartno"); %>
-
+<%@ include file="./ssi.jsp" %> 
+ 
 <!DOCTYPE html> 
 <html lang="ko"> 
   <head>
-    <title>Q&A 조회</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -15,21 +13,39 @@
     <script type="text/javascript" src="../js/tool.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </head>
-<!-- --------------------------------------------------------- -->
-  <body >
-  <jsp:include page="/menu/top.jsp" flush='false' />
-<!-- --------------------------------------------------------- -->
+  <!-- --------------------------------------------------------- -->
+    <body >
+    <jsp:include page="/menu/top.jsp" flush='false' />
+  <!-- --------------------------------------------------------- -->
+  
+<%
+int blogreplyno = Integer.parseInt(request.getParameter("blogreplyno"));
 
-<DIV class = 'container'>
-  <FORM name='frm' method='POST' action='./delete.do'>
-  <input type='hidden' id='cartno' name='cartno' value='<%=cartno%>'>
-  <div class="content">쇼핑카트에서 제거하시겠습니까?</div> 
-  <div class="feature">
-	  <button type ="submit" class="btn-sm">제거</button>
-	  <button type ="button" class="btn-sm" onclick = "location.href='./list.do?mno='">취소</button>
-  </div>
-  </FORM> 
-</DIV>  
+Pds6DTO pds6DTO = pds6DAO.read(blogreplyno); // 조회
+%>
+
+<DIV class='title'>정말로 삭제하시겠습니까?</DIV> 
+
+<FORM name='frm' method='POST' action='./delete_proc.jsp'>
+  <input type='hidden' name='blogreplyno' value='<%=blogreplyno %>'>
+  <input type='hidden' name='col' value='<%=col %>'>
+  <input type='hidden' name='word' value='<%=word %>'>
+  <input type='hidden' name='nowPage' value='<%=nowPage %>'>
+  
+  <TABLE class='table' style='width: 70%;'>
+    <TR>
+      <TD colspan='3'><%=pds6DTO.getContent() %></TD>
+    </TR>
+    <TR>
+      <TH class='th'>패스워드</TH>
+      <TD colspan="3"><input type='password' name='passwd' style='width: 100%;' value='<%=pds6DTO.getPasswd() %>'></TD>
+    </TR>
+  </TABLE>
+  <DIV class='bottom'>
+    <input type='submit' value='삭제 진행'>
+    <input type='button' value='취소' onclick="location.href='./list.jsp'"> 
+  </DIV> 
+</FORM>
 
 <!-- --------------------------------------------------------- -->
     <jsp:include page="../menu/bottom.jsp" flush='false' />
@@ -42,4 +58,9 @@
   </body>
 <!-- --------------------------------------------------------- -->
 </html>
- 
+
+
+
+
+
+

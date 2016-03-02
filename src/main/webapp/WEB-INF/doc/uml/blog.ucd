@@ -171,8 +171,8 @@
                       <constraint>
                         <height>-1</height>
                         <width>-1</width>
-                        <x>259</x>
-                        <y>131</y>
+                        <x>268</x>
+                        <y>129</y>
                       </constraint>
                       <sourceConnections/>
                       <targetConnections>
@@ -494,7 +494,7 @@
         <net.java.amateras.uml.usecasediagram.model.UsecaseModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel[3]/source/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/target"/>
       </children>
       <filterProperty/>
-      <name>게시판</name>
+      <name>캐스트</name>
     </net.java.amateras.uml.usecasediagram.model.SystemModel>
     <net.java.amateras.uml.usecasediagram.model.UsecaseActorModel reference="../net.java.amateras.uml.usecasediagram.model.SystemModel/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseGeneralizationModel/target"/>
     <net.java.amateras.uml.usecasediagram.model.UsecaseActorModel reference="../net.java.amateras.uml.usecasediagram.model.SystemModel/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target"/>

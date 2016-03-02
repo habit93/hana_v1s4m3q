@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.ArrayList" %>
-
+<%@ include file="./ssi.jsp" %>
+ 
 <!DOCTYPE html> 
 <html lang="ko"> 
   <head>
-    <title></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -14,38 +13,48 @@
     <script type="text/javascript" src="../js/tool.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </head>
-<!-- --------------------------------------------------------- -->
-  <body >
-  <jsp:include page="/menu/top.jsp" flush='false' />
-<!-- --------------------------------------------------------- -->
+  <!-- --------------------------------------------------------- -->
+    <body >
+    <jsp:include page="/menu/top.jsp" flush='false' />
+  <!-- --------------------------------------------------------- -->
 
-<DIV class='title'>알림</DIV>
 
+<DIV class='title'>삭제 처리 결과</DIV>
+
+<DIV class='body'>
 <%
-ArrayList<String> msgs = (ArrayList<String>)request.getAttribute("msgs");
-ArrayList<String> links = (ArrayList<String>)request.getAttribute("links");
+int blogreplyno = Integer.parseInt(request.getParameter("blogreplyno"));
+String passwd = request.getParameter("passwd");
+
+// 기존 파일을 삭제하기위한 레코드 읽기
+Pds6DTO _pds5DTO = pds6DAO.read(blogreplyno);
+
+// ① 패스워드 검사
+int count = pds6DAO.passwdCheck(blogreplyno, passwd);
+ 
+if (count == 1){
+  count = pds6DAO.delete(blogreplyno); // DBMS  삭제
+  
+  if (count == 1){
 %>
-<DIV class='content' style='width: 60%;'>
-  <fieldset>
-    <ul>
-      <%
-      for(int i=0; i<msgs.size(); i++){
-      %>
-        <li><%=msgs.get(i) %></li>
-      <%
-      }
-      %>
-      <li class='none' style='margin-top: 2em;'>
-      <%
-      for(int i=0; i<links.size(); i++){
-      %>
-        <%=links.get(i) %>
-      <%
-      }
-      %>
-      </li>
-    </ul>
-  </fieldset>
+  등록된 내용을 삭제했습니다.<br><br>
+  <input type='button' value='목록' onclick="location.href='./list.jsp'">
+<%
+  }else{ 
+%>
+  삭제에 실패했습니다.<br><br>
+  <input type='button' value='다시 시도'  onclick="history.back()">
+  <input type='button' value='목록' onclick="location.href='./list.jsp'">
+<%    
+  }
+}else{
+%>
+  패스워드가 일치하지 않습니다.<br><br>
+  <input type='button' value='다시 시도'  onclick="history.back()">
+  <input type='button' value='목록' onclick="location.href='./list.jsp'">
+<%  
+}
+%> 
 </DIV>
 
 <!-- --------------------------------------------------------- -->
@@ -59,4 +68,12 @@ ArrayList<String> links = (ArrayList<String>)request.getAttribute("links");
   </body>
 <!-- --------------------------------------------------------- -->
 </html>
+
+
+
+
+
+
+
+
 

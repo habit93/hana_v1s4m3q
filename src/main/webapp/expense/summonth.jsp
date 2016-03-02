@@ -121,7 +121,7 @@ ArrayList<ExpenseVO> list = (ArrayList<ExpenseVO>)request.getAttribute("sumlist1
 
 <div class='title'> 
   <%total = in_sum - ex_sum; %>
-  <b>결과 : <%=total %></b>
+  <b>잔액 : <%=total %></b>
 </div>
 
 <!-- --------------------------------------------------------- -->
